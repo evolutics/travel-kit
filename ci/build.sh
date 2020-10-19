@@ -10,7 +10,7 @@ main() {
 
   pushd "${project_folder}"
 
-  ls
+  docker build .
 
   popd
 }
