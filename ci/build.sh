@@ -11,6 +11,7 @@ main() {
   pushd "${project_folder}"
 
   local -r base_image="$(docker build \
+    --build-arg black=20.8b1 \
     --build-arg git=2.26.2 \
     --build-arg gitlint=0.13.1 \
     --build-arg hunspell=1.7.0 \

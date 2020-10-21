@@ -4,6 +4,13 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+run_black() {
+  git ls-files -z -- \
+    '*.py' \
+    '*.pyi' \
+    | xargs -0 black --check --diff
+}
+
 run_git() {
   git diff --check HEAD^
 }
@@ -32,6 +39,7 @@ run_prettier() {
 }
 
 main() {
+  run_black
   run_git
   run_gitlint
   run_hunspell
