@@ -18,7 +18,7 @@ main() {
   local -r main_image="$(docker build --build-arg base_image="${base_image}" \
     --quiet .)"
 
-  docker run --rm --volume "$(pwd)":/workdir "${main_image}"
+  docker run --rm --volume "$(pwd)":/workdir "${main_image}" "${1:-check}"
 
   popd
 }
