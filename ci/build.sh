@@ -13,7 +13,10 @@ main() {
   local -r base_image="$(docker build --quiet \
     https://github.com/evolutics/code-cleaner-buffet.git#0.11.0)"
 
-  docker build --build-arg "base_image=${base_image}" .
+  local -r main_image="$(docker build --build-arg base_image="${base_image}" \
+    --quiet .)"
+
+  docker run --rm --volume "$(pwd)":/workdir "${main_image}"
 
   popd
 }
