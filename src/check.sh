@@ -9,7 +9,16 @@ run_git() {
 }
 
 run_prettier() {
-  git ls-files -z -- '*.md' | xargs -0 prettier --check
+  git ls-files -z -- \
+    '*.css' \
+    '*.html' \
+    '*.js' \
+    '*.json' \
+    '*.md' \
+    '*.ts' \
+    '*.yaml' \
+    '*.yml'\
+    | xargs -0 prettier --check
 }
 
 main() {
