@@ -8,6 +8,10 @@ run_git() {
   git diff --check HEAD^
 }
 
+run_gitlint() {
+  gitlint --ignore body-is-missing
+}
+
 run_hunspell() {
   git log -1 --format=%B | hunspell -l -d en_US -p ci/personal_words.dic \
     | sort | uniq | tr '\n' '\0' | xargs -0 -r -n 1 sh -c \
@@ -29,6 +33,7 @@ run_prettier() {
 
 main() {
   run_git
+  run_gitlint
   run_hunspell
   run_prettier
 }

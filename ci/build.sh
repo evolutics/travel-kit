@@ -12,6 +12,7 @@ main() {
 
   local -r base_image="$(docker build \
     --build-arg git=2.26.2 \
+    --build-arg gitlint=0.13.1 \
     --build-arg hunspell=1.7.0 \
     --build-arg prettier=2.1.2 \
     --quiet \
