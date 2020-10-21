@@ -1,4 +1,5 @@
 ARG base_image
+# hadolint ignore=DL3006
 FROM "${base_image}"
 
 LABEL org.opencontainers.image.title='Travel Kit'

@@ -19,6 +19,14 @@ run_gitlint() {
   gitlint --ignore body-is-missing
 }
 
+run_hadolint() {
+  git ls-files -z -- \
+    '*.Dockerfile' \
+    '*/Dockerfile' \
+    Dockerfile \
+    | xargs -0 hadolint
+}
+
 run_hunspell() {
   git log -1 --format=%B | hunspell -l -d en_US -p ci/personal_words.dic \
     | sort | uniq | tr '\n' '\0' | xargs -0 -r -n 1 sh -c \
@@ -42,6 +50,7 @@ main() {
   run_black
   run_git
   run_gitlint
+  run_hadolint
   run_hunspell
   run_prettier
 }
