@@ -8,6 +8,12 @@ run_git() {
   git diff --check HEAD^
 }
 
+run_hunspell() {
+  git log -1 --format=%B | hunspell -l -d en_US -p ci/personal_words.dic \
+    | sort | uniq | tr '\n' '\0' | xargs -0 -r -n 1 sh -c \
+    'echo "Misspelling: $@"; exit 1' --
+}
+
 run_prettier() {
   git ls-files -z -- \
     '*.css' \
@@ -23,6 +29,7 @@ run_prettier() {
 
 main() {
   run_git
+  run_hunspell
   run_prettier
 }
 
