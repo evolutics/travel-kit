@@ -8,8 +8,13 @@ run_git() {
   git diff --check HEAD^
 }
 
+run_prettier() {
+  git ls-files -z -- '*.md' | xargs -0 prettier --check
+}
+
 main() {
   run_git
+  run_prettier
 }
 
 main "$@"
