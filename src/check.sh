@@ -4,8 +4,12 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+run_git() {
+  git diff --check HEAD^
+}
+
 main() {
-  echo "TODO: check: $(pwd)"
+  run_git
 }
 
 main "$@"

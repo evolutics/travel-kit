@@ -10,7 +10,9 @@ main() {
 
   pushd "${project_folder}"
 
-  local -r base_image="$(docker build --quiet \
+  local -r base_image="$(docker build \
+    --build-arg git=2.26.2 \
+    --quiet \
     https://github.com/evolutics/code-cleaner-buffet.git#0.11.0)"
 
   local -r main_image="$(docker build --build-arg base_image="${base_image}" \
