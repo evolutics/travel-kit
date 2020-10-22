@@ -47,12 +47,22 @@ run_prettier() {
 }
 
 main() {
-  run_black
-  run_git
-  run_gitlint
-  run_hadolint
-  run_hunspell
-  run_prettier
+  local calls='
+    run_black
+    run_git
+    run_gitlint
+    run_hadolint
+    run_hunspell
+    run_prettier
+  '
+
+  local exit_status=0
+  for call in ${calls}; do
+    if ! "${call}"; then
+      exit_status=1
+    fi
+  done
+  exit "${exit_status}"
 }
 
 main "$@"
