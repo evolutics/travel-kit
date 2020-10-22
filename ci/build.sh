@@ -10,20 +10,10 @@ main() {
 
   pushd "${project_folder}"
 
-  local -r base_image="$(docker build \
-    --build-arg black=20.8b1 \
-    --build-arg git=2.26.2 \
-    --build-arg gitlint=0.13.1 \
-    --build-arg hadolint=1.18.0 \
-    --build-arg hunspell=1.7.0 \
-    --build-arg prettier=2.1.2 \
-    --quiet \
-    https://github.com/evolutics/code-cleaner-buffet.git#0.11.0)"
+  local -r image='evolutics/travel-kit:dirty'
+  DOCKERFILE_PATH=Dockerfile IMAGE_NAME="${image}" hooks/build
 
-  local -r main_image="$(docker build --build-arg base_image="${base_image}" \
-    --quiet .)"
-
-  docker run --rm --volume "$(pwd)":/workdir "${main_image}" "${1:-check}"
+  docker run --rm --volume "$(pwd)":/workdir "${image}" "${1:-check}"
 
   popd
 }

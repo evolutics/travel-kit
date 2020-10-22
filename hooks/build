@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+main() {
+  local -r base_image="$(docker build \
+    --build-arg black=20.8b1 \
+    --build-arg git=2.26.2 \
+    --build-arg gitlint=0.13.1 \
+    --build-arg hadolint=1.18.0 \
+    --build-arg hunspell=1.7.0 \
+    --build-arg prettier=2.1.2 \
+    --quiet \
+    https://github.com/evolutics/code-cleaner-buffet.git#0.11.0)"
+
+  docker build \
+    --build-arg base_image="${base_image}" \
+    --file "${DOCKERFILE_PATH}" \
+    --tag "${IMAGE_NAME}" \
+    .
+}
+
+main "$@"
