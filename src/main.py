@@ -8,33 +8,15 @@ import typing
 
 
 def main():
-    cleaners = _cleaners()
-
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
 
-    subparser = subparsers.add_parser("check")
-    subparser.set_defaults(
-        commands=[
-            cleaner.check for cleaner in cleaners.values() if cleaner.check is not None
-        ]
-    )
-    subparser = subparsers.add_parser("fix")
-    subparser.set_defaults(
-        commands=[
-            cleaner.fix for cleaner in cleaners.values() if cleaner.fix is not None
-        ]
-    )
+    for subcommand, function in {"check": _check, "fix": _fix}.items():
+        subparser = subparsers.add_parser(subcommand)
+        subparser.set_defaults(function=function)
 
     arguments = parser.parse_args()
-
-    exit_status = 0
-    for command in arguments.commands:
-        try:
-            subprocess.run(command, check=True, shell=True)
-        except subprocess.CalledProcessError:
-            exit_status = 1
-    sys.exit(exit_status)
+    arguments.function()
 
 
 @dataclasses.dataclass
@@ -105,6 +87,28 @@ def _cleaners():
 def _command_for_git_files(command, file_patterns):
     raw_patterns = " ".join(f"'{pattern}'" for pattern in file_patterns)
     return f"git ls-files -z -- {raw_patterns} | xargs -0 {command}"
+
+
+def _check():
+    _run_commands_independently(
+        [cleaner.check for cleaner in _cleaners().values() if cleaner.check is not None]
+    )
+
+
+def _run_commands_independently(commands):
+    exit_status = 0
+    for command in commands:
+        try:
+            subprocess.run(command, check=True, shell=True)
+        except subprocess.CalledProcessError:
+            exit_status = 1
+    sys.exit(exit_status)
+
+
+def _fix():
+    _run_commands_independently(
+        [cleaner.fix for cleaner in _cleaners().values() if cleaner.fix is not None]
+    )
 
 
 if __name__ == "__main__":
