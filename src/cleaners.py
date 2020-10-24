@@ -60,10 +60,10 @@ def _haskell_dockerfile_linter():
 def _hunspell():
     return Cleaner(
         check=(
-            "git log -1 --format=%B "
-            "| hunspell -l -d en_US -p ci/personal_words.dic "
-            "| sort | uniq | tr '\\n' '\\0' | xargs -0 -r -n 1 sh -c "
-            """'echo "Misspelling: $@"; exit 1' --"""
+            r"""git log -1 --format=%B \
+  | hunspell -l -d en_US -p ci/personal_words.dic \
+  | sort | uniq | tr '\n' '\0' | xargs -0 -r -n 1 sh -c \
+  'echo "Misspelling: $@"; exit 1' --"""
         ),
         fix=None,
     )
