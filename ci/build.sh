@@ -13,7 +13,7 @@ main() {
   local -r image='evolutics/travel-kit:dirty'
   DOCKERFILE_PATH=Dockerfile IMAGE_NAME="${image}" hooks/build
 
-  docker run --rm --volume "$(pwd)":/workdir "${image}" "${1:-check}"
+  docker run --rm --volume "$(pwd)":/workdir "${image}" check
 
   popd
 }
