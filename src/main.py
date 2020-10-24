@@ -5,13 +5,18 @@ import subprocess
 import sys
 
 import cleaners
+import readme_template
 
 
 def main():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
 
-    for subcommand, function in {"check": _check, "fix": _fix}.items():
+    for subcommand, function in {
+        "check": _check,
+        "fix": _fix,
+        "readme": _readme,
+    }.items():
         subparser = subparsers.add_parser(subcommand)
         subparser.set_defaults(function=function)
 
@@ -43,6 +48,12 @@ def _fix():
     _run_commands_independently(
         [cleaner.fix for cleaner in cleaners.get().values() if cleaner.fix is not None]
     )
+
+
+def _readme():
+    menu = "\n".join([f"- {cleaner}" for cleaner in cleaners.get()])
+    readme = readme_template.get().format(menu=menu)
+    print(readme)
 
 
 if __name__ == "__main__":

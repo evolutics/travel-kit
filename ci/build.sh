@@ -15,6 +15,9 @@ main() {
 
   docker run --rm --volume "$(pwd)":/workdir "${image}" check
 
+  docker run --rm --volume "$(pwd)":/workdir "${image}" readme \
+    | diff README.md -
+
   popd
 }
 
