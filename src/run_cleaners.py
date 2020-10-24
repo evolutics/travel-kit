@@ -1,12 +1,10 @@
 import subprocess
 import sys
 
-import cleaners
 
-
-def get(get_command):
+def get(cleaners, get_command):
     exit_status = 0
-    for cleaner in cleaners.get().values():
+    for cleaner in cleaners.values():
         command = get_command(cleaner)
         if command is not None:
             try:

@@ -2,6 +2,7 @@
 
 import argparse
 
+import cleaners
 import readme
 import run_cleaners
 
@@ -11,15 +12,21 @@ def main():
     subparsers = parser.add_subparsers()
 
     for subcommand, function in {
-        "check": lambda: run_cleaners.get(lambda cleaner: cleaner.check),
-        "fix": lambda: run_cleaners.get(lambda cleaner: cleaner.fix),
-        "readme": lambda: print(readme.get()),
+        "check": lambda filtered_cleaners: run_cleaners.get(
+            filtered_cleaners, lambda cleaner: cleaner.check
+        ),
+        "fix": lambda filtered_cleaners: run_cleaners.get(
+            filtered_cleaners, lambda cleaner: cleaner.fix
+        ),
+        "readme": lambda filtered_cleaners: print(readme.get(filtered_cleaners)),
     }.items():
         subparser = subparsers.add_parser(subcommand)
         subparser.set_defaults(function=function)
 
     arguments = parser.parse_args()
-    arguments.function()
+
+    filtered_cleaners = cleaners.get()
+    arguments.function(filtered_cleaners)
 
 
 if __name__ == "__main__":
