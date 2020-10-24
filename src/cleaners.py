@@ -23,9 +23,13 @@ def get():
 
 
 def _black():
+    file_patterns = [
+        "*.py",
+        "*.pyi",
+    ]
     return Cleaner(
-        check=_command_for_git_files("black --check --diff", ["*.py", "*.pyi"]),
-        fix=_command_for_git_files("black", ["*.py", "*.pyi"]),
+        check=_command_for_git_files("black --check --diff", file_patterns),
+        fix=_command_for_git_files("black", file_patterns),
     )
 
 
@@ -69,31 +73,17 @@ def _hunspell():
 
 
 def _prettier():
+    file_patterns = [
+        "*.css",
+        "*.html",
+        "*.js",
+        "*.json",
+        "*.md",
+        "*.ts",
+        "*.yaml",
+        "*.yml",
+    ]
     return Cleaner(
-        check=_command_for_git_files(
-            "prettier --check",
-            [
-                "*.css",
-                "*.html",
-                "*.js",
-                "*.json",
-                "*.md",
-                "*.ts",
-                "*.yaml",
-                "*.yml",
-            ],
-        ),
-        fix=_command_for_git_files(
-            "prettier --write",
-            [
-                "*.css",
-                "*.html",
-                "*.js",
-                "*.json",
-                "*.md",
-                "*.ts",
-                "*.yaml",
-                "*.yml",
-            ],
-        ),
+        check=_command_for_git_files("prettier --check", file_patterns),
+        fix=_command_for_git_files("prettier --write", file_patterns),
     )
