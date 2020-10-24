@@ -15,10 +15,11 @@ def get(cleaners, get_command):
     exit_status = 0
     for cleaner in cleaners.values():
         resolved_command = _resolve_command(cleaner, context)
-        try:
-            _run_command(resolved_command)
-        except subprocess.CalledProcessError:
-            exit_status = 1
+        if resolved_command:
+            try:
+                _run_command(resolved_command)
+            except subprocess.CalledProcessError:
+                exit_status = 1
     sys.exit(exit_status)
 
 
@@ -30,7 +31,7 @@ class _Context:
 
 @dataclasses.dataclass
 class _ResolvedCommand:
-    command: typing.Optional[str]
+    command: str
     file_paths: typing.Optional[typing.Sequence[str]]
 
 
@@ -44,11 +45,11 @@ def _is_in_git_repository():
 
 def _resolve_command(cleaner, context):
     if cleaner.only_in_git_repository and not context.is_in_git_repository:
-        return _ResolvedCommand(command=None, file_paths=[])
+        return None
 
     command = context.get_command(cleaner)
     if command is None:
-        return _ResolvedCommand(command=None, file_paths=[])
+        return None
 
     return _ResolvedCommand(
         command=command,
@@ -70,9 +71,6 @@ def _get_file_paths(cleaner, context):
 
 
 def _run_command(resolved_command):
-    if resolved_command.command is None:
-        return
-
     if resolved_command.file_paths is None:
         return subprocess.run(resolved_command.command, check=True, shell=True)
 
