@@ -46,18 +46,19 @@ class _Cleaner:
 def _cleaners():
     return {
         "Black": _Cleaner(
-            check="git ls-files -z -- '*.py' '*.pyi' | xargs -0 black --check --diff",
-            fix="git ls-files -z -- '*.py' '*.pyi' | xargs -0 black",
+            check=_command_for_git_files("black --check --diff", ["*.py", "*.pyi"]),
+            fix=_command_for_git_files("black", ["*.py", "*.pyi"]),
         ),
         "Git": _Cleaner(check="git diff --check HEAD^", fix=None),
         "Gitlint": _Cleaner(check="gitlint --ignore body-is-missing", fix=None),
         "Haskell Dockerfile Linter": _Cleaner(
-            check=(
-                "git ls-files -z -- "
-                "'*.Dockerfile' "
-                "'*/Dockerfile' "
-                "Dockerfile "
-                "| xargs -0 hadolint"
+            check=_command_for_git_files(
+                "hadolint",
+                [
+                    "*.Dockerfile",
+                    "*/Dockerfile",
+                    "Dockerfile",
+                ],
             ),
             fix=None,
         ),
@@ -71,32 +72,39 @@ def _cleaners():
             fix=None,
         ),
         "Prettier": _Cleaner(
-            check=(
-                "git ls-files -z -- "
-                "'*.css' "
-                "'*.html' "
-                "'*.js' "
-                "'*.json' "
-                "'*.md' "
-                "'*.ts' "
-                "'*.yaml' "
-                "'*.yml' "
-                "| xargs -0 prettier --check"
+            check=_command_for_git_files(
+                "prettier --check",
+                [
+                    "*.css",
+                    "*.html",
+                    "*.js",
+                    "*.json",
+                    "*.md",
+                    "*.ts",
+                    "*.yaml",
+                    "*.yml",
+                ],
             ),
-            fix=(
-                "git ls-files -z -- "
-                "'*.css' "
-                "'*.html' "
-                "'*.js' "
-                "'*.json' "
-                "'*.md' "
-                "'*.ts' "
-                "'*.yaml' "
-                "'*.yml' "
-                "| xargs -0 prettier --write"
+            fix=_command_for_git_files(
+                "prettier --write",
+                [
+                    "*.css",
+                    "*.html",
+                    "*.js",
+                    "*.json",
+                    "*.md",
+                    "*.ts",
+                    "*.yaml",
+                    "*.yml",
+                ],
             ),
         ),
     }
+
+
+def _command_for_git_files(command, file_patterns):
+    raw_patterns = " ".join(f"'{pattern}'" for pattern in file_patterns)
+    return f"git ls-files -z -- {raw_patterns} | xargs -0 {command}"
 
 
 if __name__ == "__main__":
