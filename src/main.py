@@ -15,21 +15,23 @@ def main():
 
     subparser = subparsers.add_parser("check")
     subparser.set_defaults(
-        calls=[
+        commands=[
             cleaner.check for cleaner in cleaners.values() if cleaner.check is not None
         ]
     )
     subparser = subparsers.add_parser("fix")
     subparser.set_defaults(
-        calls=[cleaner.fix for cleaner in cleaners.values() if cleaner.fix is not None]
+        commands=[
+            cleaner.fix for cleaner in cleaners.values() if cleaner.fix is not None
+        ]
     )
 
     arguments = parser.parse_args()
 
     exit_status = 0
-    for call in arguments.calls:
+    for command in arguments.commands:
         try:
-            subprocess.run(call, check=True, shell=True)
+            subprocess.run(command, check=True, shell=True)
         except subprocess.CalledProcessError:
             exit_status = 1
     sys.exit(exit_status)
