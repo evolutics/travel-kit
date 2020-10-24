@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 
 import argparse
-import dataclasses
 import subprocess
 import sys
-import typing
 
 import cleaners
 
