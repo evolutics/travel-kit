@@ -13,63 +13,87 @@ class Cleaner:
 
 def get():
     return {
-        "Black": Cleaner(
-            check=_command_for_git_files("black --check --diff", ["*.py", "*.pyi"]),
-            fix=_command_for_git_files("black", ["*.py", "*.pyi"]),
-        ),
-        "Git": Cleaner(check="git diff --check HEAD^", fix=None),
-        "Gitlint": Cleaner(check="gitlint --ignore body-is-missing", fix=None),
-        "Haskell Dockerfile Linter": Cleaner(
-            check=_command_for_git_files(
-                "hadolint",
-                [
-                    "*.Dockerfile",
-                    "*/Dockerfile",
-                    "Dockerfile",
-                ],
-            ),
-            fix=None,
-        ),
-        "Hunspell": Cleaner(
-            check=(
-                "git log -1 --format=%B "
-                "| hunspell -l -d en_US -p ci/personal_words.dic "
-                "| sort | uniq | tr '\\n' '\\0' | xargs -0 -r -n 1 sh -c "
-                """'echo "Misspelling: $@"; exit 1' --"""
-            ),
-            fix=None,
-        ),
-        "Prettier": Cleaner(
-            check=_command_for_git_files(
-                "prettier --check",
-                [
-                    "*.css",
-                    "*.html",
-                    "*.js",
-                    "*.json",
-                    "*.md",
-                    "*.ts",
-                    "*.yaml",
-                    "*.yml",
-                ],
-            ),
-            fix=_command_for_git_files(
-                "prettier --write",
-                [
-                    "*.css",
-                    "*.html",
-                    "*.js",
-                    "*.json",
-                    "*.md",
-                    "*.ts",
-                    "*.yaml",
-                    "*.yml",
-                ],
-            ),
-        ),
+        "Black": _black(),
+        "Git": _git(),
+        "Gitlint": _gitlint(),
+        "Haskell Dockerfile Linter": _haskell_dockerfile_linter(),
+        "Hunspell": _hunspell(),
+        "Prettier": _prettier(),
     }
+
+
+def _black():
+    return Cleaner(
+        check=_command_for_git_files("black --check --diff", ["*.py", "*.pyi"]),
+        fix=_command_for_git_files("black", ["*.py", "*.pyi"]),
+    )
 
 
 def _command_for_git_files(command, file_patterns):
     raw_patterns = " ".join(f"'{pattern}'" for pattern in file_patterns)
     return f"git ls-files -z -- {raw_patterns} | xargs -0 {command}"
+
+
+def _git():
+    return Cleaner(check="git diff --check HEAD^", fix=None)
+
+
+def _gitlint():
+    return Cleaner(check="gitlint --ignore body-is-missing", fix=None)
+
+
+def _haskell_dockerfile_linter():
+    return Cleaner(
+        check=_command_for_git_files(
+            "hadolint",
+            [
+                "*.Dockerfile",
+                "*/Dockerfile",
+                "Dockerfile",
+            ],
+        ),
+        fix=None,
+    )
+
+
+def _hunspell():
+    return Cleaner(
+        check=(
+            "git log -1 --format=%B "
+            "| hunspell -l -d en_US -p ci/personal_words.dic "
+            "| sort | uniq | tr '\\n' '\\0' | xargs -0 -r -n 1 sh -c "
+            """'echo "Misspelling: $@"; exit 1' --"""
+        ),
+        fix=None,
+    )
+
+
+def _prettier():
+    return Cleaner(
+        check=_command_for_git_files(
+            "prettier --check",
+            [
+                "*.css",
+                "*.html",
+                "*.js",
+                "*.json",
+                "*.md",
+                "*.ts",
+                "*.yaml",
+                "*.yml",
+            ],
+        ),
+        fix=_command_for_git_files(
+            "prettier --write",
+            [
+                "*.css",
+                "*.html",
+                "*.js",
+                "*.json",
+                "*.md",
+                "*.ts",
+                "*.yaml",
+                "*.yml",
+            ],
+        ),
+    )
