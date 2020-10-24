@@ -5,6 +5,7 @@ import typing
 @dataclasses.dataclass
 class Cleaner:
     only_in_git_repository: bool
+    file_patterns: typing.Optional[typing.Sequence[str]]
     check: typing.Optional[str]
     fix: typing.Optional[str]
 
@@ -21,45 +22,44 @@ def get():
 
 
 def _black():
-    file_patterns = [
-        "*.py",
-        "*.pyi",
-    ]
     return Cleaner(
         only_in_git_repository=True,
-        check=_command_for_git_files("black --check --diff", file_patterns),
-        fix=_command_for_git_files("black", file_patterns),
+        file_patterns=[
+            "*.py",
+            "*.pyi",
+        ],
+        check="black --check --diff",
+        fix="black",
     )
-
-
-def _command_for_git_files(command, file_patterns):
-    raw_patterns = " ".join(f"'{pattern}'" for pattern in file_patterns)
-    return f"git ls-files -z -- {raw_patterns} | xargs -0 {command}"
 
 
 def _git():
     return Cleaner(
-        only_in_git_repository=True, check="git diff --check HEAD^", fix=None
+        only_in_git_repository=True,
+        file_patterns=None,
+        check="git diff --check HEAD^",
+        fix=None,
     )
 
 
 def _gitlint():
     return Cleaner(
-        only_in_git_repository=True, check="gitlint --ignore body-is-missing", fix=None
+        only_in_git_repository=True,
+        file_patterns=None,
+        check="gitlint --ignore body-is-missing",
+        fix=None,
     )
 
 
 def _haskell_dockerfile_linter():
     return Cleaner(
         only_in_git_repository=True,
-        check=_command_for_git_files(
-            "hadolint",
-            [
-                "*.Dockerfile",
-                "*/Dockerfile",
-                "Dockerfile",
-            ],
-        ),
+        file_patterns=[
+            "*.Dockerfile",
+            "*/Dockerfile",
+            "Dockerfile",
+        ],
+        check="hadolint",
         fix=None,
     )
 
@@ -67,6 +67,7 @@ def _haskell_dockerfile_linter():
 def _hunspell():
     return Cleaner(
         only_in_git_repository=True,
+        file_patterns=None,
         check=(
             r"""git log -1 --format=%B \
   | hunspell -l -d en_US -p ci/personal_words.dic \
@@ -78,18 +79,18 @@ def _hunspell():
 
 
 def _prettier():
-    file_patterns = [
-        "*.css",
-        "*.html",
-        "*.js",
-        "*.json",
-        "*.md",
-        "*.ts",
-        "*.yaml",
-        "*.yml",
-    ]
     return Cleaner(
         only_in_git_repository=True,
-        check=_command_for_git_files("prettier --check", file_patterns),
-        fix=_command_for_git_files("prettier --write", file_patterns),
+        file_patterns=[
+            "*.css",
+            "*.html",
+            "*.js",
+            "*.json",
+            "*.md",
+            "*.ts",
+            "*.yaml",
+            "*.yml",
+        ],
+        check="prettier --check",
+        fix="prettier --write",
     )

@@ -25,10 +25,15 @@ def _is_in_git_repository():
 
 
 def _command_in_context(cleaner, is_in_git_repository, get_command):
+    if cleaner.only_in_git_repository and not is_in_git_repository:
+        return None
+
     command = get_command(cleaner)
     if command is None:
         return None
 
-    if not cleaner.only_in_git_repository or is_in_git_repository:
+    if cleaner.file_patterns is None:
         return command
-    return None
+
+    raw_patterns = " ".join(f"'{pattern}'" for pattern in cleaner.file_patterns)
+    return f"git ls-files -z -- {raw_patterns} | xargs -0 {command}"
