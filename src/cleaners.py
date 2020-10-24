@@ -4,6 +4,7 @@ import typing
 
 @dataclasses.dataclass
 class Cleaner:
+    only_in_git_repository: bool
     check: typing.Optional[str]
     fix: typing.Optional[str]
 
@@ -25,6 +26,7 @@ def _black():
         "*.pyi",
     ]
     return Cleaner(
+        only_in_git_repository=True,
         check=_command_for_git_files("black --check --diff", file_patterns),
         fix=_command_for_git_files("black", file_patterns),
     )
@@ -36,15 +38,20 @@ def _command_for_git_files(command, file_patterns):
 
 
 def _git():
-    return Cleaner(check="git diff --check HEAD^", fix=None)
+    return Cleaner(
+        only_in_git_repository=True, check="git diff --check HEAD^", fix=None
+    )
 
 
 def _gitlint():
-    return Cleaner(check="gitlint --ignore body-is-missing", fix=None)
+    return Cleaner(
+        only_in_git_repository=True, check="gitlint --ignore body-is-missing", fix=None
+    )
 
 
 def _haskell_dockerfile_linter():
     return Cleaner(
+        only_in_git_repository=True,
         check=_command_for_git_files(
             "hadolint",
             [
@@ -59,6 +66,7 @@ def _haskell_dockerfile_linter():
 
 def _hunspell():
     return Cleaner(
+        only_in_git_repository=True,
         check=(
             r"""git log -1 --format=%B \
   | hunspell -l -d en_US -p ci/personal_words.dic \
@@ -81,6 +89,7 @@ def _prettier():
         "*.yml",
     ]
     return Cleaner(
+        only_in_git_repository=True,
         check=_command_for_git_files("prettier --check", file_patterns),
         fix=_command_for_git_files("prettier --write", file_patterns),
     )
