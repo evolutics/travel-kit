@@ -9,8 +9,6 @@ Common code formatters and linters in a single Alpine Docker image.
 
 As a prerequisite, you need Docker to use the image [`evolutics/travel-kit`](https://hub.docker.com/r/evolutics/travel-kit).
 
-Run the following commands from a Git repository root because only tracked files are considered.
-
 **Check** code with
 
 ```bash
