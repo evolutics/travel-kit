@@ -1,15 +1,18 @@
 import dataclasses
+import json
 import pathlib
 import subprocess
 import sys
+import textwrap
 import typing
 
 import cleaners
 
 
-def get(cleaners, get_command, file_paths):
+def get(cleaners, get_command, is_dry_run, file_paths):
     context = _Context(
         get_command=get_command,
+        is_dry_run=is_dry_run,
         file_paths=file_paths,
         is_in_git_repository=_is_in_git_repository(),
     )
@@ -19,7 +22,7 @@ def get(cleaners, get_command, file_paths):
         resolved_command = _resolve_command(cleaner, context)
         if resolved_command:
             try:
-                _run_command(resolved_command)
+                _run_command_in_context(context, resolved_command)
             except subprocess.CalledProcessError:
                 exit_status = 1
     sys.exit(exit_status)
@@ -28,6 +31,7 @@ def get(cleaners, get_command, file_paths):
 @dataclasses.dataclass
 class _Context:
     get_command: typing.Callable[[cleaners.Cleaner], str]
+    is_dry_run: bool
     file_paths: typing.Sequence[pathlib.Path]
     is_in_git_repository: bool
 
@@ -76,6 +80,23 @@ def _get_file_paths(cleaner, context):
         paths = (str(path) for path in pathlib.Path(".").glob("**/*"))
 
     return (path for path in paths if cleaner.file_pattern.search(path))
+
+
+def _run_command_in_context(context, resolved_command):
+    if context.is_dry_run:
+        return _dry_run_command(resolved_command)
+    return _run_command(resolved_command)
+
+
+def _dry_run_command(resolved_command):
+    if resolved_command.input_parts is None:
+        comment = "Would run command:"
+    else:
+        comment = "Would run command (inputs below):"
+    print(f"{comment} {resolved_command.command}")
+
+    if resolved_command.input_parts is not None:
+        print(json.dumps(resolved_command.input_parts, indent=2))
 
 
 def _run_command(resolved_command):

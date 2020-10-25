@@ -18,9 +18,10 @@ docker run --rm --volume "$(pwd)":/workdir evolutics/travel-kit check
 **Fix** code with
 
 ```bash
-# Warning: this overwrites original files.
-docker run --rm --volume "$(pwd)":/workdir evolutics/travel-kit fix
+docker run --rm --volume "$(pwd)":/workdir evolutics/travel-kit fix --dry-run
 ```
+
+To actually apply the changes (warning: this overwrites original files), drop the `--dry-run` option in the example.
 
 ## Tools
 

@@ -42,6 +42,7 @@ def _subcommands():
 
 def _subcommand_to_run_cleaner(get_command):
     def configure_subparser(subparser):
+        subparser.add_argument("--dry-run", action="store_true")
         subparser.add_argument("file_paths", nargs="*", type=pathlib.Path)
 
     return _Subcommand(
@@ -49,6 +50,7 @@ def _subcommand_to_run_cleaner(get_command):
         function=lambda arguments: run_cleaners.get(
             cleaners=cleaners.get(),
             get_command=get_command,
+            is_dry_run=arguments.dry_run,
             file_paths=arguments.file_paths,
         ),
     )
