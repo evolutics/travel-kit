@@ -59,10 +59,10 @@ def _resolve_command(cleaner, context):
         return None
 
     if cleaner.file_pattern:
-        file_paths = sorted(_get_file_paths(cleaner, context))
-        if file_paths:
+        input_parts = sorted(str(path) for path in _get_file_paths(cleaner, context))
+        if input_parts:
             return _ResolvedCommand(
-                command=f"xargs -0 {command}", input_parts=file_paths
+                command=f"xargs -0 {command}", input_parts=input_parts
             )
         return None
 
@@ -71,15 +71,11 @@ def _resolve_command(cleaner, context):
 
 def _get_file_paths(cleaner, context):
     if context.file_paths:
-        paths = (str(path) for path in context.file_paths)
-    elif context.is_in_git_repository:
-        paths = subprocess.run(
-            ["git", "ls-files", "-z"], capture_output=True, check=True, text=True
-        ).stdout.split("\x00")[:-1]
+        paths = context.file_paths
     else:
-        paths = (str(path) for path in pathlib.Path(".").glob("**/*"))
+        paths = pathlib.Path(".").glob("**/*")
 
-    return (path for path in paths if cleaner.file_pattern.search(path))
+    return (path for path in paths if cleaner.file_pattern.search(str(path)))
 
 
 def _run_command_in_context(context, resolved_command):
