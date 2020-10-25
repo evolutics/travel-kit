@@ -50,117 +50,110 @@ To actually apply the changes (warning: this overwrites original files), drop th
 
 The following tools are integrated:
 
-- **Ansible Lint**
+<details>
+<summary><strong>Ansible Lint</strong></summary>
 
-  <details>
+`check` command:
 
-  `check` command:
+```bash
+ansible-lint
+```
 
-  ```bash
-  ansible-lint
-  ```
+</details>
 
-  </details>
+<details>
+<summary><strong>Black</strong></summary>
 
-- **Black**
+Only applied to files matching regex: `\.(py|pyi)$`
 
-  <details>
+`check` command:
 
-  Only applied to files matching regex: `\.(py|pyi)$`
+```bash
+black --check --diff --
+```
 
-  `check` command:
+`fix` command:
 
-  ```bash
-  black --check --diff --
-  ```
+```bash
+black --
+```
 
-  `fix` command:
+</details>
 
-  ```bash
-  black --
-  ```
+<details>
+<summary><strong>Git</strong></summary>
 
-  </details>
+Only used if command returns 0: `git rev-parse`
 
-- **Git**
+Only applied to files.
 
-  <details>
+`check` command:
 
-  Only used if command returns 0: `git rev-parse`
+```bash
+git diff --check HEAD^ --
+```
 
-  Only applied to files.
+</details>
 
-  `check` command:
+<details>
+<summary><strong>Gitlint</strong></summary>
 
-  ```bash
-  git diff --check HEAD^ --
-  ```
+Only used if command returns 0: `git rev-parse`
 
-  </details>
+`check` command:
 
-- **Gitlint**
+```bash
+gitlint --ignore body-is-missing
+```
 
-  <details>
+</details>
 
-  Only used if command returns 0: `git rev-parse`
+<details>
+<summary><strong>Haskell Dockerfile Linter</strong></summary>
 
-  `check` command:
+Only applied to files matching regex: `(^|\.)Dockerfile$`
 
-  ```bash
-  gitlint --ignore body-is-missing
-  ```
+`check` command:
 
-  </details>
+```bash
+hadolint --
+```
 
-- **Haskell Dockerfile Linter**
+</details>
 
-  <details>
+<details>
+<summary><strong>Hunspell</strong></summary>
 
-  Only applied to files matching regex: `(^|\.)Dockerfile$`
+Only used if command returns 0: `git rev-parse`
 
-  `check` command:
+`check` command:
 
-  ```bash
-  hadolint --
-  ```
+```bash
+git log -1 --format=%B \
+  | hunspell -l -d en_US -p ci/personal_words.dic \
+  | sort | uniq | tr '\n' '\0' | xargs -0 -r -n 1 sh -c \
+  'echo "Misspelling: $@"; exit 1' --
+```
 
-  </details>
+</details>
 
-- **Hunspell**
+<details>
+<summary><strong>Prettier</strong></summary>
 
-  <details>
+Only applied to files matching regex: `\.(css|html|js|json|md|ts|yaml|yml)$`
 
-  Only used if command returns 0: `git rev-parse`
+`check` command:
 
-  `check` command:
+```bash
+prettier --check --
+```
 
-  ```bash
-  git log -1 --format=%B \
-    | hunspell -l -d en_US -p ci/personal_words.dic \
-    | sort | uniq | tr '\n' '\0' | xargs -0 -r -n 1 sh -c \
-    'echo "Misspelling: $@"; exit 1' --
-  ```
+`fix` command:
 
-  </details>
+```bash
+prettier --write --
+```
 
-- **Prettier**
-
-  <details>
-
-  Only applied to files matching regex: `\.(css|html|js|json|md|ts|yaml|yml)$`
-
-  `check` command:
-
-  ```bash
-  prettier --check --
-  ```
-
-  `fix` command:
-
-  ```bash
-  prettier --write --
-  ```
-
-  </details>
+</details>
 
 If you'd like to use another mix of tools instead, take a look at [Code Cleaner Buffet](https://github.com/evolutics/code-cleaner-buffet). It integrates many more code cleaners.
