@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import argparse
+import dataclasses
+import typing
 
 import cleaners
 import readme
@@ -11,22 +13,37 @@ def main():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
 
-    for subcommand, function in {
-        "check": lambda filtered_cleaners: run_cleaners.get(
-            filtered_cleaners, lambda cleaner: cleaner.check
-        ),
-        "fix": lambda filtered_cleaners: run_cleaners.get(
-            filtered_cleaners, lambda cleaner: cleaner.fix
-        ),
-        "readme": lambda filtered_cleaners: print(readme.get(filtered_cleaners)),
-    }.items():
-        subparser = subparsers.add_parser(subcommand)
-        subparser.set_defaults(function=function)
+    for key, subcommand in _subcommands().items():
+        subparser = subparsers.add_parser(key)
+        subparser.set_defaults(function=subcommand.function)
+        subcommand.configure_subparser(subparser)
 
     arguments = parser.parse_args()
+    arguments.function(arguments)
 
-    filtered_cleaners = cleaners.get()
-    arguments.function(filtered_cleaners)
+
+@dataclasses.dataclass
+class _Subcommand:
+    configure_subparser: typing.Callable[[argparse.ArgumentParser], None]
+    function: typing.Callable[[typing.Any], None]
+
+
+def _subcommands():
+    return {
+        "check": _subcommand_to_run_cleaner(lambda cleaner: cleaner.check),
+        "fix": _subcommand_to_run_cleaner(lambda cleaner: cleaner.fix),
+        "readme": _Subcommand(
+            lambda subparser: None,
+            function=lambda arguments: print(readme.get(cleaners.get())),
+        ),
+    }
+
+
+def _subcommand_to_run_cleaner(get_command):
+    return _Subcommand(
+        configure_subparser=lambda subparser: None,
+        function=lambda arguments: run_cleaners.get(cleaners.get(), get_command),
+    )
 
 
 if __name__ == "__main__":
