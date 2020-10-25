@@ -5,7 +5,7 @@ import subprocess
 import sys
 import typing
 
-import cleaners
+import model
 
 
 def get(cleaners, get_command, is_dry_run, file_paths):
@@ -29,7 +29,7 @@ def get(cleaners, get_command, is_dry_run, file_paths):
 
 @dataclasses.dataclass
 class _Context:
-    get_command: typing.Callable[[cleaners.Cleaner], str]
+    get_command: typing.Callable[[model.Cleaner], str]
     is_dry_run: bool
     file_paths: typing.Sequence[pathlib.Path]
     command_exit_statuses: typing.Mapping[str, int]

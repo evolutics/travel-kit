@@ -1,14 +1,6 @@
-import dataclasses
 import re
-import typing
 
-
-@dataclasses.dataclass
-class Cleaner:
-    is_only_active_if_command: typing.Optional[str]
-    file_pattern: typing.Optional[re.Pattern]
-    check: typing.Optional[str]
-    fix: typing.Optional[str]
+import model
 
 
 def get():
@@ -24,7 +16,7 @@ def get():
 
 
 def _ansible_lint():
-    return Cleaner(
+    return model.Cleaner(
         is_only_active_if_command=None,
         file_pattern=None,
         check="ansible-lint",
@@ -33,7 +25,7 @@ def _ansible_lint():
 
 
 def _black():
-    return Cleaner(
+    return model.Cleaner(
         is_only_active_if_command=None,
         file_pattern=re.compile(r"\.(py|pyi)$"),
         check="black --check --diff --",
@@ -42,7 +34,7 @@ def _black():
 
 
 def _git():
-    return Cleaner(
+    return model.Cleaner(
         is_only_active_if_command=_is_in_git_repository(),
         file_pattern=re.compile(""),
         check="git diff --check HEAD^ --",
@@ -55,7 +47,7 @@ def _is_in_git_repository():
 
 
 def _gitlint():
-    return Cleaner(
+    return model.Cleaner(
         is_only_active_if_command=_is_in_git_repository(),
         file_pattern=None,
         check="gitlint --ignore body-is-missing",
@@ -64,7 +56,7 @@ def _gitlint():
 
 
 def _haskell_dockerfile_linter():
-    return Cleaner(
+    return model.Cleaner(
         is_only_active_if_command=None,
         file_pattern=re.compile(r"(^|\.)Dockerfile$"),
         check="hadolint --",
@@ -73,7 +65,7 @@ def _haskell_dockerfile_linter():
 
 
 def _hunspell():
-    return Cleaner(
+    return model.Cleaner(
         is_only_active_if_command=_is_in_git_repository(),
         file_pattern=None,
         check=(
@@ -87,7 +79,7 @@ def _hunspell():
 
 
 def _prettier():
-    return Cleaner(
+    return model.Cleaner(
         is_only_active_if_command=None,
         file_pattern=re.compile(r"\.(css|html|js|json|md|ts|yaml|yml)$"),
         check="prettier --check --",
