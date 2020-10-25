@@ -1,5 +1,5 @@
 def get():
-    return """# Travel Kit 💼
+    return r"""# Travel Kit 💼
 
 ![build](https://github.com/evolutics/travel-kit/workflows/build/badge.svg)
 
@@ -7,15 +7,39 @@ Common code formatters and linters in a single Alpine Docker image.
 
 ## Usage
 
+Usage modes:
+
+- [Checking](#checking-code) your code for its format, linting errors, and more.
+- [Fixing](#fixing-code) your code automatically if possible.
+
 As a prerequisite, you need Docker to use the image [`evolutics/travel-kit`](https://hub.docker.com/r/evolutics/travel-kit).
 
-**Check** code with
+### Checking code
+
+Check code with
 
 ```bash
 docker run --rm --volume "$(pwd)":/workdir evolutics/travel-kit check
 ```
 
-**Fix** code with
+This checks the current folder (`pwd`) and its subfolders (recursively).
+
+To only check certain files (say `a.js` and `b.md`), pass their paths at the end as in
+
+```bash
+docker run --rm --volume "$(pwd)":/workdir evolutics/travel-kit check a.js b.md
+```
+
+You can use this to only check files tracked by Git with
+
+```bash
+docker run --entrypoint sh --rm --volume "$(pwd)":/workdir \
+  evolutics/travel-kit -c 'git ls-files -z | xargs -0 travel-kit check --'
+```
+
+### Fixing code
+
+Fix code with
 
 ```bash
 docker run --rm --volume "$(pwd)":/workdir evolutics/travel-kit fix --dry-run
