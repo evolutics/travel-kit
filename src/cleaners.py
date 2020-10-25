@@ -34,8 +34,8 @@ def _black():
 def _git():
     return Cleaner(
         only_in_git_repository=True,
-        file_pattern=None,
-        check="git diff --check HEAD^",
+        file_pattern=re.compile(""),
+        check="git diff --check HEAD^ --",
         fix=None,
     )
 
