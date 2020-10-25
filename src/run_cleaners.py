@@ -7,9 +7,11 @@ import typing
 import cleaners
 
 
-def get(cleaners, get_command):
+def get(cleaners, get_command, file_paths):
     context = _Context(
-        get_command=get_command, is_in_git_repository=_is_in_git_repository()
+        get_command=get_command,
+        file_paths=file_paths,
+        is_in_git_repository=_is_in_git_repository(),
     )
 
     exit_status = 0
@@ -26,6 +28,7 @@ def get(cleaners, get_command):
 @dataclasses.dataclass
 class _Context:
     get_command: typing.Callable[[cleaners.Cleaner], str]
+    file_paths: typing.Sequence[pathlib.Path]
     is_in_git_repository: bool
 
 
@@ -63,7 +66,9 @@ def _resolve_command(cleaner, context):
 
 
 def _get_file_paths(cleaner, context):
-    if context.is_in_git_repository:
+    if context.file_paths:
+        paths = (str(path) for path in context.file_paths)
+    elif context.is_in_git_repository:
         paths = subprocess.run(
             ["git", "ls-files", "-z"], capture_output=True, check=True, text=True
         ).stdout.split("\x00")[:-1]

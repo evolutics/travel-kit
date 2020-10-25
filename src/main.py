@@ -2,6 +2,7 @@
 
 import argparse
 import dataclasses
+import pathlib
 import typing
 
 import cleaners
@@ -40,9 +41,16 @@ def _subcommands():
 
 
 def _subcommand_to_run_cleaner(get_command):
+    def configure_subparser(subparser):
+        subparser.add_argument("file_paths", nargs="*", type=pathlib.Path)
+
     return _Subcommand(
-        configure_subparser=lambda subparser: None,
-        function=lambda arguments: run_cleaners.get(cleaners.get(), get_command),
+        configure_subparser=configure_subparser,
+        function=lambda arguments: run_cleaners.get(
+            cleaners=cleaners.get(),
+            get_command=get_command,
+            file_paths=arguments.file_paths,
+        ),
     )
 
 
