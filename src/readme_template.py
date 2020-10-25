@@ -37,6 +37,8 @@ docker run --entrypoint sh --rm --volume "$(pwd)":/workdir \
   evolutics/travel-kit -c 'git ls-files -z | xargs -0 travel-kit check --'
 ```
 
+To not apply certain tools, use the `--skip` option.
+
 ### Fixing code
 
 Fix code with
