@@ -1,97 +1,24 @@
+import json
+import pathlib
 import re
 
 import model
 
 
 def get():
-    return {
-        "Ansible Lint": _ansible_lint(),
-        "Black": _black(),
-        "Git": _git(),
-        "Gitlint": _gitlint(),
-        "Haskell Dockerfile Linter": _haskell_dockerfile_linter(),
-        "Hunspell": _hunspell(),
-        "Prettier": _prettier(),
-        "Pylint": _pylint(),
-    }
+    data_path = pathlib.Path(__file__).parent / "cleaners.json"
+    with data_path.open() as data_file:
+        data = json.load(data_file)
+
+    return {title: _get_cleaner(cleaner) for title, cleaner in data.items()}
 
 
-def _ansible_lint():
+def _get_cleaner(raw):
     return model.Cleaner(
-        is_only_active_if_command=None,
-        file_pattern=None,
-        check="ansible-lint",
-        fix=None,
-    )
-
-
-def _black():
-    return model.Cleaner(
-        is_only_active_if_command=None,
-        file_pattern=re.compile(r"\.(py|pyi)$"),
-        check="black --check --diff --",
-        fix="black --",
-    )
-
-
-def _git():
-    return model.Cleaner(
-        is_only_active_if_command=_is_in_git_repository(),
-        file_pattern=re.compile(""),
-        check="git diff --check HEAD^ --",
-        fix=None,
-    )
-
-
-def _is_in_git_repository():
-    return "git rev-parse"
-
-
-def _gitlint():
-    return model.Cleaner(
-        is_only_active_if_command=_is_in_git_repository(),
-        file_pattern=None,
-        check="gitlint --ignore body-is-missing",
-        fix=None,
-    )
-
-
-def _haskell_dockerfile_linter():
-    return model.Cleaner(
-        is_only_active_if_command=None,
-        file_pattern=re.compile(r"(^|\.)Dockerfile$"),
-        check="hadolint --",
-        fix=None,
-    )
-
-
-def _hunspell():
-    return model.Cleaner(
-        is_only_active_if_command=_is_in_git_repository(),
-        file_pattern=None,
-        check=(
-            r"""git log -1 --format=%B \
-  | hunspell -l -d en_US -p ci/personal_words.dic \
-  | sort | uniq | tr '\n' '\0' | xargs -0 -r -n 1 sh -c \
-  'echo "Misspelling: $@"; exit 1' --"""
-        ),
-        fix=None,
-    )
-
-
-def _prettier():
-    return model.Cleaner(
-        is_only_active_if_command=None,
-        file_pattern=re.compile(r"\.(css|html|js|json|md|ts|yaml|yml)$"),
-        check="prettier --check --",
-        fix="prettier --write --",
-    )
-
-
-def _pylint():
-    return model.Cleaner(
-        is_only_active_if_command=None,
-        file_pattern=re.compile(r"\.py$"),
-        check="pylint --",
-        fix=None,
+        is_only_active_if_command=raw["is_only_active_if_command"],
+        file_pattern=None
+        if raw["file_pattern"] is None
+        else re.compile(raw["file_pattern"]),
+        check=raw["check"],
+        fix=raw["fix"],
     )
