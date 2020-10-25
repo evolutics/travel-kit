@@ -32,7 +32,7 @@ class _Context:
 @dataclasses.dataclass
 class _ResolvedCommand:
     command: str
-    file_paths: typing.Optional[typing.Sequence[str]]
+    input_parts: typing.Optional[typing.Sequence[str]]
 
 
 def _is_in_git_repository():
@@ -51,12 +51,15 @@ def _resolve_command(cleaner, context):
     if command is None:
         return None
 
-    return _ResolvedCommand(
-        command=command,
-        file_paths=sorted(_get_file_paths(cleaner, context))
-        if cleaner.file_pattern
-        else None,
-    )
+    if cleaner.file_pattern:
+        file_paths = sorted(_get_file_paths(cleaner, context))
+        if file_paths:
+            return _ResolvedCommand(
+                command=f"xargs -0 {command}", input_parts=file_paths
+            )
+        return None
+
+    return _ResolvedCommand(command=command, input_parts=None)
 
 
 def _get_file_paths(cleaner, context):
@@ -71,17 +74,11 @@ def _get_file_paths(cleaner, context):
 
 
 def _run_command(resolved_command):
-    if resolved_command.file_paths is None:
-        return subprocess.run(resolved_command.command, check=True, shell=True)
+    if resolved_command.input_parts is None:
+        input_ = None
+    else:
+        input_ = "".join([part + "\x00" for part in resolved_command.input_parts])
 
-    if resolved_command.file_paths:
-        null_terminated_paths = "".join(
-            [path + "\x00" for path in resolved_command.file_paths]
-        )
-        return subprocess.run(
-            f"xargs -0 {resolved_command.command}",
-            check=True,
-            input=null_terminated_paths,
-            shell=True,
-            text=True,
-        )
+    return subprocess.run(
+        resolved_command.command, check=True, input=input_, shell=True, text=True
+    )
