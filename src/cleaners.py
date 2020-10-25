@@ -13,6 +13,7 @@ class Cleaner:
 
 def get():
     return {
+        "Ansible Lint": _ansible_lint(),
         "Black": _black(),
         "Git": _git(),
         "Gitlint": _gitlint(),
@@ -20,6 +21,15 @@ def get():
         "Hunspell": _hunspell(),
         "Prettier": _prettier(),
     }
+
+
+def _ansible_lint():
+    return Cleaner(
+        is_only_active_if_command=None,
+        file_pattern=None,
+        check="ansible-lint",
+        fix=None,
+    )
 
 
 def _black():

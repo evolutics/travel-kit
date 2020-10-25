@@ -6,6 +6,7 @@ set -o pipefail
 
 main() {
   local -r base_image="$(docker build \
+    --build-arg ansible_lint=4.3.5 \
     --build-arg black=20.8b1 \
     --build-arg git=2.26.2 \
     --build-arg gitlint=0.13.1 \
