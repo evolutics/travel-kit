@@ -14,7 +14,7 @@ def get(cleaners, get_command, is_dry_run, file_paths):
         get_command=get_command,
         is_dry_run=is_dry_run,
         file_paths=file_paths,
-        is_in_git_repository=_is_in_git_repository(),
+        command_exit_statuses=_get_activation_command_statuses(cleaners),
     )
 
     exit_status = 0
@@ -33,7 +33,7 @@ class _Context:
     get_command: typing.Callable[[cleaners.Cleaner], str]
     is_dry_run: bool
     file_paths: typing.Sequence[pathlib.Path]
-    is_in_git_repository: bool
+    command_exit_statuses: typing.Mapping[str, int]
 
 
 @dataclasses.dataclass
@@ -42,16 +42,27 @@ class _ResolvedCommand:
     input_parts: typing.Optional[typing.Sequence[str]]
 
 
-def _is_in_git_repository():
-    try:
-        subprocess.run(["git", "rev-parse"], capture_output=True, check=True)
-    except subprocess.CalledProcessError:
-        return False
-    return True
+def _get_activation_command_statuses(cleaners):
+    unique_commands = sorted(
+        {
+            cleaner.is_only_active_if_command
+            for cleaner in cleaners.values()
+            if cleaner.is_only_active_if_command is not None
+        }
+    )
+    return {
+        command: subprocess.run(
+            command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+        ).returncode
+        for command in unique_commands
+    }
 
 
 def _resolve_command(cleaner, context):
-    if cleaner.only_in_git_repository and not context.is_in_git_repository:
+    if (
+        cleaner.is_only_active_if_command is not None
+        and context.command_exit_statuses[cleaner.is_only_active_if_command]
+    ):
         return None
 
     command = context.get_command(cleaner)

@@ -23,10 +23,16 @@ def _menu_entry(title, cleaner):
 
 def _details(cleaner):
     return "\n\n".join(
-        (["Only used in Git repositories."] if cleaner.only_in_git_repository else [])
+        _is_only_active_if_command_entries(cleaner.is_only_active_if_command)
         + _file_pattern_entries(cleaner.file_pattern)
         + _command_entries(cleaner)
     )
+
+
+def _is_only_active_if_command_entries(is_only_active_if_command):
+    if is_only_active_if_command:
+        return [f"Only used if command returns 0: `{is_only_active_if_command}`"]
+    return []
 
 
 def _file_pattern_entries(file_pattern):

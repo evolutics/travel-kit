@@ -74,7 +74,7 @@ The following tools are integrated:
 
   <details>
 
-  Only used in Git repositories.
+  Only used if command returns 0: `git rev-parse`
 
   Only applied to files.
 
@@ -90,7 +90,7 @@ The following tools are integrated:
 
   <details>
 
-  Only used in Git repositories.
+  Only used if command returns 0: `git rev-parse`
 
   `check` command:
 
@@ -118,7 +118,7 @@ The following tools are integrated:
 
   <details>
 
-  Only used in Git repositories.
+  Only used if command returns 0: `git rev-parse`
 
   `check` command:
 
