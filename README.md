@@ -156,4 +156,17 @@ prettier --write --
 
 </details>
 
+<details>
+<summary><strong>Pylint</strong></summary>
+
+Only applied to files matching regex: `\.py$`
+
+`check` command:
+
+```bash
+pylint --
+```
+
+</details>
+
 If you'd like to use another mix of tools instead, take a look at [Code Cleaner Buffet](https://github.com/evolutics/code-cleaner-buffet). It integrates many more code cleaners.

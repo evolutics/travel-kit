@@ -50,7 +50,7 @@ def _get_activation_command_statuses(cleaners):
         }
     )
     return {
-        command: subprocess.run(
+        command: subprocess.run(  # pylint: disable=subprocess-run-check
             command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
         ).returncode
         for command in unique_commands

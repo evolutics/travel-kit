@@ -12,6 +12,7 @@ def get():
         "Haskell Dockerfile Linter": _haskell_dockerfile_linter(),
         "Hunspell": _hunspell(),
         "Prettier": _prettier(),
+        "Pylint": _pylint(),
     }
 
 
@@ -84,4 +85,13 @@ def _prettier():
         file_pattern=re.compile(r"\.(css|html|js|json|md|ts|yaml|yml)$"),
         check="prettier --check --",
         fix="prettier --write --",
+    )
+
+
+def _pylint():
+    return model.Cleaner(
+        is_only_active_if_command=None,
+        file_pattern=re.compile(r"\.py$"),
+        check="pylint --",
+        fix=None,
     )
