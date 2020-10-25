@@ -26,8 +26,8 @@ def _black():
     return Cleaner(
         only_in_git_repository=False,
         file_pattern=re.compile(r"\.(py|pyi)$"),
-        check="black --check --diff",
-        fix="black",
+        check="black --check --diff --",
+        fix="black --",
     )
 
 
@@ -53,7 +53,7 @@ def _haskell_dockerfile_linter():
     return Cleaner(
         only_in_git_repository=False,
         file_pattern=re.compile(r"(^|\.)Dockerfile$"),
-        check="hadolint",
+        check="hadolint --",
         fix=None,
     )
 
@@ -76,6 +76,6 @@ def _prettier():
     return Cleaner(
         only_in_git_repository=False,
         file_pattern=re.compile(r"\.(css|html|js|json|md|ts|yaml|yml)$"),
-        check="prettier --check",
-        fix="prettier --write",
+        check="prettier --check --",
+        fix="prettier --write --",
     )
