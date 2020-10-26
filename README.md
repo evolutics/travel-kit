@@ -113,7 +113,7 @@ gitlint --ignore body-is-missing
 <details>
 <summary><strong>Haskell Dockerfile Linter</strong></summary>
 
-Only applied to files matching regex: `(^|\.)Dockerfile$`
+Only applied to files matching regex: `(^|[./])Dockerfile$`
 
 `check` command:
 

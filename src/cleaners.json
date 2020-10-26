@@ -25,7 +25,7 @@
   },
   "Haskell Dockerfile Linter": {
     "is_only_active_if_command": null,
-    "file_pattern": "(^|\\.)Dockerfile$",
+    "file_pattern": "(^|[./])Dockerfile$",
     "check": "hadolint --",
     "fix": null
   },
