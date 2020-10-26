@@ -138,25 +138,6 @@ The following tools are integrated:
 
   </details>
 
-- **Hunspell**
-
-  <details>
-
-  <summary>Details</summary>
-
-  Only used if command returns 0: `git rev-parse`
-
-  `check` command:
-
-  ```bash
-  git log -1 --format=%B \
-    | hunspell -l -d en_US -p ci/personal_words.dic \
-    | sort | uniq | tr '\n' '\0' | xargs -0 -r -n 1 sh -c \
-    'echo "Misspelling: $@"; exit 1' --
-  ```
-
-  </details>
-
 - **Prettier**
 
   <details>

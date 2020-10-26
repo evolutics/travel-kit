@@ -29,12 +29,6 @@
     "check": "hadolint --",
     "fix": null
   },
-  "Hunspell": {
-    "is_only_active_if_command": "git rev-parse",
-    "file_pattern": null,
-    "check": "git log -1 --format=%B \\\n  | hunspell -l -d en_US -p ci/personal_words.dic \\\n  | sort | uniq | tr '\\n' '\\0' | xargs -0 -r -n 1 sh -c \\\n  'echo \"Misspelling: $@\"; exit 1' --",
-    "fix": null
-  },
   "Prettier": {
     "is_only_active_if_command": null,
     "file_pattern": "\\.(css|html|js|json|md|ts|yaml|yml)$",
