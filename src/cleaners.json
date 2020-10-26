@@ -31,7 +31,7 @@
   },
   "Prettier": {
     "is_only_active_if_command": null,
-    "file_pattern": "\\.(css|html|js|json|md|ts|yaml|yml)$",
+    "file_pattern": "\\.(css|html|js|json|md|toml|ts|yaml|yml)$",
     "check": "prettier --check --",
     "fix": "prettier --write --"
   },
