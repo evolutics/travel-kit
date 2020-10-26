@@ -1,3 +1,5 @@
+import textwrap
+
 import readme_template
 
 
@@ -9,13 +11,16 @@ def get(cleaners):
 
 
 def _menu_entry(title, cleaner):
-    details = _details(cleaner)
-    return f"""<details>
-<summary><strong>{title}</strong></summary>
+    details = textwrap.indent(_details(cleaner), "  ")
+    return f"""- **{title}**
+
+  <details>
+
+  <summary>Details</summary>
 
 {details}
 
-</details>"""
+  </details>"""
 
 
 def _details(cleaner):

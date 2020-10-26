@@ -52,123 +52,147 @@ To actually apply the changes (warning: this overwrites original files), drop th
 
 The following tools are integrated:
 
-<details>
-<summary><strong>Ansible Lint</strong></summary>
+- **Ansible Lint**
 
-`check` command:
+  <details>
 
-```bash
-ansible-lint
-```
+  <summary>Details</summary>
 
-</details>
+  `check` command:
 
-<details>
-<summary><strong>Black</strong></summary>
+  ```bash
+  ansible-lint
+  ```
 
-Only applied to files matching regex: `\.(py|pyi)$`
+  </details>
 
-`check` command:
+- **Black**
 
-```bash
-black --check --diff --
-```
+  <details>
 
-`fix` command:
+  <summary>Details</summary>
 
-```bash
-black --
-```
+  Only applied to files matching regex: `\.(py|pyi)$`
 
-</details>
+  `check` command:
 
-<details>
-<summary><strong>Git</strong></summary>
+  ```bash
+  black --check --diff --
+  ```
 
-Only used if command returns 0: `git rev-parse`
+  `fix` command:
 
-Only applied to files.
+  ```bash
+  black --
+  ```
 
-`check` command:
+  </details>
 
-```bash
-git diff --check HEAD^ --
-```
+- **Git**
 
-</details>
+  <details>
 
-<details>
-<summary><strong>Gitlint</strong></summary>
+  <summary>Details</summary>
 
-Only used if command returns 0: `git rev-parse`
+  Only used if command returns 0: `git rev-parse`
 
-`check` command:
+  Only applied to files.
 
-```bash
-gitlint --ignore body-is-missing
-```
+  `check` command:
 
-</details>
+  ```bash
+  git diff --check HEAD^ --
+  ```
 
-<details>
-<summary><strong>Haskell Dockerfile Linter</strong></summary>
+  </details>
 
-Only applied to files matching regex: `(^|[./])Dockerfile$`
+- **Gitlint**
 
-`check` command:
+  <details>
 
-```bash
-hadolint --
-```
+  <summary>Details</summary>
 
-</details>
+  Only used if command returns 0: `git rev-parse`
 
-<details>
-<summary><strong>Hunspell</strong></summary>
+  `check` command:
 
-Only used if command returns 0: `git rev-parse`
+  ```bash
+  gitlint --ignore body-is-missing
+  ```
 
-`check` command:
+  </details>
 
-```bash
-git log -1 --format=%B \
-  | hunspell -l -d en_US -p ci/personal_words.dic \
-  | sort | uniq | tr '\n' '\0' | xargs -0 -r -n 1 sh -c \
-  'echo "Misspelling: $@"; exit 1' --
-```
+- **Haskell Dockerfile Linter**
 
-</details>
+  <details>
 
-<details>
-<summary><strong>Prettier</strong></summary>
+  <summary>Details</summary>
 
-Only applied to files matching regex: `\.(css|html|js|json|md|ts|yaml|yml)$`
+  Only applied to files matching regex: `(^|[./])Dockerfile$`
 
-`check` command:
+  `check` command:
 
-```bash
-prettier --check --
-```
+  ```bash
+  hadolint --
+  ```
 
-`fix` command:
+  </details>
 
-```bash
-prettier --write --
-```
+- **Hunspell**
 
-</details>
+  <details>
 
-<details>
-<summary><strong>Pylint</strong></summary>
+  <summary>Details</summary>
 
-Only applied to files matching regex: `\.py$`
+  Only used if command returns 0: `git rev-parse`
 
-`check` command:
+  `check` command:
 
-```bash
-pylint --
-```
+  ```bash
+  git log -1 --format=%B \
+    | hunspell -l -d en_US -p ci/personal_words.dic \
+    | sort | uniq | tr '\n' '\0' | xargs -0 -r -n 1 sh -c \
+    'echo "Misspelling: $@"; exit 1' --
+  ```
 
-</details>
+  </details>
+
+- **Prettier**
+
+  <details>
+
+  <summary>Details</summary>
+
+  Only applied to files matching regex: `\.(css|html|js|json|md|ts|yaml|yml)$`
+
+  `check` command:
+
+  ```bash
+  prettier --check --
+  ```
+
+  `fix` command:
+
+  ```bash
+  prettier --write --
+  ```
+
+  </details>
+
+- **Pylint**
+
+  <details>
+
+  <summary>Details</summary>
+
+  Only applied to files matching regex: `\.py$`
+
+  `check` command:
+
+  ```bash
+  pylint --
+  ```
+
+  </details>
 
 If you'd like to use another mix of tools instead, take a look at [Code Cleaner Buffet](https://github.com/evolutics/code-cleaner-buffet). It integrates many more code cleaners.
