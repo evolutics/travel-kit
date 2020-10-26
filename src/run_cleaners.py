@@ -85,7 +85,7 @@ def _get_file_paths(cleaner, context):
     else:
         paths = pathlib.Path(".").glob("**/*")
 
-    return (path for path in paths if cleaner.file_pattern.search(str(path)))
+    return (path for path in paths if cleaner.file_pattern.search(path.as_posix()))
 
 
 def _run_command_in_context(context, resolved_command):
