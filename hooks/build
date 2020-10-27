@@ -15,6 +15,7 @@ main() {
     --build-arg prettier_xml=0.12.0 \
     --build-arg prettier=2.1.2 \
     --build-arg pylint=2.6.0 \
+    --build-arg shellcheck=0.7.1 \
     --quiet \
     https://github.com/evolutics/code-cleaner-buffet.git#0.14.0)"
 

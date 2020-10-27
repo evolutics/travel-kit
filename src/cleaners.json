@@ -40,5 +40,11 @@
     "file_pattern": "\\.py$",
     "check": "pylint --",
     "fix": null
+  },
+  "ShellCheck": {
+    "is_only_active_if_command": null,
+    "file_pattern": "\\.sh$",
+    "check": "shellcheck --",
+    "fix": null
   }
 }
