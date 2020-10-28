@@ -58,5 +58,11 @@
     "file_pattern": "\\.sh$",
     "check": "shellcheck --",
     "fix": null
+  },
+  "stylelint": {
+    "is_only_active_if_command": null,
+    "file_pattern": "\\.css$",
+    "check": "stylelint --",
+    "fix": null
   }
 }

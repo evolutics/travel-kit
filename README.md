@@ -224,4 +224,20 @@ The following tools are integrated:
 
   </details>
 
+- **stylelint**
+
+  <details>
+
+  <summary>Details</summary>
+
+  Only applied to files matching regex: `\.css$`
+
+  `check` command:
+
+  ```bash
+  stylelint --
+  ```
+
+  </details>
+
 If you'd like to use another mix of tools instead, take a look at [Code Cleaner Buffet](https://github.com/evolutics/code-cleaner-buffet). It integrates many more code cleaners.
