@@ -29,6 +29,12 @@
     "check": "hadolint --",
     "fix": null
   },
+  "HTMLHint": {
+    "is_only_active_if_command": null,
+    "file_pattern": "\\.(htm|html)$",
+    "check": "htmlhint --",
+    "fix": null
+  },
   "Nu Html Checker (v.Nu)": {
     "is_only_active_if_command": null,
     "file_pattern": "\\.(css|htm|html|svg|xht|xhtml)$",

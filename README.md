@@ -138,6 +138,22 @@ The following tools are integrated:
 
   </details>
 
+- **HTMLHint**
+
+  <details>
+
+  <summary>Details</summary>
+
+  Only applied to files matching regex: `\.(htm|html)$`
+
+  `check` command:
+
+  ```bash
+  htmlhint --
+  ```
+
+  </details>
+
 - **Nu Html Checker (v.Nu)**
 
   <details>
