@@ -138,6 +138,22 @@ The following tools are integrated:
 
   </details>
 
+- **Nu Html Checker (v.Nu)**
+
+  <details>
+
+  <summary>Details</summary>
+
+  Only applied to files matching regex: `\.(css|htm|html|svg|xht|xhtml)$`
+
+  `check` command:
+
+  ```bash
+  vnu --also-check-css --also-check-svg --Werror --
+  ```
+
+  </details>
+
 - **Prettier**
 
   <details>

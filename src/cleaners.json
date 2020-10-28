@@ -29,6 +29,12 @@
     "check": "hadolint --",
     "fix": null
   },
+  "Nu Html Checker (v.Nu)": {
+    "is_only_active_if_command": null,
+    "file_pattern": "\\.(css|htm|html|svg|xht|xhtml)$",
+    "check": "vnu --also-check-css --also-check-svg --Werror --",
+    "fix": null
+  },
   "Prettier": {
     "is_only_active_if_command": null,
     "file_pattern": "\\.(css|htm|html|js|json|md|toml|ts|xht|xhtml|xml|yaml|yml)$",
