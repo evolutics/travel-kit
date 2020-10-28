@@ -144,7 +144,7 @@ The following tools are integrated:
 
   <summary>Details</summary>
 
-  Only applied to files matching regex: `\.(css|html|js|json|md|toml|ts|xml|yaml|yml)$`
+  Only applied to files matching regex: `\.(css|htm|html|js|json|md|toml|ts|xht|xhtml|xml|yaml|yml)$`
 
   `check` command:
 
