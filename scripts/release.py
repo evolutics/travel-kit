@@ -11,12 +11,17 @@ def main():
     version = arguments.version
 
     _check_that_head_is_current()
+    _check_that_head_build_passed()
     _tag_head(version)
 
 
 def _check_that_head_is_current():
     subprocess.run(["git", "fetch"], check=True)
     subprocess.run(["git", "diff", "--exit-code", "HEAD", "origin/main"], check=True)
+
+
+def _check_that_head_build_passed():
+    input("Check that the build for HEAD has passed (control+C if not).")
 
 
 def _tag_head(version):
