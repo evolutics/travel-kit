@@ -10,23 +10,30 @@ def main():
     arguments = parser.parse_args()
     version = arguments.version
 
-    _check_that_head_is_current()
-    _check_that_head_build_passed()
-    _tag_head(version)
+    commit = _get_commit_to_release()
+    _check_that_current(commit)
+    _check_that_build_passed(commit)
+    _tag(commit, version)
 
 
-def _check_that_head_is_current():
+def _get_commit_to_release():
+    return subprocess.run(
+        ["git", "rev-parse", "HEAD"], capture_output=True, check=True, text=True
+    ).stdout.rstrip()
+
+
+def _check_that_current(commit):
     subprocess.run(["git", "fetch"], check=True)
-    subprocess.run(["git", "diff", "--exit-code", "HEAD", "origin/main"], check=True)
+    subprocess.run(["git", "diff", "--exit-code", commit, "origin/main"], check=True)
 
 
-def _check_that_head_build_passed():
-    input("Check that the build for HEAD has passed (control+C if not).")
+def _check_that_build_passed(commit):
+    input(f"Check that build has passed for commit (control+C if not): {commit}")
 
 
-def _tag_head(version):
+def _tag(commit, version):
     subprocess.run(
-        ["git", "tag", "--annotate", version, "--message", version], check=True
+        ["git", "tag", "--annotate", version, "--message", version, commit], check=True
     )
     subprocess.run(["git", "push", "origin", version], check=True)
 
