@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
-import csv
 import dataclasses
-import io
 import pathlib
 import typing
 
@@ -43,20 +41,23 @@ def _subcommands():
 
 
 def _subcommand_to_run_cleaner(get_command):
+    unfiltered_cleaners = cleaners.get()
+
     def configure_subparser(subparser):
         subparser.add_argument("--dry-run", action="store_true")
         subparser.add_argument(
             "--skip",
-            default="",
-            help="Do not use these tools, given as titles separated by commas.",
-            type=_csv_set,
+            action="append",
+            choices=unfiltered_cleaners,
+            default=[],
+            help="Do not use this tool.",
         )
         subparser.add_argument("file_paths", nargs="*", type=pathlib.Path)
 
     def function(arguments):
         filtered_cleaners = {
             title: cleaner
-            for title, cleaner in cleaners.get().items()
+            for title, cleaner in unfiltered_cleaners.items()
             if title not in arguments.skip
         }
         return run_cleaners.get(
@@ -67,10 +68,6 @@ def _subcommand_to_run_cleaner(get_command):
         )
 
     return _Subcommand(configure_subparser=configure_subparser, function=function)
-
-
-def _csv_set(raw):
-    return {value for record in csv.reader(io.StringIO(raw)) for value in record}
 
 
 if __name__ == "__main__":
