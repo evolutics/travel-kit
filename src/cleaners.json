@@ -1,10 +1,4 @@
 {
-  "Ansible Lint": {
-    "is_only_active_if_command": null,
-    "file_pattern": null,
-    "check": "ansible-lint",
-    "fix": null
-  },
   "Black": {
     "is_only_active_if_command": null,
     "file_pattern": "\\.(py|pyi)$",

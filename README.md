@@ -52,20 +52,6 @@ To actually apply the changes (warning: this overwrites original files), drop th
 
 The following tools are integrated:
 
-- **Ansible Lint**
-
-  <details>
-
-  <summary>Details</summary>
-
-  `check` command:
-
-  ```bash
-  ansible-lint
-  ```
-
-  </details>
-
 - **Black**
 
   <details>
