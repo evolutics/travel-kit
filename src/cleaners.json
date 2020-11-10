@@ -53,6 +53,12 @@
     "check": "shellcheck --",
     "fix": null
   },
+  "shfmt": {
+    "is_only_active_if_command": null,
+    "file_pattern": "\\.sh$",
+    "check": "shfmt -bn -ci -d -i 2 --",
+    "fix": "shfmt -bn -ci -i 2 -l -s -w --"
+  },
   "stylelint": {
     "is_only_active_if_command": null,
     "file_pattern": "\\.css$",

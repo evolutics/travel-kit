@@ -210,6 +210,28 @@ The following tools are integrated:
 
   </details>
 
+- **shfmt**
+
+  <details>
+
+  <summary>Details</summary>
+
+  Only applied to files matching regex: `\.sh$`
+
+  `check` command:
+
+  ```bash
+  shfmt -bn -ci -d -i 2 --
+  ```
+
+  `fix` command:
+
+  ```bash
+  shfmt -bn -ci -i 2 -l -s -w --
+  ```
+
+  </details>
+
 - **stylelint**
 
   <details>

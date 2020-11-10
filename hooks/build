@@ -16,6 +16,7 @@ main() {
     --build-arg prettier=2.1.2 \
     --build-arg pylint=2.6.0 \
     --build-arg shellcheck=0.7.1 \
+    --build-arg shfmt=3.2.0 \
     --build-arg stylelint=13.7.2 \
     --build-arg vnu=20.6.30 \
     --quiet \
