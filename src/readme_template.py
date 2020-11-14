@@ -5,6 +5,8 @@ def get():
 
 Common code formatters and linters in a single Alpine Docker image.
 
+If you'd like to use your own mix of tools instead, take a look at [Code Cleaner Buffet](https://github.com/evolutics/code-cleaner-buffet).
+
 ## Usage
 
 Usage modes:
@@ -53,6 +55,4 @@ To actually apply the changes (warning: this overwrites original files), drop th
 
 The following tools are integrated:
 
-{menu}
-
-If you'd like to use another mix of tools instead, take a look at [Code Cleaner Buffet](https://github.com/evolutics/code-cleaner-buffet). It integrates many more code cleaners."""
+{menu}"""
