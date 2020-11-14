@@ -1,6 +1,6 @@
 # Travel Kit 💼
 
-![build](https://github.com/evolutics/travel-kit/workflows/build/badge.svg)
+![test](https://github.com/evolutics/travel-kit/workflows/test/badge.svg)
 
 Common code formatters and linters in a single Alpine Docker image.
 

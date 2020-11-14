@@ -12,7 +12,7 @@ def main():
 
     commit = _get_commit_to_release()
     _check_that_current(commit)
-    _check_that_build_passed(commit)
+    _check_that_test_passed(commit)
     _tag(commit, version)
 
 
@@ -27,8 +27,8 @@ def _check_that_current(commit):
     subprocess.run(["git", "diff", "--exit-code", commit, "origin/main"], check=True)
 
 
-def _check_that_build_passed(commit):
-    input(f"Check that build has passed for commit (control+C if not): {commit}")
+def _check_that_test_passed(commit):
+    input(f"Check that test has passed for commit (control+C if not): {commit}")
 
 
 def _tag(commit, version):
