@@ -7,8 +7,7 @@ set -o pipefail
 main() {
   local -r script_folder="$(dirname "$(readlink --canonicalize "$0")")"
   local -r project_folder="$(dirname "${script_folder}")"
-
-  pushd "${project_folder}"
+  cd "${project_folder}"
 
   local -r image='evolutics/travel-kit:dirty'
   DOCKERFILE_PATH=Dockerfile IMAGE_NAME="${image}" hooks/build
@@ -18,8 +17,6 @@ main() {
 
   docker run --rm --volume "$(pwd)":/workdir "${image}" readme \
     | diff README.md -
-
-  popd
 }
 
 main "$@"
