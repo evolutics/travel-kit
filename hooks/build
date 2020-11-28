@@ -20,7 +20,7 @@ main() {
     --build-arg stylelint=13.7.2 \
     --build-arg vnu=20.6.30 \
     --quiet \
-    https://github.com/evolutics/code-cleaner-buffet.git#0.15.0)"
+    https://github.com/evolutics/code-cleaner-buffet.git#0.16.0)"
 
   docker build \
     --build-arg base_image="${base_image}" \
