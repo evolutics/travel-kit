@@ -6,21 +6,21 @@ set -o pipefail
 
 main() {
   local -r base_image="$(DOCKER_BUILDKIT=1 docker build \
-    --build-arg black=20.8b1 \
-    --build-arg git=2.26.2 \
-    --build-arg gitlint=0.13.1 \
-    --build-arg hadolint=1.18.0 \
-    --build-arg htmlhint=0.14.1 \
+    --build-arg black=21.5b1 \
+    --build-arg git=2.30.2 \
+    --build-arg gitlint=0.15.1 \
+    --build-arg hadolint=2.4.0 \
+    --build-arg htmlhint=0.14.2 \
     --build-arg prettier_toml=0.3.1 \
-    --build-arg prettier_xml=0.12.0 \
-    --build-arg prettier=2.1.2 \
-    --build-arg pylint=2.6.0 \
-    --build-arg shellcheck=0.7.1 \
-    --build-arg shfmt=3.2.0 \
-    --build-arg stylelint=13.7.2 \
-    --build-arg vnu=20.6.30 \
+    --build-arg prettier_xml=0.13.1 \
+    --build-arg prettier=2.3.0 \
+    --build-arg pylint=2.8.2 \
+    --build-arg shellcheck=0.7.2 \
+    --build-arg shfmt=3.2.4 \
+    --build-arg stylelint=13.13.1 \
+    --build-arg vnu=21.4.9 \
     --quiet \
-    https://github.com/evolutics/code-cleaner-buffet.git#0.16.0)"
+    https://github.com/evolutics/code-cleaner-buffet.git#0.17.0)"
 
   docker build \
     --build-arg base_image="${base_image}" \
