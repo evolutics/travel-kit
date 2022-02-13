@@ -10,7 +10,7 @@ main() {
   cd "${project_folder}"
 
   local -r image='evolutics/travel-kit:dirty'
-  DOCKERFILE_PATH=Dockerfile IMAGE_NAME="${image}" hooks/build
+  scripts/build.py "${image}"
 
   docker run --entrypoint sh --rm --volume "$(pwd)":/workdir "${image}" -c \
     'git ls-files -z | xargs -0 travel-kit check --'

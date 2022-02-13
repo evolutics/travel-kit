@@ -13,6 +13,7 @@ def main():
     commit = _get_commit_to_release()
     _check_that_current(commit)
     _check_that_test_passed(commit)
+    _publish(version)
     _tag(commit, version)
 
 
@@ -29,6 +30,17 @@ def _check_that_current(commit):
 
 def _check_that_test_passed(commit):
     input(f"Check that test has passed for commit (control+C if not): {commit}")
+
+
+def _publish(tag):
+    name = "evolutics/travel-kit"
+    image = f"{name}:{tag}"
+    subprocess.run(["scripts/build.py", image], check=True)
+
+    latest_image = f"{name}:latest"
+    subprocess.run(["docker", "tag", image, latest_image], check=True)
+    subprocess.run(["docker", "push", image], check=True)
+    subprocess.run(["docker", "push", latest_image], check=True)
 
 
 def _tag(commit, version):
