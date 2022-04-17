@@ -21,21 +21,21 @@ As a prerequisite, you need Docker to use the image [`evolutics/travel-kit`](htt
 Check code with
 
 ```bash
-docker run --rm --volume "$(pwd)":/workdir evolutics/travel-kit check
+docker run --rm --volume "${{PWD}}":/workdir evolutics/travel-kit check
 ```
 
-This checks the current folder (`pwd`) and its subfolders (recursively).
+This checks the current folder (`PWD`) and its subfolders (recursively).
 
 To only check certain files (say `a.js` and `b.md`), pass their paths at the end as in
 
 ```bash
-docker run --rm --volume "$(pwd)":/workdir evolutics/travel-kit check a.js b.md
+docker run --rm --volume "${{PWD}}":/workdir evolutics/travel-kit check a.js b.md
 ```
 
 You can use this to only check files tracked by Git with
 
 ```bash
-docker run --entrypoint sh --rm --volume "$(pwd)":/workdir \
+docker run --entrypoint sh --rm --volume "${{PWD}}":/workdir \
   evolutics/travel-kit -c 'git ls-files -z | xargs -0 travel-kit check --'
 ```
 
@@ -46,7 +46,7 @@ To not apply certain tools, use the `--skip` option.
 Fix code with
 
 ```bash
-docker run --rm --volume "$(pwd)":/workdir evolutics/travel-kit fix --dry-run
+docker run --rm --volume "${{PWD}}":/workdir evolutics/travel-kit fix --dry-run
 ```
 
 To actually apply the changes (warning: this overwrites original files), drop the `--dry-run` option in the example.
