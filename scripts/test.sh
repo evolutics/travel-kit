@@ -6,16 +6,15 @@ set -o pipefail
 
 main() {
   local -r script_folder="$(dirname "$(readlink --canonicalize "$0")")"
-  local -r project_folder="$(dirname "${script_folder}")"
-  cd "${project_folder}"
+  cd "$(dirname "${script_folder}")"
 
   local -r image='evolutics/travel-kit:dirty'
   scripts/build.py "${image}"
 
-  docker run --entrypoint sh --rm --volume "$(pwd)":/workdir "${image}" -c \
+  docker run --entrypoint sh --rm --volume "${PWD}":/workdir "${image}" -c \
     'git ls-files -z | xargs -0 travel-kit check --'
 
-  docker run --rm --volume "$(pwd)":/workdir "${image}" readme \
+  docker run --rm --volume "${PWD}":/workdir "${image}" readme \
     | diff README.md -
 }
 
