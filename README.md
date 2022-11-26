@@ -2,9 +2,7 @@
 
 ![test](https://github.com/evolutics/travel-kit/workflows/test/badge.svg)
 
-Common code formatters and linters in a single Alpine Docker image.
-
-If you'd like to use your own mix of tools instead, take a look at [Code Cleaner Buffet](https://github.com/evolutics/code-cleaner-buffet).
+Common code formatters and linters in a single Nix flake.
 
 ## Usage
 
@@ -13,29 +11,28 @@ Usage modes:
 - [Checking](#checking-code) your code for its format, linting errors, and more.
 - [Fixing](#fixing-code) your code automatically if possible.
 
-As a prerequisite, you need Docker to use the image [`evolutics/travel-kit`](https://hub.docker.com/r/evolutics/travel-kit).
+As a prerequisite, you need Nix to use this flake `github:evolutics/travel-kit`.
 
 ### Checking code
 
 Check code with
 
 ```bash
-docker run --rm --volume "${PWD}":/workdir evolutics/travel-kit check
+travel-kit check
 ```
 
-This checks the current folder (`PWD`) and its subfolders (recursively).
+This checks the current folder and its subfolders (recursively).
 
 To only check certain files (say `a.js` and `b.md`), pass their paths at the end as in
 
 ```bash
-docker run --rm --volume "${PWD}":/workdir evolutics/travel-kit check a.js b.md
+travel-kit check a.js b.md
 ```
 
 You can use this to only check files tracked by Git with
 
 ```bash
-docker run --entrypoint sh --rm --volume "${PWD}":/workdir \
-  evolutics/travel-kit -c 'git ls-files -z | xargs -0 travel-kit check --'
+git ls-files -z | xargs -0 travel-kit check --
 ```
 
 To not apply certain tools, use the `--skip` option.
@@ -45,7 +42,7 @@ To not apply certain tools, use the `--skip` option.
 Fix code with
 
 ```bash
-docker run --rm --volume "${PWD}":/workdir evolutics/travel-kit fix --dry-run
+travel-kit fix --dry-run
 ```
 
 To actually apply the changes (warning: this overwrites original files), drop the `--dry-run` option in the example.
@@ -110,18 +107,18 @@ The following tools are integrated:
 
   </details>
 
-- **Haskell Dockerfile Linter**
+- **HTML5 Validator**
 
   <details>
 
   <summary>Details</summary>
 
-  Only applied to files matching regex: `(^|[./])Dockerfile$`
+  Only applied to files matching regex: `\.(css|htm|html|svg|xht|xhtml)$`
 
   `check` command:
 
   ```bash
-  hadolint --
+  html5validator --also-check-css --also-check-svg --Werror --
   ```
 
   </details>
@@ -142,18 +139,18 @@ The following tools are integrated:
 
   </details>
 
-- **Nu Html Checker (v.Nu)**
+- **Haskell Dockerfile Linter**
 
   <details>
 
   <summary>Details</summary>
 
-  Only applied to files matching regex: `\.(css|htm|html|svg|xht|xhtml)$`
+  Only applied to files matching regex: `(^|[./])Dockerfile$`
 
   `check` command:
 
   ```bash
-  vnu --also-check-css --also-check-svg --Werror --
+  hadolint --
   ```
 
   </details>
@@ -169,13 +166,13 @@ The following tools are integrated:
   `check` command:
 
   ```bash
-  prettier --check --
+  prettier --check --plugin-search-dir … --
   ```
 
   `fix` command:
 
   ```bash
-  prettier --write --
+  prettier --plugin-search-dir … --write --
   ```
 
   </details>
@@ -191,7 +188,7 @@ The following tools are integrated:
   `check` command:
 
   ```bash
-  pylint --
+  pylint
   ```
 
   </details>

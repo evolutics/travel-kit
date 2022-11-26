@@ -5,9 +5,9 @@ import dataclasses
 import pathlib
 import typing
 
-import cleaners
-import readme
-import run_cleaners
+from . import cleaners
+from . import readme
+from . import run_cleaners
 
 
 def main():

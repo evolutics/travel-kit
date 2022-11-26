@@ -1,6 +1,7 @@
+import pathlib
 import textwrap
 
-import readme_template
+from . import readme_template
 
 
 def get(cleaners):
@@ -33,8 +34,16 @@ def _details(cleaner):
 
 def _is_only_active_if_command_entries(is_only_active_if_command):
     if is_only_active_if_command:
-        return [f"Only used if command returns 0: `{is_only_active_if_command}`"]
+        command = _humanize_command(is_only_active_if_command)
+        return [f"Only used if command returns 0: `{command}`"]
     return []
+
+
+def _humanize_command(command):
+    return " ".join(
+        ("…" if pathlib.Path(argument).is_absolute() else argument)
+        for argument in command[1:]
+    )
 
 
 def _file_pattern_entries(file_pattern):
@@ -49,11 +58,12 @@ def _command_entries(cleaner):
     return [
         _command_entry(key, command)
         for key, command in {"check": cleaner.check, "fix": cleaner.fix}.items()
-        if command is not None
+        if command
     ]
 
 
 def _command_entry(key, command):
+    command = _humanize_command(command)
     return f"""`{key}` command:
 
 ```bash

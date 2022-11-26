@@ -3,9 +3,7 @@ def get():
 
 ![test](https://github.com/evolutics/travel-kit/workflows/test/badge.svg)
 
-Common code formatters and linters in a single Alpine Docker image.
-
-If you'd like to use your own mix of tools instead, take a look at [Code Cleaner Buffet](https://github.com/evolutics/code-cleaner-buffet).
+Common code formatters and linters in a single Nix flake.
 
 ## Usage
 
@@ -14,29 +12,28 @@ Usage modes:
 - [Checking](#checking-code) your code for its format, linting errors, and more.
 - [Fixing](#fixing-code) your code automatically if possible.
 
-As a prerequisite, you need Docker to use the image [`evolutics/travel-kit`](https://hub.docker.com/r/evolutics/travel-kit).
+As a prerequisite, you need Nix to use this flake `github:evolutics/travel-kit`.
 
 ### Checking code
 
 Check code with
 
 ```bash
-docker run --rm --volume "${{PWD}}":/workdir evolutics/travel-kit check
+travel-kit check
 ```
 
-This checks the current folder (`PWD`) and its subfolders (recursively).
+This checks the current folder and its subfolders (recursively).
 
 To only check certain files (say `a.js` and `b.md`), pass their paths at the end as in
 
 ```bash
-docker run --rm --volume "${{PWD}}":/workdir evolutics/travel-kit check a.js b.md
+travel-kit check a.js b.md
 ```
 
 You can use this to only check files tracked by Git with
 
 ```bash
-docker run --entrypoint sh --rm --volume "${{PWD}}":/workdir \
-  evolutics/travel-kit -c 'git ls-files -z | xargs -0 travel-kit check --'
+git ls-files -z | xargs -0 travel-kit check --
 ```
 
 To not apply certain tools, use the `--skip` option.
@@ -46,7 +43,7 @@ To not apply certain tools, use the `--skip` option.
 Fix code with
 
 ```bash
-docker run --rm --volume "${{PWD}}":/workdir evolutics/travel-kit fix --dry-run
+travel-kit fix --dry-run
 ```
 
 To actually apply the changes (warning: this overwrites original files), drop the `--dry-run` option in the example.
