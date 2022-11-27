@@ -51,6 +51,28 @@ To actually apply the changes (warning: this overwrites original files), drop th
 
 The following tools are integrated:
 
+- **Alejandra**
+
+  <details>
+
+  <summary>Details of <code>alejandra</code></summary>
+
+  Only applied to files matching regex: `\.nix$`
+
+  `check` command:
+
+  ```bash
+  alejandra --check --
+  ```
+
+  `fix` command:
+
+  ```bash
+  alejandra --
+  ```
+
+  </details>
+
 - **Black**
 
   <details>

@@ -15,6 +15,7 @@
     flake-utils.lib.eachDefaultSystem (
       system: let
         cleaners = let
+          alejandra = [(pkgs.lib.makeBinPath [pkgs.alejandra]) "alejandra"];
           black = [(pkgs.lib.makeBinPath [pkgs.black]) "black"];
           git = [(pkgs.lib.makeBinPath [pkgs.git]) "git"];
           gitlint = [(pkgs.lib.makeBinPath [pkgs.gitlint]) "gitlint"];
@@ -28,6 +29,13 @@
           stylelint = [(pkgs.lib.makeBinPath [pkgs.nodePackages.stylelint]) "stylelint"];
         in
           builtins.toJSON {
+            alejandra = {
+              title = "Alejandra";
+              is_only_active_if_command = [];
+              file_pattern = "\\.nix$";
+              check = alejandra ++ ["--check" "--"];
+              fix = alejandra ++ ["--"];
+            };
             black = {
               title = "Black";
               is_only_active_if_command = [];
