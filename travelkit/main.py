@@ -56,9 +56,9 @@ def _subcommand_to_run_cleaner(get_command):
 
     def function(arguments):
         filtered_cleaners = {
-            title: cleaner
-            for title, cleaner in unfiltered_cleaners.items()
-            if title not in arguments.skip
+            identifier: cleaner
+            for identifier, cleaner in unfiltered_cleaners.items()
+            if identifier not in arguments.skip
         }
         return run_cleaners.get(
             cleaners=filtered_cleaners,

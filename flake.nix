@@ -28,43 +28,50 @@
           stylelint = [(pkgs.lib.makeBinPath [pkgs.nodePackages.stylelint]) "stylelint"];
         in
           builtins.toJSON {
-            Black = {
+            black = {
+              title = "Black";
               is_only_active_if_command = [];
               file_pattern = "\\.(py|pyi)$";
               check = black ++ ["--check" "--diff" "--"];
               fix = black ++ ["--"];
             };
-            Git = {
+            git = {
+              title = "Git";
               is_only_active_if_command = git ++ ["rev-parse"];
               file_pattern = "";
               check = git ++ ["diff" "--check" "HEAD^" "--"];
               fix = [];
             };
-            Gitlint = {
+            gitlint = {
+              title = "Gitlint";
               is_only_active_if_command = git ++ ["rev-parse"];
               file_pattern = null;
               check = gitlint ++ ["--ignore" "body-is-missing"];
               fix = [];
             };
-            "Haskell Dockerfile Linter" = {
+            hadolint = {
+              title = "Haskell Dockerfile Linter";
               is_only_active_if_command = [];
               file_pattern = "(^|[./])Dockerfile$";
               check = hadolint ++ ["--"];
               fix = [];
             };
-            "HTML5 Validator" = {
+            html5validator = {
+              title = "HTML5 Validator";
               is_only_active_if_command = [];
               file_pattern = "\\.(css|htm|html|svg|xht|xhtml)$";
               check = html5validator ++ ["--also-check-css" "--also-check-svg" "--Werror" "--"];
               fix = [];
             };
-            HTMLHint = {
+            htmlhint = {
+              title = "HTMLHint";
               is_only_active_if_command = [];
               file_pattern = "\\.(htm|html)$";
               check = htmlhint ++ ["--"];
               fix = [];
             };
-            Prettier = {
+            prettier = {
+              title = "Prettier";
               is_only_active_if_command = [];
               file_pattern = "\\.(css|htm|html|js|json|md|toml|ts|xht|xhtml|xml|yaml|yml)$";
               check =
@@ -84,25 +91,29 @@
                   "--"
                 ];
             };
-            Pylint = {
+            pylint = {
+              title = "Pylint";
               is_only_active_if_command = [];
               file_pattern = "\\.py$";
               check = pylint;
               fix = [];
             };
-            ShellCheck = {
+            shellcheck = {
+              title = "ShellCheck";
               is_only_active_if_command = [];
               file_pattern = "\\.sh$";
               check = shellcheck ++ ["--"];
               fix = [];
             };
             shfmt = {
+              title = "shfmt";
               is_only_active_if_command = [];
               file_pattern = "\\.sh$";
               check = shfmt ++ ["-bn" "-ci" "-d" "-i" "2" "--"];
               fix = shfmt ++ ["-bn" "-ci" "-i" "2" "-l" "-s" "-w" "--"];
             };
             stylelint = {
+              title = "stylelint";
               is_only_active_if_command = [];
               file_pattern = "\\.css$";
               check = stylelint ++ ["--"];

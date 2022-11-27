@@ -6,18 +6,18 @@ from . import readme_template
 
 def get(cleaners):
     menu = "\n\n".join(
-        [_menu_entry(title, cleaner) for title, cleaner in cleaners.items()]
+        [_menu_entry(identifier, cleaner) for identifier, cleaner in cleaners.items()]
     )
     return readme_template.get().format(menu=menu)
 
 
-def _menu_entry(title, cleaner):
+def _menu_entry(identifier, cleaner):
     details = textwrap.indent(_details(cleaner), "  ")
-    return f"""- **{title}**
+    return f"""- **{cleaner.title}**
 
   <details>
 
-  <summary>Details</summary>
+  <summary>Details of `{identifier}`</summary>
 
 {details}
 

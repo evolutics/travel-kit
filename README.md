@@ -55,7 +55,7 @@ The following tools are integrated:
 
   <details>
 
-  <summary>Details</summary>
+  <summary>Details of `black`</summary>
 
   Only applied to files matching regex: `\.(py|pyi)$`
 
@@ -77,7 +77,7 @@ The following tools are integrated:
 
   <details>
 
-  <summary>Details</summary>
+  <summary>Details of `git`</summary>
 
   Only used if command returns 0: `git rev-parse`
 
@@ -95,7 +95,7 @@ The following tools are integrated:
 
   <details>
 
-  <summary>Details</summary>
+  <summary>Details of `gitlint`</summary>
 
   Only used if command returns 0: `git rev-parse`
 
@@ -107,11 +107,27 @@ The following tools are integrated:
 
   </details>
 
+- **Haskell Dockerfile Linter**
+
+  <details>
+
+  <summary>Details of `hadolint`</summary>
+
+  Only applied to files matching regex: `(^|[./])Dockerfile$`
+
+  `check` command:
+
+  ```bash
+  hadolint --
+  ```
+
+  </details>
+
 - **HTML5 Validator**
 
   <details>
 
-  <summary>Details</summary>
+  <summary>Details of `html5validator`</summary>
 
   Only applied to files matching regex: `\.(css|htm|html|svg|xht|xhtml)$`
 
@@ -127,7 +143,7 @@ The following tools are integrated:
 
   <details>
 
-  <summary>Details</summary>
+  <summary>Details of `htmlhint`</summary>
 
   Only applied to files matching regex: `\.(htm|html)$`
 
@@ -139,27 +155,11 @@ The following tools are integrated:
 
   </details>
 
-- **Haskell Dockerfile Linter**
-
-  <details>
-
-  <summary>Details</summary>
-
-  Only applied to files matching regex: `(^|[./])Dockerfile$`
-
-  `check` command:
-
-  ```bash
-  hadolint --
-  ```
-
-  </details>
-
 - **Prettier**
 
   <details>
 
-  <summary>Details</summary>
+  <summary>Details of `prettier`</summary>
 
   Only applied to files matching regex: `\.(css|htm|html|js|json|md|toml|ts|xht|xhtml|xml|yaml|yml)$`
 
@@ -181,7 +181,7 @@ The following tools are integrated:
 
   <details>
 
-  <summary>Details</summary>
+  <summary>Details of `pylint`</summary>
 
   Only applied to files matching regex: `\.py$`
 
@@ -197,7 +197,7 @@ The following tools are integrated:
 
   <details>
 
-  <summary>Details</summary>
+  <summary>Details of `shellcheck`</summary>
 
   Only applied to files matching regex: `\.sh$`
 
@@ -213,7 +213,7 @@ The following tools are integrated:
 
   <details>
 
-  <summary>Details</summary>
+  <summary>Details of `shfmt`</summary>
 
   Only applied to files matching regex: `\.sh$`
 
@@ -235,7 +235,7 @@ The following tools are integrated:
 
   <details>
 
-  <summary>Details</summary>
+  <summary>Details of `stylelint`</summary>
 
   Only applied to files matching regex: `\.css$`
 
