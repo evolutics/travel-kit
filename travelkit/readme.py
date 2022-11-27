@@ -17,7 +17,7 @@ def _menu_entry(identifier, cleaner):
 
   <details>
 
-  <summary>Details of `{identifier}`</summary>
+  <summary>Details of <code>{identifier}</code></summary>
 
 {details}
 
