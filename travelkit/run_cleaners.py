@@ -28,10 +28,10 @@ def get(cleaners, get_command, is_dry_run, file_paths):
 
 @dataclasses.dataclass
 class _Context:
-    get_command: typing.Callable[[model.Cleaner], tuple[str]]
+    get_command: typing.Callable[[model.Cleaner], tuple[str, ...]]
     is_dry_run: bool
     file_paths: typing.Sequence[pathlib.Path]
-    command_exit_statuses: typing.Mapping[tuple[str], int]
+    command_exit_statuses: typing.Mapping[tuple[str, ...], int]
 
 
 def _get_activation_command_statuses(cleaners):
