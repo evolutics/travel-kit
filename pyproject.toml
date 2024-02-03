@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "travelkit"
+version = "0.1.0"
+
+[project.scripts]
+travel-kit = "travelkit.main:main"
+
+[tool.setuptools.package-data]
+travelkit = ["cleaners.json"]
