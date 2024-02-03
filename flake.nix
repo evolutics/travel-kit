@@ -23,6 +23,7 @@
           html5validator = [(pkgs.lib.makeBinPath [pkgs.html5validator]) "html5validator"];
           htmlhint = [(pkgs.lib.makeBinPath [pkgs.nodePackages.htmlhint]) "htmlhint"];
           jsonnetfmt = [(pkgs.lib.makeBinPath [pkgs.go-jsonnet]) "jsonnetfmt"];
+          jsonnetLint = [(pkgs.lib.makeBinPath [pkgs.go-jsonnet]) "jsonnet-lint"];
           prettier = [(pkgs.lib.makeBinPath [pkgs.nodePackages.prettier]) "prettier"];
           pylint = [(pkgs.lib.makeBinPath [pkgs.pylint]) "pylint"];
           shellcheck = [(pkgs.lib.makeBinPath [pkgs.shellcheck]) "shellcheck"];
@@ -77,6 +78,13 @@
               is_only_active_if_command = [];
               file_pattern = "\\.(htm|html)$";
               check = htmlhint ++ ["--"];
+              fix = [];
+            };
+            jsonnet-lint = {
+              title = "Jsonnet linter";
+              is_only_active_if_command = [];
+              file_pattern = "\\.(jsonnet|libsonnet)$";
+              check = jsonnetLint ++ ["--"];
               fix = [];
             };
             jsonnetfmt = {

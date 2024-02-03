@@ -177,6 +177,22 @@ The following tools are integrated:
 
   </details>
 
+- **Jsonnet linter**
+
+  <details>
+
+  <summary>Details of <code>jsonnet-lint</code></summary>
+
+  Only applied to files matching regex: `\.(jsonnet|libsonnet)$`
+
+  `check` command:
+
+  ```bash
+  jsonnet-lint --
+  ```
+
+  </details>
+
 - **Jsonnet formatter**
 
   <details>
