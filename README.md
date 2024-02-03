@@ -177,6 +177,28 @@ The following tools are integrated:
 
   </details>
 
+- **Jsonnet formatter**
+
+  <details>
+
+  <summary>Details of <code>jsonnetfmt</code></summary>
+
+  Only applied to files matching regex: `\.(jsonnet|libsonnet)$`
+
+  `check` command:
+
+  ```bash
+  jsonnetfmt --test --
+  ```
+
+  `fix` command:
+
+  ```bash
+  jsonnetfmt --in-place --
+  ```
+
+  </details>
+
 - **Prettier**
 
   <details>
