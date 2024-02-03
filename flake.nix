@@ -86,15 +86,15 @@
                 prettier
                 ++ [
                   "--check"
-                  "--plugin-search-dir"
-                  "${pkgs.lib.makeLibraryPath [pkgs.nodePackages.prettier-plugin-toml]}"
+                  "--plugin"
+                  "${pkgs.lib.makeLibraryPath [pkgs.nodePackages.prettier-plugin-toml]}/node_modules/prettier-plugin-toml/lib/index.cjs"
                   "--"
                 ];
               fix =
                 prettier
                 ++ [
-                  "--plugin-search-dir"
-                  "${pkgs.lib.makeLibraryPath [pkgs.nodePackages.prettier-plugin-toml]}"
+                  "--plugin"
+                  "${pkgs.lib.makeLibraryPath [pkgs.nodePackages.prettier-plugin-toml]}/node_modules/prettier-plugin-toml/lib/index.cjs"
                   "--write"
                   "--"
                 ];

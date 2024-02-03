@@ -188,13 +188,13 @@ The following tools are integrated:
   `check` command:
 
   ```bash
-  prettier --check --plugin-search-dir … --
+  prettier --check --plugin … --
   ```
 
   `fix` command:
 
   ```bash
-  prettier --plugin-search-dir … --write --
+  prettier --plugin … --write --
   ```
 
   </details>
