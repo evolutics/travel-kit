@@ -13,6 +13,13 @@ main() {
   nix run . -- readme | diff README.md -
 
   git rm --force flake.lock
+
+  (
+    cd example
+    nix flake check --no-write-lock-file
+    direnv allow
+    direnv exec . travel-kit --help
+  )
 }
 
 main "$@"
