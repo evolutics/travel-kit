@@ -146,16 +146,18 @@
           };
         pkgs = nixpkgs.legacyPackages.${system};
       in {
-        defaultApp = pkgs.python3Packages.buildPythonApplication {
-          format = "pyproject";
-          name = "travel-kit";
-          preBuild = ''
-            cat >travelkit/cleaners.json <<'EOF'
-            ${cleaners}
-            EOF
-          '';
-          propagatedBuildInputs = [pkgs.python3Packages.setuptools];
-          src = ./.;
+        apps.default = flake-utils.lib.mkApp {
+          drv = pkgs.python3Packages.buildPythonApplication {
+            format = "pyproject";
+            name = "travel-kit";
+            preBuild = ''
+              cat >travelkit/cleaners.json <<'EOF'
+              ${cleaners}
+              EOF
+            '';
+            propagatedBuildInputs = [pkgs.python3Packages.setuptools];
+            src = ./.;
+          };
         };
       }
     );
