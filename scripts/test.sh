@@ -8,6 +8,8 @@ main() {
   local -r script_folder="$(dirname "$(readlink --canonicalize "$0")")"
   cd "$(dirname "${script_folder}")"
 
+  nix flake check
+
   git ls-files -z | xargs -0 nix run . -- check --
 
   nix run . -- readme | diff README.md -
