@@ -8,9 +8,11 @@ main() {
   local -r script_folder="$(dirname "$(readlink --canonicalize "$0")")"
   cd "$(dirname "${script_folder}")"
 
-  git ls-files -z | xargs -0 nix develop ./example --command travel-kit check --
+  git ls-files -z | xargs -0 nix run . -- check --
 
-  nix develop ./example --command travel-kit readme | diff README.md -
+  nix run . -- readme | diff README.md -
+
+  git rm --force flake.lock
 
   (
     cd example

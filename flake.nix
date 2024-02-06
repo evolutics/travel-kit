@@ -144,9 +144,7 @@
               fix = [];
             };
           };
-        pkgs = nixpkgs.legacyPackages.${system};
-      in {
-        apps.default = pkgs.python3Packages.buildPythonApplication {
+        package = pkgs.python3Packages.buildPythonApplication {
           format = "pyproject";
           name = "travel-kit";
           preBuild = ''
@@ -157,6 +155,13 @@
           propagatedBuildInputs = [pkgs.python3Packages.setuptools];
           src = ./.;
         };
+        pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        apps.default = {
+          program = "${package}/bin/travel-kit";
+          type = "app";
+        };
+        packages.default = package;
       }
     );
 }
