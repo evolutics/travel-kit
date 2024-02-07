@@ -91,6 +91,6 @@ def _get_file_paths(cleaner, context):
 def _run_command_in_context(context, command):
     if context.is_dry_run:
         shell_command = " ".join(shlex.quote(str(argument)) for argument in command[1:])
-        print(f"Would run command: {shell_command}")
+        print(f"Would run: {shell_command}")
         return
     subprocess.run(_executable_command(command), check=True)
