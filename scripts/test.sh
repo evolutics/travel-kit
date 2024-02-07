@@ -10,6 +10,14 @@ check_basics() {
   nix run . -- readme | diff README.md -
 }
 
+test_cleaner_sample_runs() {
+  echo '{"hi" :5 }' >sample.json
+  nix run . -- check sample.json && exit 1
+  nix run . -- fix sample.json
+  nix run . -- check sample.json
+  rm sample.json
+}
+
 sanity_check_example_integration() {
   (
     cd example
@@ -24,6 +32,7 @@ main() {
   cd "$(dirname "${script_folder}")"
 
   check_basics
+  test_cleaner_sample_runs
   git rm --force flake.lock
 
   sanity_check_example_integration
