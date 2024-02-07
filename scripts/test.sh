@@ -18,6 +18,38 @@ test_cleaner_sample_runs() {
   rm sample.json
 }
 
+test_cleaner_command_constructions() {
+  mkdir test/cases
+
+  (
+    cd test/cases
+
+    touch \
+      alejandra.nix \
+      black.py \
+      git \
+      gitlint \
+      hadolint.Dockerfile \
+      html5validator.css \
+      htmlhint.htm \
+      jsonnet_lint.jsonnet \
+      jsonnetfmt.jsonnet \
+      prettier.css \
+      pylint.py \
+      shellcheck.sh \
+      shfmt.sh \
+      stylelint.css
+
+    for subcommand in check fix; do
+      nix run ../.. -- "${subcommand}" --dry-run -- * \
+        | sed 's: /\S* : … :g' \
+        | diff "../expected/${subcommand}.txt" -
+    done
+  )
+
+  rm --recursive test/cases
+}
+
 sanity_check_example_integration() {
   (
     cd example
@@ -33,6 +65,7 @@ main() {
 
   check_basics
   test_cleaner_sample_runs
+  test_cleaner_command_constructions
   git rm --force flake.lock
 
   sanity_check_example_integration

@@ -1,0 +1,5 @@
+Would run: alejandra -- alejandra.nix
+Would run: black -- black.py pylint.py
+Would run: jsonnetfmt --in-place -- jsonnet_lint.jsonnet jsonnetfmt.jsonnet
+Would run: prettier --plugin … --write -- html5validator.css htmlhint.htm prettier.css stylelint.css
+Would run: shfmt -bn -ci -i 2 -l -s -w -- shellcheck.sh shfmt.sh
