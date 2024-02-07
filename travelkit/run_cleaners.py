@@ -1,5 +1,6 @@
 import dataclasses
 import pathlib
+import shlex
 import subprocess
 import sys
 import typing
@@ -89,7 +90,7 @@ def _get_file_paths(cleaner, context):
 
 def _run_command_in_context(context, command):
     if context.is_dry_run:
-        shell_command = " ".join(str(argument) for argument in command[1:])
+        shell_command = " ".join(shlex.quote(str(argument)) for argument in command[1:])
         print(f"Would run command: {shell_command}")
         return
     subprocess.run(_executable_command(command), check=True)
