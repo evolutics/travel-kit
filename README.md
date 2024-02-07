@@ -109,7 +109,7 @@ The following tools are integrated:
   `check` command:
 
   ```bash
-  git diff --check HEAD^ --
+  git diff --check 'HEAD^' --
   ```
 
   </details>

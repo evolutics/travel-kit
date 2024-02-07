@@ -1,4 +1,5 @@
 import pathlib
+import shlex
 import textwrap
 
 from . import readme_template
@@ -41,7 +42,7 @@ def _is_only_active_if_command_entries(is_only_active_if_command):
 
 def _humanize_command(command):
     return " ".join(
-        ("…" if pathlib.Path(argument).is_absolute() else argument)
+        ("…" if pathlib.Path(argument).is_absolute() else shlex.quote(argument))
         for argument in command[1:]
     )
 
