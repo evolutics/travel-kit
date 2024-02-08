@@ -19,10 +19,9 @@ test_cleaner_sample_runs() {
 }
 
 test_cleaner_command_constructions() {
-  mkdir test/cases
-
   (
     cd test/cases
+    rm --force -- *
 
     touch \
       alejandra.nix \
@@ -46,8 +45,6 @@ test_cleaner_command_constructions() {
         | diff "../expected/${subcommand}.txt" -
     done
   )
-
-  rm --recursive test/cases
 }
 
 sanity_check_example_integration() {
