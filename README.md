@@ -281,13 +281,13 @@ The following tools are integrated:
   `check` command:
 
   ```bash
-  shfmt -bn -ci -d -i 2 --
+  shfmt --binary-next-line --case-indent --diff --indent 2 --
   ```
 
   `fix` command:
 
   ```bash
-  shfmt -bn -ci -i 2 -l -s -w --
+  shfmt --binary-next-line --case-indent --indent 2 --list --simplify --write --
   ```
 
   </details>

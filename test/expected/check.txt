@@ -10,5 +10,5 @@ Would run: jsonnetfmt --test -- jsonnet_lint.jsonnet jsonnetfmt.jsonnet
 Would run: prettier --check --plugin … -- html5validator.css htmlhint.htm prettier.css stylelint.css
 Would run: pylint black.py pylint.py
 Would run: shellcheck -- shellcheck.sh shfmt.sh
-Would run: shfmt -bn -ci -d -i 2 -- shellcheck.sh shfmt.sh
+Would run: shfmt --binary-next-line --case-indent --diff --indent 2 -- shellcheck.sh shfmt.sh
 Would run: stylelint -- html5validator.css prettier.css stylelint.css

@@ -133,8 +133,28 @@
               title = "shfmt";
               is_only_active_if_command = [];
               file_pattern = "\\.sh$";
-              check = shfmt ++ ["-bn" "-ci" "-d" "-i" "2" "--"];
-              fix = shfmt ++ ["-bn" "-ci" "-i" "2" "-l" "-s" "-w" "--"];
+              check =
+                shfmt
+                ++ [
+                  "--binary-next-line"
+                  "--case-indent"
+                  "--diff"
+                  "--indent"
+                  "2"
+                  "--"
+                ];
+              fix =
+                shfmt
+                ++ [
+                  "--binary-next-line"
+                  "--case-indent"
+                  "--indent"
+                  "2"
+                  "--list"
+                  "--simplify"
+                  "--write"
+                  "--"
+                ];
             };
             stylelint = {
               title = "stylelint";
