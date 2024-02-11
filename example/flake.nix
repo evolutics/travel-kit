@@ -5,7 +5,7 @@
     travel-kit.url = "path:./.."; # TODO: Use "github:evolutics/travel-kit".
   };
 
-  outputs = inputs @ {
+  outputs = {
     flake-utils,
     nixpkgs,
     travel-kit,
