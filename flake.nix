@@ -29,6 +29,7 @@
           shellcheck = [(pkgs.lib.makeBinPath [pkgs.shellcheck]) "shellcheck"];
           shfmt = [(pkgs.lib.makeBinPath [pkgs.shfmt]) "shfmt"];
           stylelint = [(pkgs.lib.makeBinPath [pkgs.nodePackages.stylelint]) "stylelint"];
+          terraform = [(pkgs.lib.makeBinPath [pkgs.terraform]) "terraform"];
         in
           builtins.toJSON {
             alejandra = {
@@ -163,6 +164,13 @@
               check = stylelint ++ ["--"];
               fix = [];
             };
+            terraform = {
+              title = "Terraform";
+              is_only_active_if_command = [];
+              file_pattern = "\\.tf$";
+              check = terraform ++ ["fmt" "-check" "-diff" "--"];
+              fix = terraform ++ ["fmt" "--"];
+            };
           };
         package = pkgs.python3Packages.buildPythonApplication {
           format = "pyproject";
@@ -175,7 +183,10 @@
           propagatedBuildInputs = [pkgs.python3Packages.setuptools];
           src = ./.;
         };
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
       in {
         apps.default = {
           program = "${package}/bin/travel-kit";

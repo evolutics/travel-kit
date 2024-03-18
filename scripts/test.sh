@@ -37,7 +37,8 @@ test_cleaner_command_constructions() {
       pylint.py \
       shellcheck.sh \
       shfmt.sh \
-      stylelint.css
+      stylelint.css \
+      terraform.tf
 
     for subcommand in check fix; do
       nix run ../.. -- "${subcommand}" --dry-run -- * \

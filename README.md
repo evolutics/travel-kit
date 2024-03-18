@@ -307,3 +307,25 @@ The following tools are integrated:
   ```
 
   </details>
+
+- **Terraform**
+
+  <details>
+
+  <summary>Details of <code>terraform</code></summary>
+
+  Only applied to files matching regex: `\.tf$`
+
+  `check` command:
+
+  ```bash
+  terraform fmt -check -diff --
+  ```
+
+  `fix` command:
+
+  ```bash
+  terraform fmt --
+  ```
+
+  </details>
