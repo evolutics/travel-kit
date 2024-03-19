@@ -254,6 +254,28 @@ The following tools are integrated:
 
   </details>
 
+- **Rufo**
+
+  <details>
+
+  <summary>Details of <code>rufo</code></summary>
+
+  Only applied to files matching regex: `(\.rb|(^|/)Vagrantfile)$`
+
+  `check` command:
+
+  ```bash
+  rufo --check --
+  ```
+
+  `fix` command:
+
+  ```bash
+  rufo --
+  ```
+
+  </details>
+
 - **ShellCheck**
 
   <details>

@@ -35,6 +35,7 @@ test_cleaner_command_constructions() {
       jsonnetfmt.jsonnet \
       prettier.css \
       pylint.py \
+      rufo.rb \
       shellcheck.sh \
       shfmt.sh \
       stylelint.css \

@@ -26,6 +26,7 @@
           jsonnetLint = [(pkgs.lib.makeBinPath [pkgs.go-jsonnet]) "jsonnet-lint"];
           prettier = [(pkgs.lib.makeBinPath [pkgs.nodePackages.prettier]) "prettier"];
           pylint = [(pkgs.lib.makeBinPath [pkgs.pylint]) "pylint"];
+          rufo = [(pkgs.lib.makeBinPath [pkgs.rufo]) "rufo"];
           shellcheck = [(pkgs.lib.makeBinPath [pkgs.shellcheck]) "shellcheck"];
           shfmt = [(pkgs.lib.makeBinPath [pkgs.shfmt]) "shfmt"];
           stylelint = [(pkgs.lib.makeBinPath [pkgs.nodePackages.stylelint]) "stylelint"];
@@ -122,6 +123,13 @@
               file_pattern = "\\.py$";
               check = pylint;
               fix = [];
+            };
+            rufo = {
+              title = "Rufo";
+              is_only_active_if_command = [];
+              file_pattern = "(\\.rb|(^|/)Vagrantfile)$";
+              check = rufo ++ ["--check" "--"];
+              fix = rufo ++ ["--"];
             };
             shellcheck = {
               title = "ShellCheck";

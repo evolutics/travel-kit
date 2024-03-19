@@ -2,5 +2,6 @@ Would run: alejandra -- alejandra.nix
 Would run: black -- black.py pylint.py
 Would run: jsonnetfmt --in-place -- jsonnet_lint.jsonnet jsonnetfmt.jsonnet
 Would run: prettier --plugin … --write -- html5validator.css htmlhint.htm prettier.css stylelint.css
+Would run: rufo -- rufo.rb
 Would run: shfmt --binary-next-line --case-indent --indent 2 --list --simplify --write -- shellcheck.sh shfmt.sh
 Would run: terraform fmt -- terraform.tf
