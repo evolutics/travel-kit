@@ -31,6 +31,7 @@ test_cleaner_command_constructions() {
       hadolint.Dockerfile \
       html5validator.css \
       htmlhint.htm \
+      isort.py \
       jsonnet_lint.jsonnet \
       jsonnetfmt.jsonnet \
       prettier.css \

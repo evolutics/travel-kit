@@ -22,6 +22,7 @@
           hadolint = [(pkgs.lib.makeBinPath [pkgs.hadolint]) "hadolint"];
           html5validator = [(pkgs.lib.makeBinPath [pkgs.html5validator]) "html5validator"];
           htmlhint = [(pkgs.lib.makeBinPath [pkgs.nodePackages.htmlhint]) "htmlhint"];
+          isort = [(pkgs.lib.makeBinPath [pkgs.isort]) "isort"];
           jsonnetfmt = [(pkgs.lib.makeBinPath [pkgs.go-jsonnet]) "jsonnetfmt"];
           jsonnetLint = [(pkgs.lib.makeBinPath [pkgs.go-jsonnet]) "jsonnet-lint"];
           prettier = [(pkgs.lib.makeBinPath [pkgs.nodePackages.prettier]) "prettier"];
@@ -81,6 +82,31 @@
               file_pattern = "\\.(htm|html)$";
               check = htmlhint ++ ["--"];
               fix = [];
+            };
+            isort = {
+              title = "isort";
+              is_only_active_if_command = [];
+              file_pattern = "\\.(py|pyi)$";
+              check =
+                isort
+                ++ [
+                  "--check"
+                  "--diff"
+                  "--force-single-line-imports"
+                  "--from-first"
+                  "--profile"
+                  "black"
+                  "--"
+                ];
+              fix =
+                isort
+                ++ [
+                  "--force-single-line-imports"
+                  "--from-first"
+                  "--profile"
+                  "black"
+                  "--"
+                ];
             };
             jsonnet-lint = {
               title = "Jsonnet linter";

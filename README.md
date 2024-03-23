@@ -178,6 +178,28 @@ The following tools are integrated:
 
   </details>
 
+- **isort**
+
+  <details>
+
+  <summary>Details of <code>isort</code></summary>
+
+  Only applied to files matching regex: `\.(py|pyi)$`
+
+  `check` command:
+
+  ```bash
+  isort --check --diff --force-single-line-imports --from-first --profile black --
+  ```
+
+  `fix` command:
+
+  ```bash
+  isort --force-single-line-imports --from-first --profile black --
+  ```
+
+  </details>
+
 - **Jsonnet linter**
 
   <details>
