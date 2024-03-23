@@ -154,7 +154,7 @@
               title = "Pylint";
               is_only_active_if_command = [];
               file_pattern = "\\.py$";
-              check = pylint;
+              check = pylint ++ ["--"];
               fix = [];
             };
             rufo = {

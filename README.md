@@ -271,7 +271,7 @@ The following tools are integrated:
   `check` command:
 
   ```bash
-  pylint
+  pylint --
   ```
 
   </details>

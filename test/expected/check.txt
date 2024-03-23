@@ -9,7 +9,7 @@ Would run: isort --check --diff --force-single-line-imports --from-first --profi
 Would run: jsonnet-lint -- jsonnet_lint.jsonnet jsonnetfmt.jsonnet
 Would run: jsonnetfmt --test -- jsonnet_lint.jsonnet jsonnetfmt.jsonnet
 Would run: prettier --check --plugin … -- html5validator.css htmlhint.htm prettier.css stylelint.css
-Would run: pylint black.py isort.py pylint.py
+Would run: pylint -- black.py isort.py pylint.py
 Would run: rufo --check -- rufo.rb
 Would run: shellcheck -- shellcheck.sh shfmt.sh
 Would run: shfmt --binary-next-line --case-indent --diff --indent 2 -- shellcheck.sh shfmt.sh
