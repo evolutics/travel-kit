@@ -340,7 +340,7 @@ The following tools are integrated:
 
   </details>
 
-- [**stylelint**](https://stylelint.io)
+- [**Stylelint**](https://stylelint.io)
 
   <details>
 

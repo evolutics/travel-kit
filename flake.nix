@@ -214,7 +214,7 @@
                 ];
             };
             stylelint = {
-              title = "stylelint";
+              title = "Stylelint";
               homepage = pkgs.nodePackages.stylelint.meta.homepage;
               is_only_active_if_command = [];
               file_pattern = "\\.css$";
