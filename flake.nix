@@ -73,7 +73,14 @@
               title = "HTML5 Validator";
               is_only_active_if_command = [];
               file_pattern = "\\.(css|htm|html|svg|xht|xhtml)$";
-              check = html5validator ++ ["--also-check-css" "--also-check-svg" "--Werror" "--"];
+              check =
+                html5validator
+                ++ [
+                  "--also-check-css"
+                  "--also-check-svg"
+                  "--Werror"
+                  "--"
+                ];
               fix = [];
             };
             htmlhint = {
