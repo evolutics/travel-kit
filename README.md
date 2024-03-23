@@ -11,8 +11,12 @@ Usage modes:
 - [Checking](#checking-code) your code for its format, linting errors, and more.
 - [Fixing](#fixing-code) your code automatically if possible.
 
-As a prerequisite, you need Nix to use this flake (see
-[example](example/flake.nix)).
+As a prerequisite, you need Nix to use this flake. You can integrate it into a
+flake as in this [example](example/flake.nix). To use it ad hoc instead, run
+
+```bash
+nix run --no-write-lock-file github:evolutics/travel-kit -- {check,fix} …
+```
 
 ### Checking code
 
