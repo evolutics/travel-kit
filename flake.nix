@@ -15,26 +15,12 @@
     flake-utils.lib.eachDefaultSystem (
       system: let
         cleaners = let
-          alejandra = [(pkgs.lib.makeBinPath [pkgs.alejandra]) "alejandra"];
-          black = [(pkgs.lib.makeBinPath [pkgs.black]) "black"];
           git = [(pkgs.lib.makeBinPath [pkgs.git]) "git"];
-          gitlint = [(pkgs.lib.makeBinPath [pkgs.gitlint]) "gitlint"];
-          hadolint = [(pkgs.lib.makeBinPath [pkgs.hadolint]) "hadolint"];
-          html5validator = [(pkgs.lib.makeBinPath [pkgs.html5validator]) "html5validator"];
-          htmlhint = [(pkgs.lib.makeBinPath [pkgs.nodePackages.htmlhint]) "htmlhint"];
-          isort = [(pkgs.lib.makeBinPath [pkgs.isort]) "isort"];
-          jsonnetfmt = [(pkgs.lib.makeBinPath [pkgs.go-jsonnet]) "jsonnetfmt"];
-          jsonnetLint = [(pkgs.lib.makeBinPath [pkgs.go-jsonnet]) "jsonnet-lint"];
-          prettier = [(pkgs.lib.makeBinPath [pkgs.nodePackages.prettier]) "prettier"];
-          pylint = [(pkgs.lib.makeBinPath [pkgs.pylint]) "pylint"];
-          rufo = [(pkgs.lib.makeBinPath [pkgs.rufo]) "rufo"];
-          shellcheck = [(pkgs.lib.makeBinPath [pkgs.shellcheck]) "shellcheck"];
-          shfmt = [(pkgs.lib.makeBinPath [pkgs.shfmt]) "shfmt"];
-          stylelint = [(pkgs.lib.makeBinPath [pkgs.nodePackages.stylelint]) "stylelint"];
-          terraform = [(pkgs.lib.makeBinPath [pkgs.terraform]) "terraform"];
         in
           builtins.toJSON {
-            alejandra = {
+            alejandra = let
+              alejandra = [(pkgs.lib.makeBinPath [pkgs.alejandra]) "alejandra"];
+            in {
               title = "Alejandra";
               homepage = pkgs.alejandra.meta.homepage;
               is_only_active_if_command = [];
@@ -42,7 +28,9 @@
               check = alejandra ++ ["--check" "--"];
               fix = alejandra ++ ["--"];
             };
-            black = {
+            black = let
+              black = [(pkgs.lib.makeBinPath [pkgs.black]) "black"];
+            in {
               title = "Black";
               homepage = pkgs.black.meta.homepage;
               is_only_active_if_command = [];
@@ -58,7 +46,9 @@
               check = git ++ ["diff" "--check" "HEAD^" "--"];
               fix = [];
             };
-            gitlint = {
+            gitlint = let
+              gitlint = [(pkgs.lib.makeBinPath [pkgs.gitlint]) "gitlint"];
+            in {
               title = "Gitlint";
               homepage = pkgs.gitlint.meta.homepage;
               is_only_active_if_command = git ++ ["rev-parse"];
@@ -66,7 +56,9 @@
               check = gitlint ++ ["--ignore" "body-is-missing"];
               fix = [];
             };
-            hadolint = {
+            hadolint = let
+              hadolint = [(pkgs.lib.makeBinPath [pkgs.hadolint]) "hadolint"];
+            in {
               title = "Haskell Dockerfile Linter";
               homepage = pkgs.hadolint.meta.homepage;
               is_only_active_if_command = [];
@@ -74,7 +66,9 @@
               check = hadolint ++ ["--"];
               fix = [];
             };
-            html5validator = {
+            html5validator = let
+              html5validator = [(pkgs.lib.makeBinPath [pkgs.html5validator]) "html5validator"];
+            in {
               title = "HTML5 Validator";
               homepage = pkgs.html5validator.meta.homepage;
               is_only_active_if_command = [];
@@ -89,7 +83,9 @@
                 ];
               fix = [];
             };
-            htmlhint = {
+            htmlhint = let
+              htmlhint = [(pkgs.lib.makeBinPath [pkgs.nodePackages.htmlhint]) "htmlhint"];
+            in {
               title = "HTMLHint";
               homepage = pkgs.nodePackages.htmlhint.meta.homepage;
               is_only_active_if_command = [];
@@ -97,7 +93,9 @@
               check = htmlhint ++ ["--"];
               fix = [];
             };
-            isort = {
+            isort = let
+              isort = [(pkgs.lib.makeBinPath [pkgs.isort]) "isort"];
+            in {
               title = "isort";
               homepage = pkgs.isort.meta.homepage;
               is_only_active_if_command = [];
@@ -123,7 +121,9 @@
                   "--"
                 ];
             };
-            jsonnet-lint = {
+            jsonnet-lint = let
+              jsonnetLint = [(pkgs.lib.makeBinPath [pkgs.go-jsonnet]) "jsonnet-lint"];
+            in {
               title = "Jsonnet linter";
               homepage = "https://jsonnet.org/learning/tools.html";
               is_only_active_if_command = [];
@@ -131,7 +131,9 @@
               check = jsonnetLint ++ ["--"];
               fix = [];
             };
-            jsonnetfmt = {
+            jsonnetfmt = let
+              jsonnetfmt = [(pkgs.lib.makeBinPath [pkgs.go-jsonnet]) "jsonnetfmt"];
+            in {
               title = "Jsonnet formatter";
               homepage = "https://jsonnet.org/learning/tools.html";
               is_only_active_if_command = [];
@@ -139,7 +141,9 @@
               check = jsonnetfmt ++ ["--test" "--"];
               fix = jsonnetfmt ++ ["--in-place" "--"];
             };
-            prettier = {
+            prettier = let
+              prettier = [(pkgs.lib.makeBinPath [pkgs.nodePackages.prettier]) "prettier"];
+            in {
               title = "Prettier";
               homepage = pkgs.nodePackages.prettier.meta.homepage;
               is_only_active_if_command = [];
@@ -161,7 +165,9 @@
                   "--"
                 ];
             };
-            pylint = {
+            pylint = let
+              pylint = [(pkgs.lib.makeBinPath [pkgs.pylint]) "pylint"];
+            in {
               title = "Pylint";
               homepage = pkgs.pylint.meta.homepage;
               is_only_active_if_command = [];
@@ -169,7 +175,9 @@
               check = pylint ++ ["--"];
               fix = [];
             };
-            rufo = {
+            rufo = let
+              rufo = [(pkgs.lib.makeBinPath [pkgs.rufo]) "rufo"];
+            in {
               title = "Rufo";
               homepage = pkgs.rufo.meta.homepage;
               is_only_active_if_command = [];
@@ -177,7 +185,9 @@
               check = rufo ++ ["--check" "--"];
               fix = rufo ++ ["--"];
             };
-            shellcheck = {
+            shellcheck = let
+              shellcheck = [(pkgs.lib.makeBinPath [pkgs.shellcheck]) "shellcheck"];
+            in {
               title = "ShellCheck";
               homepage = pkgs.shellcheck.meta.homepage;
               is_only_active_if_command = [];
@@ -185,7 +195,9 @@
               check = shellcheck ++ ["--"];
               fix = [];
             };
-            shfmt = {
+            shfmt = let
+              shfmt = [(pkgs.lib.makeBinPath [pkgs.shfmt]) "shfmt"];
+            in {
               title = "shfmt";
               homepage = pkgs.shfmt.meta.homepage;
               is_only_active_if_command = [];
@@ -213,7 +225,9 @@
                   "--"
                 ];
             };
-            stylelint = {
+            stylelint = let
+              stylelint = [(pkgs.lib.makeBinPath [pkgs.nodePackages.stylelint]) "stylelint"];
+            in {
               title = "Stylelint";
               homepage = pkgs.nodePackages.stylelint.meta.homepage;
               is_only_active_if_command = [];
@@ -221,7 +235,9 @@
               check = stylelint ++ ["--"];
               fix = [];
             };
-            terraform = {
+            terraform = let
+              terraform = [(pkgs.lib.makeBinPath [pkgs.terraform]) "terraform"];
+            in {
               title = "Terraform fmt";
               homepage = "https://developer.hashicorp.com/terraform/cli/commands/fmt";
               is_only_active_if_command = [];
