@@ -198,7 +198,7 @@ The following tools are integrated:
   `check` command:
 
   ```bash
-  isort --check --diff --force-single-line-imports --from-first --profile black --
+  isort --force-single-line-imports --from-first --profile black --check --diff --
   ```
 
   `fix` command:
@@ -258,7 +258,7 @@ The following tools are integrated:
   `check` command:
 
   ```bash
-  prettier --check --plugin … --
+  prettier --plugin … --check --
   ```
 
   `fix` command:
@@ -334,7 +334,7 @@ The following tools are integrated:
   `check` command:
 
   ```bash
-  shfmt --binary-next-line --case-indent --diff --indent 2 --
+  shfmt --binary-next-line --case-indent --indent 2 --diff --
   ```
 
   `fix` command:

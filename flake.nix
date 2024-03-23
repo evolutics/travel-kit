@@ -95,31 +95,19 @@
             };
             isort = let
               isort = [(pkgs.lib.makeBinPath [pkgs.isort]) "isort"];
+              options = [
+                "--force-single-line-imports"
+                "--from-first"
+                "--profile"
+                "black"
+              ];
             in {
               title = "isort";
               homepage = pkgs.isort.meta.homepage;
               is_only_active_if_command = [];
               file_pattern = "\\.(py|pyi)$";
-              check =
-                isort
-                ++ [
-                  "--check"
-                  "--diff"
-                  "--force-single-line-imports"
-                  "--from-first"
-                  "--profile"
-                  "black"
-                  "--"
-                ];
-              fix =
-                isort
-                ++ [
-                  "--force-single-line-imports"
-                  "--from-first"
-                  "--profile"
-                  "black"
-                  "--"
-                ];
+              check = isort ++ options ++ ["--check" "--diff" "--"];
+              fix = isort ++ options ++ ["--"];
             };
             jsonnet-lint = let
               jsonnetLint = [(pkgs.lib.makeBinPath [pkgs.go-jsonnet]) "jsonnet-lint"];
@@ -143,27 +131,17 @@
             };
             prettier = let
               prettier = [(pkgs.lib.makeBinPath [pkgs.nodePackages.prettier]) "prettier"];
+              options = [
+                "--plugin"
+                "${pkgs.lib.makeLibraryPath [pkgs.nodePackages.prettier-plugin-toml]}/node_modules/prettier-plugin-toml/lib/index.cjs"
+              ];
             in {
               title = "Prettier";
               homepage = pkgs.nodePackages.prettier.meta.homepage;
               is_only_active_if_command = [];
               file_pattern = "\\.(css|htm|html|js|json|md|toml|ts|xht|xhtml|xml|yaml|yml)$";
-              check =
-                prettier
-                ++ [
-                  "--check"
-                  "--plugin"
-                  "${pkgs.lib.makeLibraryPath [pkgs.nodePackages.prettier-plugin-toml]}/node_modules/prettier-plugin-toml/lib/index.cjs"
-                  "--"
-                ];
-              fix =
-                prettier
-                ++ [
-                  "--plugin"
-                  "${pkgs.lib.makeLibraryPath [pkgs.nodePackages.prettier-plugin-toml]}/node_modules/prettier-plugin-toml/lib/index.cjs"
-                  "--write"
-                  "--"
-                ];
+              check = prettier ++ options ++ ["--check" "--"];
+              fix = prettier ++ options ++ ["--write" "--"];
             };
             pylint = let
               pylint = [(pkgs.lib.makeBinPath [pkgs.pylint]) "pylint"];
@@ -197,33 +175,19 @@
             };
             shfmt = let
               shfmt = [(pkgs.lib.makeBinPath [pkgs.shfmt]) "shfmt"];
+              options = [
+                "--binary-next-line"
+                "--case-indent"
+                "--indent"
+                "2"
+              ];
             in {
               title = "shfmt";
               homepage = pkgs.shfmt.meta.homepage;
               is_only_active_if_command = [];
               file_pattern = "\\.sh$";
-              check =
-                shfmt
-                ++ [
-                  "--binary-next-line"
-                  "--case-indent"
-                  "--diff"
-                  "--indent"
-                  "2"
-                  "--"
-                ];
-              fix =
-                shfmt
-                ++ [
-                  "--binary-next-line"
-                  "--case-indent"
-                  "--indent"
-                  "2"
-                  "--list"
-                  "--simplify"
-                  "--write"
-                  "--"
-                ];
+              check = shfmt ++ options ++ ["--diff" "--"];
+              fix = shfmt ++ options ++ ["--list" "--simplify" "--write" "--"];
             };
             stylelint = let
               stylelint = [(pkgs.lib.makeBinPath [pkgs.nodePackages.stylelint]) "stylelint"];
