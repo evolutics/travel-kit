@@ -56,7 +56,7 @@ To actually apply the changes (warning: this overwrites original files), drop th
 
 The following tools are integrated:
 
-- **Alejandra**
+- [**Alejandra**](https://github.com/kamadorueda/alejandra)
 
   <details>
 
@@ -78,7 +78,7 @@ The following tools are integrated:
 
   </details>
 
-- **Black**
+- [**Black**](https://github.com/psf/black)
 
   <details>
 
@@ -100,7 +100,7 @@ The following tools are integrated:
 
   </details>
 
-- **Git**
+- [**Git**](https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---check)
 
   <details>
 
@@ -118,7 +118,7 @@ The following tools are integrated:
 
   </details>
 
-- **Gitlint**
+- [**Gitlint**](https://jorisroovers.com/gitlint/)
 
   <details>
 
@@ -134,7 +134,7 @@ The following tools are integrated:
 
   </details>
 
-- **Haskell Dockerfile Linter**
+- [**Haskell Dockerfile Linter**](https://hackage.haskell.org/package/hadolint)
 
   <details>
 
@@ -150,7 +150,7 @@ The following tools are integrated:
 
   </details>
 
-- **HTML5 Validator**
+- [**HTML5 Validator**](https://github.com/svenkreiss/html5validator)
 
   <details>
 
@@ -166,7 +166,7 @@ The following tools are integrated:
 
   </details>
 
-- **HTMLHint**
+- [**HTMLHint**](https://github.com/htmlhint/HTMLHint)
 
   <details>
 
@@ -182,7 +182,7 @@ The following tools are integrated:
 
   </details>
 
-- **isort**
+- [**isort**](https://github.com/PyCQA/isort)
 
   <details>
 
@@ -204,7 +204,7 @@ The following tools are integrated:
 
   </details>
 
-- **Jsonnet linter**
+- [**Jsonnet linter**](https://jsonnet.org/learning/tools.html)
 
   <details>
 
@@ -220,7 +220,7 @@ The following tools are integrated:
 
   </details>
 
-- **Jsonnet formatter**
+- [**Jsonnet formatter**](https://jsonnet.org/learning/tools.html)
 
   <details>
 
@@ -242,7 +242,7 @@ The following tools are integrated:
 
   </details>
 
-- **Prettier**
+- [**Prettier**](https://prettier.io)
 
   <details>
 
@@ -264,7 +264,7 @@ The following tools are integrated:
 
   </details>
 
-- **Pylint**
+- [**Pylint**](https://pylint.readthedocs.io/en/stable/)
 
   <details>
 
@@ -280,7 +280,7 @@ The following tools are integrated:
 
   </details>
 
-- **Rufo**
+- [**Rufo**](https://github.com/ruby-formatter/rufo)
 
   <details>
 
@@ -302,7 +302,7 @@ The following tools are integrated:
 
   </details>
 
-- **ShellCheck**
+- [**ShellCheck**](https://hackage.haskell.org/package/ShellCheck)
 
   <details>
 
@@ -318,7 +318,7 @@ The following tools are integrated:
 
   </details>
 
-- **shfmt**
+- [**shfmt**](https://github.com/mvdan/sh)
 
   <details>
 
@@ -340,7 +340,7 @@ The following tools are integrated:
 
   </details>
 
-- **stylelint**
+- [**stylelint**](https://stylelint.io)
 
   <details>
 
@@ -356,7 +356,7 @@ The following tools are integrated:
 
   </details>
 
-- **Terraform**
+- [**Terraform**](https://developer.hashicorp.com/terraform/cli/commands/fmt)
 
   <details>
 

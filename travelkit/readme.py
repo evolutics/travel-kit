@@ -14,7 +14,7 @@ def get(cleaners):
 
 def _menu_entry(identifier, cleaner):
     details = textwrap.indent(_details(cleaner), "  ")
-    return f"""- **{cleaner.title}**
+    return f"""- [**{cleaner.title}**]({cleaner.homepage})
 
   <details>
 
