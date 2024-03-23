@@ -75,12 +75,7 @@
               file_pattern = "\\.(css|htm|html|svg|xht|xhtml)$";
               check =
                 html5validator
-                ++ [
-                  "--also-check-css"
-                  "--also-check-svg"
-                  "--Werror"
-                  "--"
-                ];
+                ++ ["--also-check-css" "--also-check-svg" "--Werror" "--"];
               fix = [];
             };
             htmlhint = let
@@ -175,12 +170,7 @@
             };
             shfmt = let
               shfmt = [(pkgs.lib.makeBinPath [pkgs.shfmt]) "shfmt"];
-              options = [
-                "--binary-next-line"
-                "--case-indent"
-                "--indent"
-                "2"
-              ];
+              options = ["--binary-next-line" "--case-indent" "--indent" "2"];
             in {
               title = "shfmt";
               homepage = pkgs.shfmt.meta.homepage;
