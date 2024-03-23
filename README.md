@@ -100,7 +100,7 @@ The following tools are integrated:
 
   </details>
 
-- [**Git**](https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---check)
+- [**Git diff check**](https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---check)
 
   <details>
 
@@ -356,7 +356,7 @@ The following tools are integrated:
 
   </details>
 
-- [**Terraform**](https://developer.hashicorp.com/terraform/cli/commands/fmt)
+- [**Terraform fmt**](https://developer.hashicorp.com/terraform/cli/commands/fmt)
 
   <details>
 

@@ -51,7 +51,7 @@
               fix = black ++ ["--"];
             };
             git = {
-              title = "Git";
+              title = "Git diff check";
               homepage = "https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---check";
               is_only_active_if_command = git ++ ["rev-parse"];
               file_pattern = "";
@@ -222,7 +222,7 @@
               fix = [];
             };
             terraform = {
-              title = "Terraform";
+              title = "Terraform fmt";
               homepage = "https://developer.hashicorp.com/terraform/cli/commands/fmt";
               is_only_active_if_command = [];
               file_pattern = "\\.tf$";
