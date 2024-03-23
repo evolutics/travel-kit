@@ -52,6 +52,11 @@ travel-kit fix --dry-run
 
 To actually apply the changes (warning: this overwrites original files), drop the `--dry-run` option in the example.
 
+## Related projects
+
+- [Super-linter](https://github.com/super-linter/super-linter)
+- [`treefmt`](https://github.com/numtide/treefmt)
+
 ## Tools
 
 The following tools are integrated:
