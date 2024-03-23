@@ -17,9 +17,9 @@ def _get_cleaner(raw):
     return model.Cleaner(
         title=raw["title"],
         is_only_active_if_command=tuple(raw["is_only_active_if_command"]),
-        file_pattern=None
-        if raw["file_pattern"] is None
-        else re.compile(raw["file_pattern"]),
+        file_pattern=(
+            None if raw["file_pattern"] is None else re.compile(raw["file_pattern"])
+        ),
         check=tuple(raw["check"]),
         fix=tuple(raw["fix"]),
     )
