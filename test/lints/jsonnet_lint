@@ -1,0 +1,1 @@
+test/cases/jsonnet_lint.jsonnet:1:7-12 Unused variable: a

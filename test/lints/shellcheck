@@ -1,0 +1,6 @@
+In test/cases/shellcheck.sh line 2:
+echo ${PWD}
+     ^----^ SC2086 (info): Double quote to prevent globbing and word splitting.
+
+Did you mean:
+echo "${PWD}"
