@@ -29,12 +29,12 @@ test_cleaner_command_constructions() {
       git \
       gitlint \
       hadolint.Dockerfile \
-      html5validator.css \
+      html5validator.htm \
       htmlhint.htm \
       isort.py \
       jsonnet_lint.jsonnet \
       jsonnetfmt.jsonnet \
-      prettier.css \
+      prettier.js \
       pylint.py \
       rufo.rb \
       shellcheck.sh \
