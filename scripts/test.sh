@@ -49,7 +49,7 @@ test_cleaners() {
   diff <(cd test/cases && git ls-files --modified) \
     <(cd test/fixed && git ls-files)
 
-  local -r delta="$(diff --recursive test/fixed test/cases)"
+  local -r delta="$(diff --recursive test/cases test/fixed)"
   if [[ "${delta}" != "Only in test/cases: git
 Only in test/cases: gitlint
 Only in test/cases: hadolint.Dockerfile
