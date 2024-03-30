@@ -46,6 +46,9 @@ test_cleaners() {
 
   nix run . fix test/cases/*
 
+  diff <(cd test/cases && git ls-files --modified) \
+    <(cd test/fixed && git ls-files)
+
   local -r delta="$(diff --recursive test/fixed test/cases)"
   if [[ "${delta}" != "Only in test/cases: git
 Only in test/cases: gitlint
