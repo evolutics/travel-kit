@@ -304,7 +304,7 @@ The following tools are integrated:
   `fix` command:
 
   ```bash
-  rufo --
+  rufo --simple-exit --
   ```
 
   </details>

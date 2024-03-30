@@ -156,7 +156,7 @@
               is_only_active_if_command = [];
               file_pattern = "(\\.rb|(^|/)Vagrantfile)$";
               check = rufo ++ ["--check" "--"];
-              fix = rufo ++ ["--"];
+              fix = rufo ++ ["--simple-exit" "--"];
             };
             shellcheck = let
               shellcheck = [(pkgs.lib.makeBinPath [pkgs.shellcheck]) "shellcheck"];
