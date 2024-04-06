@@ -17,7 +17,8 @@ def get(cleaners, is_dry_run, file_paths):
                     subprocess.run(resolved_command, check=True)
                 except subprocess.CalledProcessError:
                     exit_status = 1
-    sys.exit(exit_status)
+    if exit_status:
+        sys.exit(exit_status)
 
 
 def _resolve_command(cleaner, file_paths):
