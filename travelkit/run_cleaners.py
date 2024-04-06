@@ -51,7 +51,7 @@ def _resolve_command(cleaner, context):
         return ()
 
     if cleaner.file_patterns:
-        file_paths = tuple(sorted(_filter_file_paths(cleaner, context)))
+        file_paths = tuple(_filter_file_paths(cleaner, context))
         if file_paths:
             return command + file_paths
         return ()

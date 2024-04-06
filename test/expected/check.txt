@@ -1,13 +1,13 @@
 Would run: alejandra --check -- alejandra.nix
 Would run: black --check --diff -- black.py isort.py pylint.py
-Would run: git diff --check 'HEAD^' -- alejandra.nix black.py git gitlint hadolint.Dockerfile html5validator.htm htmlhint.htm isort.py jsonnet_lint.jsonnet jsonnetfmt.jsonnet prettier.js pylint.py rufo.rb shellcheck.sh shfmt.sh stylelint.css terraform.tf
+Would run: git diff --check 'HEAD^' -- alejandra.nix black.py git gitlint hadolint.Dockerfile html5validator.htm htmlhint.htm isort.py jsonnetfmt.jsonnet jsonnet_lint.jsonnet prettier.js pylint.py rufo.rb shellcheck.sh shfmt.sh stylelint.css terraform.tf
 Would run: gitlint --ignore body-is-missing
 Would run: hadolint -- hadolint.Dockerfile
 Would run: html5validator --also-check-css --also-check-svg --Werror -- html5validator.htm htmlhint.htm stylelint.css
 Would run: htmlhint -- html5validator.htm htmlhint.htm
 Would run: isort --force-single-line-imports --from-first --profile black --check --diff -- black.py isort.py pylint.py
-Would run: jsonnet-lint -- jsonnet_lint.jsonnet jsonnetfmt.jsonnet
-Would run: jsonnetfmt --test -- jsonnet_lint.jsonnet jsonnetfmt.jsonnet
+Would run: jsonnet-lint -- jsonnetfmt.jsonnet jsonnet_lint.jsonnet
+Would run: jsonnetfmt --test -- jsonnetfmt.jsonnet jsonnet_lint.jsonnet
 Would run: prettier --plugin … --check -- html5validator.htm htmlhint.htm prettier.js stylelint.css
 Would run: pylint -- black.py isort.py pylint.py
 Would run: rufo --check -- rufo.rb
