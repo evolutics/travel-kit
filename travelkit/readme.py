@@ -28,7 +28,7 @@ def _menu_entry(identifier, cleaner):
 def _details(cleaner):
     return "\n\n".join(
         _is_only_active_if_command_entries(cleaner.is_only_active_if_command)
-        + _file_pattern_entries(cleaner.file_pattern)
+        + _file_pattern_entries(cleaner.file_patterns)
         + _command_entries(cleaner)
     )
 
@@ -47,11 +47,10 @@ def _humanize_command(command):
     )
 
 
-def _file_pattern_entries(file_pattern):
-    if file_pattern:
-        if file_pattern.pattern:
-            return [f"Only applied to files matching regex: `{file_pattern.pattern}`"]
-        return ["Only applied to files."]
+def _file_pattern_entries(file_patterns):
+    if file_patterns:
+        humanized_patterns = ", ".join(f"`{pattern}`" for pattern in file_patterns)
+        return [f"Only applied to files matching patterns: {humanized_patterns}"]
     return []
 
 

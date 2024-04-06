@@ -69,7 +69,7 @@ The following tools are integrated:
 
   <summary>Details of <code>alejandra</code></summary>
 
-  Only applied to files matching regex: `\.nix$`
+  Only applied to files matching patterns: `*.nix`
 
   `check` command:
 
@@ -91,7 +91,7 @@ The following tools are integrated:
 
   <summary>Details of <code>black</code></summary>
 
-  Only applied to files matching regex: `\.(py|pyi)$`
+  Only applied to files matching patterns: `*.py`, `*.pyi`
 
   `check` command:
 
@@ -115,7 +115,7 @@ The following tools are integrated:
 
   Only used if command returns 0: `git rev-parse`
 
-  Only applied to files.
+  Only applied to files matching patterns: `*`
 
   `check` command:
 
@@ -147,7 +147,7 @@ The following tools are integrated:
 
   <summary>Details of <code>hadolint</code></summary>
 
-  Only applied to files matching regex: `(^|[./])Dockerfile$`
+  Only applied to files matching patterns: `*.Dockerfile`, `Dockerfile`
 
   `check` command:
 
@@ -163,7 +163,7 @@ The following tools are integrated:
 
   <summary>Details of <code>html5validator</code></summary>
 
-  Only applied to files matching regex: `\.(css|htm|html|svg|xht|xhtml)$`
+  Only applied to files matching patterns: `*.css`, `*.htm`, `*.html`, `*.svg`, `*.xht`, `*.xhtml`
 
   `check` command:
 
@@ -179,7 +179,7 @@ The following tools are integrated:
 
   <summary>Details of <code>htmlhint</code></summary>
 
-  Only applied to files matching regex: `\.(htm|html)$`
+  Only applied to files matching patterns: `*.htm`, `*.html`
 
   `check` command:
 
@@ -195,7 +195,7 @@ The following tools are integrated:
 
   <summary>Details of <code>isort</code></summary>
 
-  Only applied to files matching regex: `\.(py|pyi)$`
+  Only applied to files matching patterns: `*.py`, `*.pyi`
 
   `check` command:
 
@@ -217,7 +217,7 @@ The following tools are integrated:
 
   <summary>Details of <code>jsonnet-lint</code></summary>
 
-  Only applied to files matching regex: `\.(jsonnet|libsonnet)$`
+  Only applied to files matching patterns: `*.jsonnet`, `*.libsonnet`
 
   `check` command:
 
@@ -233,7 +233,7 @@ The following tools are integrated:
 
   <summary>Details of <code>jsonnetfmt</code></summary>
 
-  Only applied to files matching regex: `\.(jsonnet|libsonnet)$`
+  Only applied to files matching patterns: `*.jsonnet`, `*.libsonnet`
 
   `check` command:
 
@@ -255,7 +255,7 @@ The following tools are integrated:
 
   <summary>Details of <code>prettier</code></summary>
 
-  Only applied to files matching regex: `\.(css|htm|html|js|json|md|toml|ts|xht|xhtml|xml|yaml|yml)$`
+  Only applied to files matching patterns: `*.css`, `*.htm`, `*.html`, `*.js`, `*.json`, `*.md`, `*.toml`, `*.ts`, `*.xht`, `*.xhtml`, `*.xml`, `*.yaml`, `*.yml`
 
   `check` command:
 
@@ -277,7 +277,7 @@ The following tools are integrated:
 
   <summary>Details of <code>pylint</code></summary>
 
-  Only applied to files matching regex: `\.py$`
+  Only applied to files matching patterns: `*.py`
 
   `check` command:
 
@@ -293,7 +293,7 @@ The following tools are integrated:
 
   <summary>Details of <code>rufo</code></summary>
 
-  Only applied to files matching regex: `(\.rb|(^|/)Vagrantfile)$`
+  Only applied to files matching patterns: `*.rb`, `Vagrantfile`
 
   `check` command:
 
@@ -315,7 +315,7 @@ The following tools are integrated:
 
   <summary>Details of <code>shellcheck</code></summary>
 
-  Only applied to files matching regex: `\.sh$`
+  Only applied to files matching patterns: `*.sh`
 
   `check` command:
 
@@ -331,7 +331,7 @@ The following tools are integrated:
 
   <summary>Details of <code>shfmt</code></summary>
 
-  Only applied to files matching regex: `\.sh$`
+  Only applied to files matching patterns: `*.sh`
 
   `check` command:
 
@@ -353,7 +353,7 @@ The following tools are integrated:
 
   <summary>Details of <code>stylelint</code></summary>
 
-  Only applied to files matching regex: `\.css$`
+  Only applied to files matching patterns: `*.css`
 
   `check` command:
 
@@ -369,7 +369,7 @@ The following tools are integrated:
 
   <summary>Details of <code>terraform</code></summary>
 
-  Only applied to files matching regex: `\.tf$`
+  Only applied to files matching patterns: `*.tf`
 
   `check` command:
 

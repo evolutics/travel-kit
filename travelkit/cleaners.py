@@ -1,6 +1,5 @@
 from importlib import resources
 import json
-import re
 
 from . import model
 
@@ -18,9 +17,7 @@ def _get_cleaner(raw):
         title=raw["title"],
         homepage=raw["homepage"],
         is_only_active_if_command=tuple(raw["is_only_active_if_command"]),
-        file_pattern=(
-            None if raw["file_pattern"] is None else re.compile(raw["file_pattern"])
-        ),
+        file_patterns=tuple(raw["file_patterns"]),
         check=tuple(raw["check"]),
         fix=tuple(raw["fix"]),
     )

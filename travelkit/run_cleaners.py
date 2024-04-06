@@ -1,4 +1,5 @@
 import dataclasses
+import fnmatch
 import pathlib
 import shlex
 import subprocess
@@ -70,7 +71,7 @@ def _resolve_command(cleaner, context):
     if not command:
         return ()
 
-    if cleaner.file_pattern:
+    if cleaner.file_patterns:
         file_paths = tuple(sorted(_get_file_paths(cleaner, context)))
         if file_paths:
             return command + file_paths
@@ -85,7 +86,13 @@ def _get_file_paths(cleaner, context):
     else:
         paths = pathlib.Path(".").glob("**/*")
 
-    return (path for path in paths if cleaner.file_pattern.search(path.as_posix()))
+    return (
+        path
+        for path in paths
+        if any(
+            fnmatch.fnmatchcase(str(path), pattern) for pattern in cleaner.file_patterns
+        )
+    )
 
 
 def _run_command_in_context(context, command):
