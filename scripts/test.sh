@@ -20,7 +20,7 @@ test_cleaner_command_constructions() {
   )
 }
 
-test_cleaners() {
+test_cleaner_effects() {
   local -r status="$(git status --porcelain test/cases)"
   if [[ -n "${status}" ]]; then
     >&2 echo "${status}"
@@ -77,7 +77,7 @@ main() {
 
   check_basics
   test_cleaner_command_constructions
-  test_cleaners
+  test_cleaner_effects
   git rm --force flake.lock
 
   sanity_check_example_integration
