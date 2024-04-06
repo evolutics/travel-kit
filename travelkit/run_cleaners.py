@@ -14,7 +14,7 @@ def get(cleaners, is_dry_run, file_paths):
                 _dry_run_command(resolved_command)
             else:
                 try:
-                    _run_command(resolved_command)
+                    subprocess.run(resolved_command, check=True)
                 except subprocess.CalledProcessError:
                     exit_status = 1
     sys.exit(exit_status)
@@ -43,7 +43,3 @@ def _filter_file_paths(cleaner, file_paths):
 def _dry_run_command(resolved_command):
     shell_command = " ".join(shlex.quote(argument) for argument in resolved_command)
     print(f"Would run: {shell_command}")
-
-
-def _run_command(resolved_command):
-    subprocess.run(resolved_command, check=True)
