@@ -2,14 +2,12 @@ import pathlib
 import shlex
 import textwrap
 
-from . import readme_template
-
 
 def get(cleaners):
     menu = "\n\n".join(
         [_menu_entry(identifier, cleaner) for identifier, cleaner in cleaners.items()]
     )
-    return readme_template.get().format(menu=menu)
+    return f"\nThe following tools are integrated:\n\n{menu}"
 
 
 def _menu_entry(identifier, cleaner):
