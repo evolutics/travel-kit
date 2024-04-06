@@ -15,7 +15,7 @@ test_cleaner_command_constructions() {
     cd test/cases
 
     nix run ../.. -- --dry-run -- * \
-      | sed 's: /\S* : … :g' \
+      | sed 's: /\S*/: /…/:g' \
       | diff '../expected.txt' -
   )
 }

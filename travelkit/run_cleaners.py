@@ -23,11 +23,13 @@ def get(cleaners, is_dry_run, file_paths):
 def _resolve_command(cleaner, file_paths):
     if cleaner.file_patterns:
         file_paths = tuple(_filter_file_paths(cleaner, file_paths))
-        if file_paths:
-            return cleaner.command + file_paths
-        return ()
+        if not file_paths:
+            return ()
+    else:
+        file_paths = ()
 
-    return cleaner.command
+    executable = str(pathlib.Path(cleaner.command[0]) / cleaner.command[1])
+    return (executable,) + cleaner.command[2:] + file_paths
 
 
 def _filter_file_paths(cleaner, file_paths):
@@ -39,10 +41,9 @@ def _filter_file_paths(cleaner, file_paths):
 
 
 def _dry_run_command(resolved_command):
-    shell_command = " ".join(shlex.quote(argument) for argument in resolved_command[1:])
+    shell_command = " ".join(shlex.quote(argument) for argument in resolved_command)
     print(f"Would run: {shell_command}")
 
 
 def _run_command(resolved_command):
-    executable = pathlib.Path(resolved_command[0]) / resolved_command[1]
-    subprocess.run((executable,) + resolved_command[2:], check=True)
+    subprocess.run(resolved_command, check=True)
