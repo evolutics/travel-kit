@@ -10,13 +10,13 @@ check_basics() {
   nix run . -- --readme | diff <(sed '1,/^## Tools$/d' README.md) -
 }
 
-test_cleaner_command_constructions() {
+test_cleaner_calls() {
   (
     cd test/cases
 
     nix run ../.. -- --dry-run \
       | sed 's: /\S*/: /…/:g' \
-      | diff '../expected.txt' -
+      | diff '../expected_calls.txt' -
   )
 }
 
@@ -76,7 +76,7 @@ main() {
   cd "$(dirname "${script_folder}")"
 
   check_basics
-  test_cleaner_command_constructions
+  test_cleaner_calls
   test_cleaner_effects
   git rm --force flake.lock
 
