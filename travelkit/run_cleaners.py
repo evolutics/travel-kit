@@ -8,13 +8,13 @@ import sys
 def get(cleaners, is_dry_run, file_paths):
     exit_status = 0
     for cleaner in cleaners.values():
-        command = _resolve_command(cleaner, file_paths)
-        if command:
+        resolved_command = _resolve_command(cleaner, file_paths)
+        if resolved_command:
             if is_dry_run:
-                _dry_run_command(command)
+                _dry_run_command(resolved_command)
             else:
                 try:
-                    _run_command(command)
+                    _run_command(resolved_command)
                 except subprocess.CalledProcessError:
                     exit_status = 1
     sys.exit(exit_status)
@@ -38,11 +38,11 @@ def _filter_file_paths(cleaner, file_paths):
     )
 
 
-def _dry_run_command(command):
-    shell_command = " ".join(shlex.quote(argument) for argument in command[1:])
+def _dry_run_command(resolved_command):
+    shell_command = " ".join(shlex.quote(argument) for argument in resolved_command[1:])
     print(f"Would run: {shell_command}")
 
 
-def _run_command(command):
-    executable = pathlib.Path(command[0]) / command[1]
-    subprocess.run((executable,) + command[2:], check=True)
+def _run_command(resolved_command):
+    executable = pathlib.Path(resolved_command[0]) / resolved_command[1]
+    subprocess.run((executable,) + resolved_command[2:], check=True)
