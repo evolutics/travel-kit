@@ -6,8 +6,8 @@ import sys
 
 
 def get(cleaners, is_dry_run, file_paths):
-    exit_status = 0
-    for cleaner in cleaners.values():
+    errors = []
+    for identifier, cleaner in cleaners.items():
         resolved_command = _resolve_command(cleaner, file_paths)
         if resolved_command:
             if is_dry_run:
@@ -15,10 +15,10 @@ def get(cleaners, is_dry_run, file_paths):
             else:
                 try:
                     subprocess.run(resolved_command, check=True)
-                except subprocess.CalledProcessError:
-                    exit_status = 1
-    if exit_status:
-        sys.exit(exit_status)
+                except subprocess.CalledProcessError as error:
+                    errors += [f"{identifier}: error code {error.returncode}"]
+    if errors:
+        sys.exit("\n".join(errors))
 
 
 def _resolve_command(cleaner, file_paths):
