@@ -6,7 +6,7 @@ set -o pipefail
 
 check_basics() {
   nix flake check
-  git ls-files -z -- ':!:test/cases/' | xargs -0 nix run . --
+  git ls-files -z -- ':!:test/cases' | xargs -0 nix run . --
   nix run . -- --readme | diff <(sed '1,/^## Tools$/d' README.md) -
 }
 
