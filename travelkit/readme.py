@@ -5,7 +5,7 @@ import textwrap
 
 def get(cleaners):
     menu = "\n\n".join(
-        [_menu_entry(identifier, cleaner) for identifier, cleaner in cleaners.items()]
+        _menu_entry(identifier, cleaner) for identifier, cleaner in cleaners.items()
     )
     return f"\nThe following tools are integrated:\n\n{menu}"
 
