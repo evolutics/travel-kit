@@ -39,10 +39,8 @@ def main():
             if identifier not in arguments.skip
         },
         is_dry_run=arguments.dry_run,
-        file_paths=(
-            tuple(arguments.file_paths)
-            if arguments.file_paths
-            else _get_default_file_paths()
+        file_paths=tuple(
+            arguments.file_paths if arguments.file_paths else _get_default_file_paths()
         ),
     )
 
@@ -65,7 +63,7 @@ def _get_cleaners():
 
 def _get_default_file_paths():
     terminator = "\0"
-    return tuple(
+    return (
         subprocess.run(
             ["git", "ls-files", "-z"], check=True, stdout=subprocess.PIPE, text=True
         )
