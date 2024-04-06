@@ -27,7 +27,7 @@ def _menu_entry(identifier, cleaner):
 
 def _details(cleaner):
     return "\n\n".join(
-        _file_pattern_entries(cleaner.file_patterns) + _command_entries(cleaner)
+        _file_pattern_entries(cleaner.file_patterns) + [_command_entry(cleaner.command)]
     )
 
 
@@ -38,17 +38,9 @@ def _file_pattern_entries(file_patterns):
     return []
 
 
-def _command_entries(cleaner):
-    return [
-        _command_entry(key, command)
-        for key, command in {"check": cleaner.check, "fix": cleaner.fix}.items()
-        if command
-    ]
-
-
-def _command_entry(key, command):
+def _command_entry(command):
     command = _humanize_command(command)
-    return f"""`{key}` command:
+    return f"""Command:
 
 ```bash
 {command}

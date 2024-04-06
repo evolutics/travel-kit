@@ -6,19 +6,17 @@ set -o pipefail
 
 check_basics() {
   nix flake check
-  git ls-files -z -- ':!:test/cases/' | xargs -0 nix run . -- check --
-  nix run . -- readme | diff README.md -
+  git ls-files -z -- ':!:test/cases/' | xargs -0 nix run . --
+  nix run . -- --readme | diff README.md -
 }
 
 test_cleaner_command_constructions() {
   (
     cd test/cases
 
-    for subcommand in check fix; do
-      nix run ../.. -- "${subcommand}" --dry-run -- * \
-        | sed 's: /\S* : … :g' \
-        | diff "../expected/${subcommand}.txt" -
-    done
+    nix run ../.. -- --dry-run -- * \
+      | sed 's: /\S* : … :g' \
+      | diff '../expected.txt' -
   )
 }
 
@@ -30,7 +28,7 @@ test_cleaners() {
   fi
 
   local actual_output
-  actual_output="$(nix run . check test/cases/* 2>&1)" && exit 1
+  actual_output="$(nix run . test/cases/* 2>&1)" && exit 1
   readonly actual_output
 
   for lint in test/lints/*; do
@@ -43,8 +41,6 @@ test_cleaners() {
       fi
     done
   done
-
-  nix run . fix test/cases/*
 
   diff <(cd test/cases && git ls-files --modified) \
     <(cd test/fixed && git ls-files)

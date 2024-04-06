@@ -10,49 +10,29 @@ As a prerequisite, you need Nix to use this flake. You can integrate it into a
 flake as in this [example](example/flake.nix). To use it ad hoc instead, run
 
 ```bash
-nix run --no-write-lock-file github:evolutics/travel-kit -- {check,fix} …
+nix run --no-write-lock-file github:evolutics/travel-kit -- [argument …]
 ```
 
 ## Usage
 
-Usage modes:
-
-- [Checking](#checking-code) your code for its format, linting errors, and more.
-- [Fixing](#fixing-code) your code automatically if possible.
-
-### Checking code
-
-Check code with
+To format your code and check for linting errors, simply run
 
 ```bash
-travel-kit check
+# WARNING: this overwrites original files.
+travel-kit
 ```
 
-This checks the current folder and its subfolders (recursively).
+By default, this affects only Git-tracked files in the current folder and its subfolders (recursively).
 
-To only check certain files (say `a.js` and `b.md`), pass their paths at the end as in
-
-```bash
-travel-kit check a.js b.md
-```
-
-You can use this to only check files tracked by Git with
+To only check certain files (say `a.js` and `b.md`), pass their paths as in
 
 ```bash
-git ls-files -z | xargs -0 travel-kit check --
+travel-kit a.js b.md
 ```
 
 To not apply certain tools, use the `--skip` option.
 
-### Fixing code
-
-Fix code with
-
-```bash
-travel-kit fix --dry-run
-```
-
-To actually apply the changes (warning: this overwrites original files), drop the `--dry-run` option in the example.
+The `--dry-run` option shows what would be done without changing anything.
 
 ## Related projects
 
@@ -71,13 +51,7 @@ The following tools are integrated:
 
   Only applied to files matching patterns: `*.nix`
 
-  `check` command:
-
-  ```bash
-  alejandra --check --
-  ```
-
-  `fix` command:
+  Command:
 
   ```bash
   alejandra --
@@ -93,13 +67,7 @@ The following tools are integrated:
 
   Only applied to files matching patterns: `*.py`, `*.pyi`
 
-  `check` command:
-
-  ```bash
-  black --check --diff --
-  ```
-
-  `fix` command:
+  Command:
 
   ```bash
   black --
@@ -115,7 +83,7 @@ The following tools are integrated:
 
   Only applied to files matching patterns: `*`
 
-  `check` command:
+  Command:
 
   ```bash
   git diff --check 'HEAD^' --
@@ -129,7 +97,7 @@ The following tools are integrated:
 
   <summary>Details of <code>gitlint</code></summary>
 
-  `check` command:
+  Command:
 
   ```bash
   gitlint --ignore body-is-missing
@@ -145,7 +113,7 @@ The following tools are integrated:
 
   Only applied to files matching patterns: `*.Dockerfile`, `Dockerfile`
 
-  `check` command:
+  Command:
 
   ```bash
   hadolint --
@@ -161,7 +129,7 @@ The following tools are integrated:
 
   Only applied to files matching patterns: `*.css`, `*.htm`, `*.html`, `*.svg`, `*.xht`, `*.xhtml`
 
-  `check` command:
+  Command:
 
   ```bash
   html5validator --also-check-css --also-check-svg --Werror --
@@ -177,7 +145,7 @@ The following tools are integrated:
 
   Only applied to files matching patterns: `*.htm`, `*.html`
 
-  `check` command:
+  Command:
 
   ```bash
   htmlhint --
@@ -193,13 +161,7 @@ The following tools are integrated:
 
   Only applied to files matching patterns: `*.py`, `*.pyi`
 
-  `check` command:
-
-  ```bash
-  isort --force-single-line-imports --from-first --profile black --check --diff --
-  ```
-
-  `fix` command:
+  Command:
 
   ```bash
   isort --force-single-line-imports --from-first --profile black --
@@ -215,7 +177,7 @@ The following tools are integrated:
 
   Only applied to files matching patterns: `*.jsonnet`, `*.libsonnet`
 
-  `check` command:
+  Command:
 
   ```bash
   jsonnet-lint --
@@ -231,13 +193,7 @@ The following tools are integrated:
 
   Only applied to files matching patterns: `*.jsonnet`, `*.libsonnet`
 
-  `check` command:
-
-  ```bash
-  jsonnetfmt --test --
-  ```
-
-  `fix` command:
+  Command:
 
   ```bash
   jsonnetfmt --in-place --
@@ -253,13 +209,7 @@ The following tools are integrated:
 
   Only applied to files matching patterns: `*.css`, `*.htm`, `*.html`, `*.js`, `*.json`, `*.md`, `*.toml`, `*.ts`, `*.xht`, `*.xhtml`, `*.xml`, `*.yaml`, `*.yml`
 
-  `check` command:
-
-  ```bash
-  prettier --plugin … --check --
-  ```
-
-  `fix` command:
+  Command:
 
   ```bash
   prettier --plugin … --write --
@@ -275,7 +225,7 @@ The following tools are integrated:
 
   Only applied to files matching patterns: `*.py`
 
-  `check` command:
+  Command:
 
   ```bash
   pylint --
@@ -291,16 +241,10 @@ The following tools are integrated:
 
   Only applied to files matching patterns: `*.rb`, `Vagrantfile`
 
-  `check` command:
+  Command:
 
   ```bash
-  rufo --check --
-  ```
-
-  `fix` command:
-
-  ```bash
-  rufo --simple-exit --
+  rufo --
   ```
 
   </details>
@@ -313,7 +257,7 @@ The following tools are integrated:
 
   Only applied to files matching patterns: `*.sh`
 
-  `check` command:
+  Command:
 
   ```bash
   shellcheck --
@@ -329,16 +273,10 @@ The following tools are integrated:
 
   Only applied to files matching patterns: `*.sh`
 
-  `check` command:
+  Command:
 
   ```bash
-  shfmt --binary-next-line --case-indent --indent 2 --diff --
-  ```
-
-  `fix` command:
-
-  ```bash
-  shfmt --binary-next-line --case-indent --indent 2 --list --simplify --write --
+  shfmt --binary-next-line --case-indent --indent 2 --list --write --
   ```
 
   </details>
@@ -351,7 +289,7 @@ The following tools are integrated:
 
   Only applied to files matching patterns: `*.css`
 
-  `check` command:
+  Command:
 
   ```bash
   stylelint --
@@ -367,13 +305,7 @@ The following tools are integrated:
 
   Only applied to files matching patterns: `*.tf`
 
-  `check` command:
-
-  ```bash
-  terraform fmt -check -diff --
-  ```
-
-  `fix` command:
+  Command:
 
   ```bash
   terraform fmt --

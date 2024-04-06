@@ -17,6 +17,5 @@ def _get_cleaner(raw):
         title=raw["title"],
         homepage=raw["homepage"],
         file_patterns=tuple(raw["file_patterns"]),
-        check=tuple(raw["check"]),
-        fix=tuple(raw["fix"]),
+        command=tuple(raw["command"]),
     )

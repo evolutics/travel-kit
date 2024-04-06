@@ -1,37 +1,23 @@
-import dataclasses
 import fnmatch
 import pathlib
 import shlex
 import subprocess
 import sys
-import typing
-
-from . import model
 
 
-def get(cleaners, get_command, is_dry_run, file_paths):
-    context = _Context(
-        get_command=get_command,
-        is_dry_run=is_dry_run,
-        file_paths=file_paths if file_paths else _get_default_file_paths(),
-    )
+def get(cleaners, is_dry_run, file_paths):
+    if not file_paths:
+        file_paths = _get_default_file_paths()
 
     exit_status = 0
     for cleaner in cleaners.values():
-        command = _resolve_command(cleaner, context)
+        command = _resolve_command(cleaner, file_paths)
         if command:
             try:
-                _run_command_in_context(context, command)
+                _run_command_in_context(is_dry_run, command)
             except subprocess.CalledProcessError:
                 exit_status = 1
     sys.exit(exit_status)
-
-
-@dataclasses.dataclass
-class _Context:
-    get_command: typing.Callable[[model.Cleaner], tuple[str, ...]]
-    is_dry_run: bool
-    file_paths: tuple[str, ...]
 
 
 def _get_default_file_paths():
@@ -45,30 +31,29 @@ def _get_default_file_paths():
     )
 
 
-def _resolve_command(cleaner, context):
-    command = context.get_command(cleaner)
-    if not command:
+def _resolve_command(cleaner, file_paths):
+    if not cleaner.command:
         return ()
 
     if cleaner.file_patterns:
-        file_paths = tuple(_filter_file_paths(cleaner, context))
+        file_paths = tuple(_filter_file_paths(cleaner, file_paths))
         if file_paths:
-            return command + file_paths
+            return cleaner.command + file_paths
         return ()
 
-    return command
+    return cleaner.command
 
 
-def _filter_file_paths(cleaner, context):
+def _filter_file_paths(cleaner, file_paths):
     return (
         path
-        for path in context.file_paths
+        for path in file_paths
         if any(fnmatch.fnmatchcase(path, pattern) for pattern in cleaner.file_patterns)
     )
 
 
-def _run_command_in_context(context, command):
-    if context.is_dry_run:
+def _run_command_in_context(is_dry_run, command):
+    if is_dry_run:
         shell_command = " ".join(shlex.quote(str(argument)) for argument in command[1:])
         print(f"Would run: {shell_command}")
         return
