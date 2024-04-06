@@ -37,7 +37,7 @@ def _filter_file_paths(cleaner, file_paths):
 
 def _run_command_in_context(is_dry_run, command):
     if is_dry_run:
-        shell_command = " ".join(shlex.quote(str(argument)) for argument in command[1:])
+        shell_command = " ".join(shlex.quote(argument) for argument in command[1:])
         print(f"Would run: {shell_command}")
         return
     subprocess.run(_executable_command(command), check=True)
