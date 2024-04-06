@@ -31,17 +31,6 @@ test_cleaner_effects() {
   actual_output="$(cd test/cases && nix run ../.. 2>&1)" && exit 1
   readonly actual_output
 
-  for lint in test/lints/*; do
-    readarray -t expected_lines < <(cat "${lint}")
-    for expected_line in "${expected_lines[@]}"; do
-      if ! echo "${actual_output}" \
-        | grep --fixed-strings --quiet "${expected_line}"; then
-        >&2 echo "${lint}: ${expected_line}"
-        exit 1
-      fi
-    done
-  done
-
   diff <(cd test/cases && git ls-files --modified) \
     <(cd test/fixed && git ls-files)
 
@@ -60,6 +49,17 @@ Only in test/cases: stylelint.css" ]]; then
   fi
 
   git restore test/cases
+
+  for lint in test/lints/*; do
+    readarray -t expected_lines < <(cat "${lint}")
+    for expected_line in "${expected_lines[@]}"; do
+      if ! echo "${actual_output}" \
+        | grep --fixed-strings --quiet "${expected_line}"; then
+        >&2 echo "${lint}: ${expected_line}"
+        exit 1
+      fi
+    done
+  done
 }
 
 sanity_check_example_integration() {
