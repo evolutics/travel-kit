@@ -3,6 +3,7 @@
 from importlib import resources
 import argparse
 import json
+import subprocess
 
 from . import model
 from . import readme
@@ -38,7 +39,9 @@ def main():
             if identifier not in arguments.skip
         },
         is_dry_run=arguments.dry_run,
-        file_paths=arguments.file_paths,
+        file_paths=(
+            arguments.file_paths if arguments.file_paths else _get_default_file_paths()
+        ),
     )
 
 
@@ -56,6 +59,17 @@ def _get_cleaners():
         )
         for identifier, cleaner in data.items()
     }
+
+
+def _get_default_file_paths():
+    terminator = "\0"
+    return (
+        subprocess.run(
+            ["git", "ls-files", "-z"], check=True, stdout=subprocess.PIPE, text=True
+        )
+        .stdout.rstrip(terminator)
+        .split(terminator)
+    )
 
 
 if __name__ == "__main__":

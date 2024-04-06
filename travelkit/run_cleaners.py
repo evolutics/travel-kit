@@ -6,9 +6,6 @@ import sys
 
 
 def get(cleaners, is_dry_run, file_paths):
-    if not file_paths:
-        file_paths = _get_default_file_paths()
-
     exit_status = 0
     for cleaner in cleaners.values():
         command = _resolve_command(cleaner, file_paths)
@@ -18,17 +15,6 @@ def get(cleaners, is_dry_run, file_paths):
             except subprocess.CalledProcessError:
                 exit_status = 1
     sys.exit(exit_status)
-
-
-def _get_default_file_paths():
-    terminator = "\0"
-    return (
-        subprocess.run(
-            ["git", "ls-files", "-z"], check=True, stdout=subprocess.PIPE, text=True
-        )
-        .stdout.rstrip(terminator)
-        .split(terminator)
-    )
 
 
 def _resolve_command(cleaner, file_paths):
