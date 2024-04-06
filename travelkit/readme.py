@@ -27,15 +27,14 @@ def _menu_entry(identifier, cleaner):
 
 def _details(cleaner):
     return "\n\n".join(
-        _file_pattern_entries(cleaner.file_patterns) + [_command_entry(cleaner.command)]
+        ([_file_pattern_entry(cleaner.file_patterns)] if cleaner.file_patterns else [])
+        + [_command_entry(cleaner.command)]
     )
 
 
-def _file_pattern_entries(file_patterns):
-    if file_patterns:
-        humanized_patterns = ", ".join(f"`{pattern}`" for pattern in file_patterns)
-        return [f"Only applied to files matching patterns: {humanized_patterns}"]
-    return []
+def _file_pattern_entry(file_patterns):
+    humanized_patterns = ", ".join(f"`{pattern}`" for pattern in file_patterns)
+    return f"Only applied to files matching patterns: {humanized_patterns}"
 
 
 def _command_entry(command):
