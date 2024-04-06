@@ -18,9 +18,6 @@ def get(cleaners, is_dry_run, file_paths):
 
 
 def _resolve_command(cleaner, file_paths):
-    if not cleaner.command:
-        return ()
-
     if cleaner.file_patterns:
         file_paths = tuple(_filter_file_paths(cleaner, file_paths))
         if file_paths:
