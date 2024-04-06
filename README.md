@@ -22,7 +22,8 @@ To format your code and check for linting errors, simply run
 travel-kit
 ```
 
-By default, this affects only Git-tracked files in the current folder and its subfolders (recursively).
+By default, this affects only Git-tracked files in the current folder and its
+subfolders (recursively).
 
 To only check certain files (say `a.js` and `b.md`), pass their paths as in
 
