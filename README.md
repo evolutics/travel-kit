@@ -48,12 +48,10 @@ The following tools are integrated:
 
   <summary>Details of <code>alejandra</code></summary>
 
-  Only applied to files matching patterns: `*.nix`
-
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
-  alejandra --
+  alejandra -- *.nix
   ```
 
   </details>
@@ -64,12 +62,10 @@ The following tools are integrated:
 
   <summary>Details of <code>black</code></summary>
 
-  Only applied to files matching patterns: `*.py`, `*.pyi`
-
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
-  black --
+  black -- *.py *.pyi
   ```
 
   </details>
@@ -80,12 +76,10 @@ The following tools are integrated:
 
   <summary>Details of <code>git</code></summary>
 
-  Only applied to files matching patterns: `*`
-
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
-  git diff --check 'HEAD^' --
+  git diff --check 'HEAD^' -- *
   ```
 
   </details>
@@ -96,7 +90,7 @@ The following tools are integrated:
 
   <summary>Details of <code>gitlint</code></summary>
 
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
   gitlint --ignore body-is-missing
@@ -110,12 +104,10 @@ The following tools are integrated:
 
   <summary>Details of <code>hadolint</code></summary>
 
-  Only applied to files matching patterns: `*.Dockerfile`, `Dockerfile`
-
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
-  hadolint --
+  hadolint -- *.Dockerfile Dockerfile
   ```
 
   </details>
@@ -126,12 +118,10 @@ The following tools are integrated:
 
   <summary>Details of <code>html5validator</code></summary>
 
-  Only applied to files matching patterns: `*.css`, `*.htm`, `*.html`, `*.svg`, `*.xht`, `*.xhtml`
-
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
-  html5validator --also-check-css --also-check-svg --Werror --
+  html5validator --also-check-css --also-check-svg --Werror -- *.css *.htm *.html *.svg *.xht *.xhtml
   ```
 
   </details>
@@ -142,12 +132,10 @@ The following tools are integrated:
 
   <summary>Details of <code>htmlhint</code></summary>
 
-  Only applied to files matching patterns: `*.htm`, `*.html`
-
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
-  htmlhint --
+  htmlhint -- *.htm *.html
   ```
 
   </details>
@@ -158,12 +146,10 @@ The following tools are integrated:
 
   <summary>Details of <code>isort</code></summary>
 
-  Only applied to files matching patterns: `*.py`, `*.pyi`
-
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
-  isort --force-single-line-imports --from-first --profile black --
+  isort --force-single-line-imports --from-first --profile black -- *.py *.pyi
   ```
 
   </details>
@@ -174,12 +160,10 @@ The following tools are integrated:
 
   <summary>Details of <code>jsonnet-lint</code></summary>
 
-  Only applied to files matching patterns: `*.jsonnet`, `*.libsonnet`
-
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
-  jsonnet-lint --
+  jsonnet-lint -- *.jsonnet *.libsonnet
   ```
 
   </details>
@@ -190,12 +174,10 @@ The following tools are integrated:
 
   <summary>Details of <code>jsonnetfmt</code></summary>
 
-  Only applied to files matching patterns: `*.jsonnet`, `*.libsonnet`
-
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
-  jsonnetfmt --in-place --
+  jsonnetfmt --in-place -- *.jsonnet *.libsonnet
   ```
 
   </details>
@@ -206,12 +188,10 @@ The following tools are integrated:
 
   <summary>Details of <code>prettier</code></summary>
 
-  Only applied to files matching patterns: `*.css`, `*.htm`, `*.html`, `*.js`, `*.json`, `*.md`, `*.toml`, `*.ts`, `*.xht`, `*.xhtml`, `*.xml`, `*.yaml`, `*.yml`
-
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
-  prettier --plugin … --write --
+  prettier --plugin … --write -- *.css *.htm *.html *.js *.json *.md *.toml *.ts *.xht *.xhtml *.xml *.yaml *.yml
   ```
 
   </details>
@@ -222,12 +202,10 @@ The following tools are integrated:
 
   <summary>Details of <code>pylint</code></summary>
 
-  Only applied to files matching patterns: `*.py`
-
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
-  pylint --
+  pylint -- *.py
   ```
 
   </details>
@@ -238,12 +216,10 @@ The following tools are integrated:
 
   <summary>Details of <code>rufo</code></summary>
 
-  Only applied to files matching patterns: `*.rb`, `Vagrantfile`
-
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
-  rufo --
+  rufo -- *.rb Vagrantfile
   ```
 
   </details>
@@ -254,12 +230,10 @@ The following tools are integrated:
 
   <summary>Details of <code>shellcheck</code></summary>
 
-  Only applied to files matching patterns: `*.sh`
-
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
-  shellcheck --
+  shellcheck -- *.sh
   ```
 
   </details>
@@ -270,12 +244,10 @@ The following tools are integrated:
 
   <summary>Details of <code>shfmt</code></summary>
 
-  Only applied to files matching patterns: `*.sh`
-
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
-  shfmt --binary-next-line --case-indent --indent 2 --list --write --
+  shfmt --binary-next-line --case-indent --indent 2 --list --write -- *.sh
   ```
 
   </details>
@@ -286,12 +258,10 @@ The following tools are integrated:
 
   <summary>Details of <code>stylelint</code></summary>
 
-  Only applied to files matching patterns: `*.css`
-
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
-  stylelint --
+  stylelint -- *.css
   ```
 
   </details>
@@ -302,12 +272,10 @@ The following tools are integrated:
 
   <summary>Details of <code>terraform</code></summary>
 
-  Only applied to files matching patterns: `*.tf`
-
-  Command:
+  Command (file patterns apply recursively):
 
   ```bash
-  terraform fmt --
+  terraform fmt -- *.tf
   ```
 
   </details>
