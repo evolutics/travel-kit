@@ -38,16 +38,12 @@ def _file_pattern_entry(file_patterns):
 
 
 def _command_entry(command):
-    humanized_command = _humanize_command(command)
+    humanized_command = " ".join(
+        ("…" if pathlib.Path(argument).is_absolute() else shlex.quote(argument))
+        for argument in command[1:]
+    )
     return f"""Command:
 
 ```bash
 {humanized_command}
 ```"""
-
-
-def _humanize_command(command):
-    return " ".join(
-        ("…" if pathlib.Path(argument).is_absolute() else shlex.quote(argument))
-        for argument in command[1:]
-    )
