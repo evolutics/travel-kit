@@ -50,7 +50,7 @@ Only in test/cases: stylelint.css" ]]; then
 
   git restore test/cases
 
-  for lint in test/lints/*; do
+  for lint in $(git ls-files test/lints); do
     readarray -t expected_lines < <(cat "${lint}")
     for expected_line in "${expected_lines[@]}"; do
       if ! echo "${actual_output}" \
