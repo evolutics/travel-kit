@@ -13,7 +13,7 @@ def get(cleaners, get_command, is_dry_run, file_paths):
     context = _Context(
         get_command=get_command,
         is_dry_run=is_dry_run,
-        file_paths=file_paths,
+        file_paths=file_paths if file_paths else _get_default_file_paths(),
         command_exit_statuses=_get_activation_command_statuses(cleaners),
     )
 
@@ -32,8 +32,19 @@ def get(cleaners, get_command, is_dry_run, file_paths):
 class _Context:
     get_command: typing.Callable[[model.Cleaner], tuple[str, ...]]
     is_dry_run: bool
-    file_paths: typing.Sequence[pathlib.Path]
+    file_paths: tuple[str, ...]
     command_exit_statuses: typing.Mapping[tuple[str, ...], int]
+
+
+def _get_default_file_paths():
+    terminator = "\0"
+    return (
+        subprocess.run(
+            ["git", "ls-files", "-z"], check=True, stdout=subprocess.PIPE, text=True
+        )
+        .stdout.rstrip(terminator)
+        .split(terminator)
+    )
 
 
 def _get_activation_command_statuses(cleaners):
@@ -72,7 +83,7 @@ def _resolve_command(cleaner, context):
         return ()
 
     if cleaner.file_patterns:
-        file_paths = tuple(sorted(_get_file_paths(cleaner, context)))
+        file_paths = tuple(sorted(_filter_file_paths(cleaner, context)))
         if file_paths:
             return command + file_paths
         return ()
@@ -80,18 +91,11 @@ def _resolve_command(cleaner, context):
     return command
 
 
-def _get_file_paths(cleaner, context):
-    if context.file_paths:
-        paths = context.file_paths
-    else:
-        paths = pathlib.Path(".").glob("**/*")
-
+def _filter_file_paths(cleaner, context):
     return (
         path
-        for path in paths
-        if any(
-            fnmatch.fnmatchcase(str(path), pattern) for pattern in cleaner.file_patterns
-        )
+        for path in context.file_paths
+        if any(fnmatch.fnmatchcase(path, pattern) for pattern in cleaner.file_patterns)
     )
 
 

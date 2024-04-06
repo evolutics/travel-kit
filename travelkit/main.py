@@ -2,7 +2,6 @@
 
 import argparse
 import dataclasses
-import pathlib
 import typing
 
 from . import cleaners
@@ -52,7 +51,7 @@ def _subcommand_to_run_cleaner(get_command):
             default=[],
             help="Do not use this tool.",
         )
-        subparser.add_argument("file_paths", nargs="*", type=pathlib.Path)
+        subparser.add_argument("file_paths", nargs="*")
 
     def function(arguments):
         filtered_cleaners = {
