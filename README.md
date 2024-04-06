@@ -20,13 +20,13 @@ To format your code and check for linting errors, simply run
 travel-kit
 ```
 
-By default, this affects only Git-tracked files in the current folder and its
-subfolders (recursively).
+This affects all Git-tracked files in the current folder and its subfolders
+(recursively).
 
-To only check certain files (say `a.js` and `b.md`), pass their paths as in
+Alternatively, you can pass specific paths to precisely affect those files as in
 
 ```bash
-travel-kit a.js b.md
+travel-kit foo.js bar.md
 ```
 
 To not apply certain tools, use the `--skip` option.
