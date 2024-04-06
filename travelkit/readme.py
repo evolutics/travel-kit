@@ -38,11 +38,11 @@ def _file_pattern_entry(file_patterns):
 
 
 def _command_entry(command):
-    command = _humanize_command(command)
+    humanized_command = _humanize_command(command)
     return f"""Command:
 
 ```bash
-{command}
+{humanized_command}
 ```"""
 
 
