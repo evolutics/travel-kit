@@ -24,7 +24,7 @@ def _resolve_command(cleaner, file_paths):
     if cleaner.file_patterns:
         file_paths = tuple(_filter_file_paths(cleaner, file_paths))
         if not file_paths:
-            return ()
+            return None
     else:
         file_paths = ()
 
