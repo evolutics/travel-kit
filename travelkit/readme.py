@@ -4,23 +4,15 @@ import textwrap
 
 
 def get(cleaners):
-    menu = "\n\n".join(
-        _menu_entry(identifier, cleaner) for identifier, cleaner in cleaners.items()
-    )
+    menu = "\n\n".join(_menu_entry(cleaner) for cleaner in cleaners.values())
     return f"\nThe following tools are integrated:\n\n{menu}"
 
 
-def _menu_entry(identifier, cleaner):
+def _menu_entry(cleaner):
     details = textwrap.indent(_details(cleaner), "  ")
     return f"""- [**{cleaner.title}**]({cleaner.homepage})
 
-  <details>
-
-  <summary>Details of <code>{identifier}</code></summary>
-
-{details}
-
-  </details>"""
+{details}"""
 
 
 def _details(cleaner):
@@ -29,8 +21,6 @@ def _details(cleaner):
         for argument in cleaner.command[1:]
     )
     pattern_indicator = "".join(f" {pattern}" for pattern in cleaner.file_patterns)
-    return f"""Command (file patterns apply recursively):
-
-```bash
+    return f"""```bash
 {humanized_command}{pattern_indicator}
 ```"""
