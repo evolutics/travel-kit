@@ -31,13 +31,6 @@ def _details(cleaner):
     )
 
 
-def _humanize_command(command):
-    return " ".join(
-        ("…" if pathlib.Path(argument).is_absolute() else shlex.quote(argument))
-        for argument in command[1:]
-    )
-
-
 def _file_pattern_entries(file_patterns):
     if file_patterns:
         humanized_patterns = ", ".join(f"`{pattern}`" for pattern in file_patterns)
@@ -60,3 +53,10 @@ def _command_entry(key, command):
 ```bash
 {command}
 ```"""
+
+
+def _humanize_command(command):
+    return " ".join(
+        ("…" if pathlib.Path(argument).is_absolute() else shlex.quote(argument))
+        for argument in command[1:]
+    )
