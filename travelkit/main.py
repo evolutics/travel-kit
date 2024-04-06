@@ -47,16 +47,15 @@ def _get_cleaners():
     with data_path.open("br") as data_file:
         data = json.load(data_file)
 
-    return {identifier: _get_cleaner(cleaner) for identifier, cleaner in data.items()}
-
-
-def _get_cleaner(raw):
-    return model.Cleaner(
-        title=raw["title"],
-        homepage=raw["homepage"],
-        file_patterns=tuple(raw["file_patterns"]),
-        command=tuple(raw["command"]),
-    )
+    return {
+        identifier: model.Cleaner(
+            title=cleaner["title"],
+            homepage=cleaner["homepage"],
+            file_patterns=tuple(cleaner["file_patterns"]),
+            command=tuple(cleaner["command"]),
+        )
+        for identifier, cleaner in data.items()
+    }
 
 
 if __name__ == "__main__":
