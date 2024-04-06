@@ -28,7 +28,7 @@ test_cleaners() {
   fi
 
   local actual_output
-  actual_output="$(nix run . test/cases/* 2>&1)" && exit 1
+  actual_output="$(cd test/cases && nix run ../.. 2>&1)" && exit 1
   readonly actual_output
 
   for lint in test/lints/*; do
