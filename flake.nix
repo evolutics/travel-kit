@@ -23,44 +23,47 @@
             in {
               title = "Alejandra";
               homepage = pkgs.alejandra.meta.homepage;
-              file_patterns = ["*.nix"];
               command = alejandra ++ ["--"];
+              file_patterns = ["*.nix"];
             };
             black = let
               black = [(pkgs.lib.makeBinPath [pkgs.black]) "black"];
             in {
               title = "Black";
               homepage = pkgs.black.meta.homepage;
-              file_patterns = ["*.py" "*.pyi"];
               command = black ++ ["--"];
+              file_patterns = ["*.py" "*.pyi"];
             };
             git = {
               title = "Git diff check";
               homepage = "https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---check";
-              file_patterns = ["*"];
               command = git ++ ["diff" "--check" "HEAD^" "--"];
+              file_patterns = ["*"];
             };
             gitlint = let
               gitlint = [(pkgs.lib.makeBinPath [pkgs.gitlint]) "gitlint"];
             in {
               title = "Gitlint";
               homepage = pkgs.gitlint.meta.homepage;
-              file_patterns = [];
               command = gitlint ++ ["--ignore" "body-is-missing"];
+              file_patterns = [];
             };
             hadolint = let
               hadolint = [(pkgs.lib.makeBinPath [pkgs.hadolint]) "hadolint"];
             in {
               title = "Haskell Dockerfile Linter";
               homepage = pkgs.hadolint.meta.homepage;
-              file_patterns = ["*.Dockerfile" "Dockerfile"];
               command = hadolint ++ ["--"];
+              file_patterns = ["*.Dockerfile" "Dockerfile"];
             };
             html5validator = let
               html5validator = [(pkgs.lib.makeBinPath [pkgs.html5validator]) "html5validator"];
             in {
               title = "HTML5 Validator";
               homepage = pkgs.html5validator.meta.homepage;
+              command =
+                html5validator
+                ++ ["--also-check-css" "--also-check-svg" "--Werror" "--"];
               file_patterns = [
                 "*.css"
                 "*.htm"
@@ -69,17 +72,14 @@
                 "*.xht"
                 "*.xhtml"
               ];
-              command =
-                html5validator
-                ++ ["--also-check-css" "--also-check-svg" "--Werror" "--"];
             };
             htmlhint = let
               htmlhint = [(pkgs.lib.makeBinPath [pkgs.nodePackages.htmlhint]) "htmlhint"];
             in {
               title = "HTMLHint";
               homepage = pkgs.nodePackages.htmlhint.meta.homepage;
-              file_patterns = ["*.htm" "*.html"];
               command = htmlhint ++ ["--"];
+              file_patterns = ["*.htm" "*.html"];
             };
             isort = let
               isort = [(pkgs.lib.makeBinPath [pkgs.isort]) "isort"];
@@ -92,24 +92,24 @@
             in {
               title = "isort";
               homepage = pkgs.isort.meta.homepage;
-              file_patterns = ["*.py" "*.pyi"];
               command = isort ++ options ++ ["--"];
+              file_patterns = ["*.py" "*.pyi"];
             };
             jsonnet-lint = let
               jsonnetLint = [(pkgs.lib.makeBinPath [pkgs.go-jsonnet]) "jsonnet-lint"];
             in {
               title = "Jsonnet linter";
               homepage = "https://jsonnet.org/learning/tools.html";
-              file_patterns = ["*.jsonnet" "*.libsonnet"];
               command = jsonnetLint ++ ["--"];
+              file_patterns = ["*.jsonnet" "*.libsonnet"];
             };
             jsonnetfmt = let
               jsonnetfmt = [(pkgs.lib.makeBinPath [pkgs.go-jsonnet]) "jsonnetfmt"];
             in {
               title = "Jsonnet formatter";
               homepage = "https://jsonnet.org/learning/tools.html";
-              file_patterns = ["*.jsonnet" "*.libsonnet"];
               command = jsonnetfmt ++ ["--in-place" "--"];
+              file_patterns = ["*.jsonnet" "*.libsonnet"];
             };
             prettier = let
               prettier = [(pkgs.lib.makeBinPath [pkgs.nodePackages.prettier]) "prettier"];
@@ -120,6 +120,7 @@
             in {
               title = "Prettier";
               homepage = pkgs.nodePackages.prettier.meta.homepage;
+              command = prettier ++ options ++ ["--write" "--"];
               file_patterns = [
                 "*.css"
                 "*.htm"
@@ -135,31 +136,30 @@
                 "*.yaml"
                 "*.yml"
               ];
-              command = prettier ++ options ++ ["--write" "--"];
             };
             pylint = let
               pylint = [(pkgs.lib.makeBinPath [pkgs.pylint]) "pylint"];
             in {
               title = "Pylint";
               homepage = pkgs.pylint.meta.homepage;
-              file_patterns = ["*.py"];
               command = pylint ++ ["--"];
+              file_patterns = ["*.py"];
             };
             rufo = let
               rufo = [(pkgs.lib.makeBinPath [pkgs.rufo]) "rufo"];
             in {
               title = "Rufo";
               homepage = pkgs.rufo.meta.homepage;
-              file_patterns = ["*.rb" "Vagrantfile"];
               command = rufo ++ ["--"];
+              file_patterns = ["*.rb" "Vagrantfile"];
             };
             shellcheck = let
               shellcheck = [(pkgs.lib.makeBinPath [pkgs.shellcheck]) "shellcheck"];
             in {
               title = "ShellCheck";
               homepage = pkgs.shellcheck.meta.homepage;
-              file_patterns = ["*.sh"];
               command = shellcheck ++ ["--"];
+              file_patterns = ["*.sh"];
             };
             shfmt = let
               shfmt = [(pkgs.lib.makeBinPath [pkgs.shfmt]) "shfmt"];
@@ -167,24 +167,24 @@
             in {
               title = "shfmt";
               homepage = pkgs.shfmt.meta.homepage;
-              file_patterns = ["*.sh"];
               command = shfmt ++ options ++ ["--list" "--write" "--"];
+              file_patterns = ["*.sh"];
             };
             stylelint = let
               stylelint = [(pkgs.lib.makeBinPath [pkgs.nodePackages.stylelint]) "stylelint"];
             in {
               title = "Stylelint";
               homepage = pkgs.nodePackages.stylelint.meta.homepage;
-              file_patterns = ["*.css"];
               command = stylelint ++ ["--"];
+              file_patterns = ["*.css"];
             };
             terraform = let
               terraform = [(pkgs.lib.makeBinPath [pkgs.terraform]) "terraform"];
             in {
               title = "Terraform fmt";
               homepage = "https://developer.hashicorp.com/terraform/cli/commands/fmt";
-              file_patterns = ["*.tf"];
               command = terraform ++ ["fmt" "--"];
+              file_patterns = ["*.tf"];
             };
           };
         package = pkgs.python3Packages.buildPythonApplication {

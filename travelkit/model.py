@@ -5,5 +5,5 @@ import dataclasses
 class Cleaner:
     title: str
     homepage: str
-    file_patterns: tuple[str, ...]
     command: tuple[str, ...]
+    file_patterns: tuple[str, ...]

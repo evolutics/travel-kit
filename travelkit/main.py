@@ -54,8 +54,8 @@ def _get_cleaners():
         identifier: model.Cleaner(
             title=cleaner["title"],
             homepage=cleaner["homepage"],
-            file_patterns=tuple(cleaner["file_patterns"]),
             command=tuple(cleaner["command"]),
+            file_patterns=tuple(cleaner["file_patterns"]),
         )
         for identifier, cleaner in data.items()
     }
