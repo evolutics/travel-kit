@@ -23,7 +23,6 @@
             in {
               title = "Alejandra";
               homepage = pkgs.alejandra.meta.homepage;
-              is_only_active_if_command = [];
               file_patterns = ["*.nix"];
               check = alejandra ++ ["--check" "--"];
               fix = alejandra ++ ["--"];
@@ -33,7 +32,6 @@
             in {
               title = "Black";
               homepage = pkgs.black.meta.homepage;
-              is_only_active_if_command = [];
               file_patterns = ["*.py" "*.pyi"];
               check = black ++ ["--check" "--diff" "--"];
               fix = black ++ ["--"];
@@ -41,7 +39,6 @@
             git = {
               title = "Git diff check";
               homepage = "https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---check";
-              is_only_active_if_command = git ++ ["rev-parse"];
               file_patterns = ["*"];
               check = git ++ ["diff" "--check" "HEAD^" "--"];
               fix = [];
@@ -51,7 +48,6 @@
             in {
               title = "Gitlint";
               homepage = pkgs.gitlint.meta.homepage;
-              is_only_active_if_command = git ++ ["rev-parse"];
               file_patterns = [];
               check = gitlint ++ ["--ignore" "body-is-missing"];
               fix = [];
@@ -61,7 +57,6 @@
             in {
               title = "Haskell Dockerfile Linter";
               homepage = pkgs.hadolint.meta.homepage;
-              is_only_active_if_command = [];
               file_patterns = ["*.Dockerfile" "Dockerfile"];
               check = hadolint ++ ["--"];
               fix = [];
@@ -71,7 +66,6 @@
             in {
               title = "HTML5 Validator";
               homepage = pkgs.html5validator.meta.homepage;
-              is_only_active_if_command = [];
               file_patterns = [
                 "*.css"
                 "*.htm"
@@ -90,7 +84,6 @@
             in {
               title = "HTMLHint";
               homepage = pkgs.nodePackages.htmlhint.meta.homepage;
-              is_only_active_if_command = [];
               file_patterns = ["*.htm" "*.html"];
               check = htmlhint ++ ["--"];
               fix = [];
@@ -106,7 +99,6 @@
             in {
               title = "isort";
               homepage = pkgs.isort.meta.homepage;
-              is_only_active_if_command = [];
               file_patterns = ["*.py" "*.pyi"];
               check = isort ++ options ++ ["--check" "--diff" "--"];
               fix = isort ++ options ++ ["--"];
@@ -116,7 +108,6 @@
             in {
               title = "Jsonnet linter";
               homepage = "https://jsonnet.org/learning/tools.html";
-              is_only_active_if_command = [];
               file_patterns = ["*.jsonnet" "*.libsonnet"];
               check = jsonnetLint ++ ["--"];
               fix = [];
@@ -126,7 +117,6 @@
             in {
               title = "Jsonnet formatter";
               homepage = "https://jsonnet.org/learning/tools.html";
-              is_only_active_if_command = [];
               file_patterns = ["*.jsonnet" "*.libsonnet"];
               check = jsonnetfmt ++ ["--test" "--"];
               fix = jsonnetfmt ++ ["--in-place" "--"];
@@ -140,7 +130,6 @@
             in {
               title = "Prettier";
               homepage = pkgs.nodePackages.prettier.meta.homepage;
-              is_only_active_if_command = [];
               file_patterns = [
                 "*.css"
                 "*.htm"
@@ -164,7 +153,6 @@
             in {
               title = "Pylint";
               homepage = pkgs.pylint.meta.homepage;
-              is_only_active_if_command = [];
               file_patterns = ["*.py"];
               check = pylint ++ ["--"];
               fix = [];
@@ -174,7 +162,6 @@
             in {
               title = "Rufo";
               homepage = pkgs.rufo.meta.homepage;
-              is_only_active_if_command = [];
               file_patterns = ["*.rb" "Vagrantfile"];
               check = rufo ++ ["--check" "--"];
               fix = rufo ++ ["--simple-exit" "--"];
@@ -184,7 +171,6 @@
             in {
               title = "ShellCheck";
               homepage = pkgs.shellcheck.meta.homepage;
-              is_only_active_if_command = [];
               file_patterns = ["*.sh"];
               check = shellcheck ++ ["--"];
               fix = [];
@@ -195,7 +181,6 @@
             in {
               title = "shfmt";
               homepage = pkgs.shfmt.meta.homepage;
-              is_only_active_if_command = [];
               file_patterns = ["*.sh"];
               check = shfmt ++ options ++ ["--diff" "--"];
               fix = shfmt ++ options ++ ["--list" "--simplify" "--write" "--"];
@@ -205,7 +190,6 @@
             in {
               title = "Stylelint";
               homepage = pkgs.nodePackages.stylelint.meta.homepage;
-              is_only_active_if_command = [];
               file_patterns = ["*.css"];
               check = stylelint ++ ["--"];
               fix = [];
@@ -215,7 +199,6 @@
             in {
               title = "Terraform fmt";
               homepage = "https://developer.hashicorp.com/terraform/cli/commands/fmt";
-              is_only_active_if_command = [];
               file_patterns = ["*.tf"];
               check = terraform ++ ["fmt" "-check" "-diff" "--"];
               fix = terraform ++ ["fmt" "--"];

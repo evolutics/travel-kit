@@ -27,17 +27,8 @@ def _menu_entry(identifier, cleaner):
 
 def _details(cleaner):
     return "\n\n".join(
-        _is_only_active_if_command_entries(cleaner.is_only_active_if_command)
-        + _file_pattern_entries(cleaner.file_patterns)
-        + _command_entries(cleaner)
+        _file_pattern_entries(cleaner.file_patterns) + _command_entries(cleaner)
     )
-
-
-def _is_only_active_if_command_entries(is_only_active_if_command):
-    if is_only_active_if_command:
-        command = _humanize_command(is_only_active_if_command)
-        return [f"Only used if command returns 0: `{command}`"]
-    return []
 
 
 def _humanize_command(command):

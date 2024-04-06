@@ -14,7 +14,6 @@ def get(cleaners, get_command, is_dry_run, file_paths):
         get_command=get_command,
         is_dry_run=is_dry_run,
         file_paths=file_paths if file_paths else _get_default_file_paths(),
-        command_exit_statuses=_get_activation_command_statuses(cleaners),
     )
 
     exit_status = 0
@@ -33,7 +32,6 @@ class _Context:
     get_command: typing.Callable[[model.Cleaner], tuple[str, ...]]
     is_dry_run: bool
     file_paths: tuple[str, ...]
-    command_exit_statuses: typing.Mapping[tuple[str, ...], int]
 
 
 def _get_default_file_paths():
@@ -47,37 +45,7 @@ def _get_default_file_paths():
     )
 
 
-def _get_activation_command_statuses(cleaners):
-    unique_commands = sorted(
-        {
-            cleaner.is_only_active_if_command
-            for cleaner in cleaners.values()
-            if cleaner.is_only_active_if_command
-        }
-    )
-    return {
-        command: subprocess.run(
-            _executable_command(command),
-            check=False,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        ).returncode
-        for command in unique_commands
-    }
-
-
-def _executable_command(command):
-    executable = pathlib.Path(command[0]) / command[1]
-    return (executable,) + command[2:]
-
-
 def _resolve_command(cleaner, context):
-    if (
-        cleaner.is_only_active_if_command
-        and context.command_exit_statuses[cleaner.is_only_active_if_command]
-    ):
-        return ()
-
     command = context.get_command(cleaner)
     if not command:
         return ()
@@ -105,3 +73,8 @@ def _run_command_in_context(context, command):
         print(f"Would run: {shell_command}")
         return
     subprocess.run(_executable_command(command), check=True)
+
+
+def _executable_command(command):
+    executable = pathlib.Path(command[0]) / command[1]
+    return (executable,) + command[2:]

@@ -113,8 +113,6 @@ The following tools are integrated:
 
   <summary>Details of <code>git</code></summary>
 
-  Only used if command returns 0: `git rev-parse`
-
   Only applied to files matching patterns: `*`
 
   `check` command:
@@ -130,8 +128,6 @@ The following tools are integrated:
   <details>
 
   <summary>Details of <code>gitlint</code></summary>
-
-  Only used if command returns 0: `git rev-parse`
 
   `check` command:
 
