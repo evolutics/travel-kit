@@ -1,7 +1,5 @@
 # Travel Kit 💼
 
-![test](https://github.com/evolutics/travel-kit/workflows/test/badge.svg)
-
 Common code formatters and linters in a single Nix flake.
 
 ## Installation
