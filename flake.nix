@@ -5,11 +5,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
+    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
   outputs = {
     flake-utils,
     nixpkgs,
+    self,
+    treefmt-nix,
     ...
   }:
     flake-utils.lib.eachDefaultSystem (
@@ -170,6 +173,17 @@
             command = ["${pkgs.terraform}/bin/terraform" "fmt" "--"];
             file_patterns = ["*.tf"];
           };
+          treefmt = {
+            title = "treefmt";
+            homepage = "https://github.com/numtide/treefmt";
+            command = [
+              "${treefmtEval.config.build.wrapper}/bin/treefmt"
+              "--fail-on-change"
+              "--no-cache"
+              # `"--"` would break treefmt as it seems to append `--tree-root`.
+            ];
+            file_patterns = ["*"];
+          };
         };
         package = pkgs.python3Packages.buildPythonApplication {
           format = "pyproject";
@@ -186,6 +200,10 @@
           inherit system;
           config.allowUnfree = true;
         };
+        treefmtEval = treefmt-nix.lib.evalModule pkgs ({pkgs, ...}: {
+          programs.keep-sorted.enable = true;
+          projectRootFile = "flake.nix";
+        });
       in {
         apps.default = {
           program = "${package}/bin/travel-kit";

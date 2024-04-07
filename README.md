@@ -143,3 +143,9 @@ The following tools are integrated:
   ```bash
   terraform fmt -- *.tf
   ```
+
+- [**treefmt**](https://github.com/numtide/treefmt)
+
+  ```bash
+  treefmt --fail-on-change --no-cache *
+  ```
