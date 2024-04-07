@@ -42,18 +42,6 @@ The `--dry-run` option shows what would be done without changing anything.
 
 The following tools are integrated:
 
-- [**Alejandra**](https://github.com/kamadorueda/alejandra)
-
-  ```bash
-  alejandra -- *.nix
-  ```
-
-- [**Black**](https://github.com/psf/black)
-
-  ```bash
-  black -- *.py *.pyi
-  ```
-
 - [**Git diff check**](https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---check)
 
   ```bash
@@ -84,28 +72,16 @@ The following tools are integrated:
   htmlhint -- *.htm *.html
   ```
 
-- [**isort**](https://github.com/PyCQA/isort)
-
-  ```bash
-  isort --force-single-line-imports --from-first --profile black -- *.py *.pyi
-  ```
-
 - [**Jsonnet linter**](https://jsonnet.org/learning/tools.html)
 
   ```bash
   jsonnet-lint -- *.jsonnet *.libsonnet
   ```
 
-- [**Jsonnet formatter**](https://jsonnet.org/learning/tools.html)
-
-  ```bash
-  jsonnetfmt --in-place -- *.jsonnet *.libsonnet
-  ```
-
 - [**Prettier**](https://prettier.io)
 
   ```bash
-  prettier --plugin … --write -- *.css *.htm *.html *.js *.json *.md *.toml *.ts *.xht *.xhtml *.xml *.yaml *.yml
+  prettier --plugin … --write -- *.toml
   ```
 
 - [**Pylint**](https://pylint.readthedocs.io/en/stable/)
@@ -114,34 +90,16 @@ The following tools are integrated:
   pylint -- *.py
   ```
 
-- [**Rufo**](https://github.com/ruby-formatter/rufo)
-
-  ```bash
-  rufo -- *.rb Vagrantfile
-  ```
-
 - [**ShellCheck**](https://hackage.haskell.org/package/ShellCheck)
 
   ```bash
   shellcheck -- *.sh
   ```
 
-- [**shfmt**](https://github.com/mvdan/sh)
-
-  ```bash
-  shfmt --binary-next-line --case-indent --indent 2 --list --write -- *.sh
-  ```
-
 - [**Stylelint**](https://stylelint.io)
 
   ```bash
   stylelint -- *.css
-  ```
-
-- [**Terraform fmt**](https://developer.hashicorp.com/terraform/cli/commands/fmt)
-
-  ```bash
-  terraform fmt -- *.tf
   ```
 
 - [**treefmt**](https://github.com/numtide/treefmt)

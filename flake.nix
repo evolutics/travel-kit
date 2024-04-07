@@ -18,18 +18,6 @@
     flake-utils.lib.eachDefaultSystem (
       system: let
         cleaners = builtins.toJSON {
-          alejandra = {
-            title = "Alejandra";
-            homepage = pkgs.alejandra.meta.homepage;
-            command = ["${pkgs.alejandra}/bin/alejandra" "--"];
-            file_patterns = ["*.nix"];
-          };
-          black = {
-            title = "Black";
-            homepage = pkgs.black.meta.homepage;
-            command = ["${pkgs.black}/bin/black" "--"];
-            file_patterns = ["*.py" "*.pyi"];
-          };
           git = {
             title = "Git diff check";
             homepage = "https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---check";
@@ -77,29 +65,10 @@
             command = ["${pkgs.nodePackages.htmlhint}/bin/htmlhint" "--"];
             file_patterns = ["*.htm" "*.html"];
           };
-          isort = {
-            title = "isort";
-            homepage = pkgs.isort.meta.homepage;
-            command = [
-              "${pkgs.isort}/bin/isort"
-              "--force-single-line-imports"
-              "--from-first"
-              "--profile"
-              "black"
-              "--"
-            ];
-            file_patterns = ["*.py" "*.pyi"];
-          };
           jsonnet-lint = {
             title = "Jsonnet linter";
             homepage = "https://jsonnet.org/learning/tools.html";
             command = ["${pkgs.go-jsonnet}/bin/jsonnet-lint" "--"];
-            file_patterns = ["*.jsonnet" "*.libsonnet"];
-          };
-          jsonnetfmt = {
-            title = "Jsonnet formatter";
-            homepage = "https://jsonnet.org/learning/tools.html";
-            command = ["${pkgs.go-jsonnet}/bin/jsonnetfmt" "--in-place" "--"];
             file_patterns = ["*.jsonnet" "*.libsonnet"];
           };
           prettier = {
@@ -112,21 +81,7 @@
               "--write"
               "--"
             ];
-            file_patterns = [
-              "*.css"
-              "*.htm"
-              "*.html"
-              "*.js"
-              "*.json"
-              "*.md"
-              "*.toml"
-              "*.ts"
-              "*.xht"
-              "*.xhtml"
-              "*.xml"
-              "*.yaml"
-              "*.yml"
-            ];
+            file_patterns = ["*.toml"];
           };
           pylint = {
             title = "Pylint";
@@ -134,31 +89,10 @@
             command = ["${pkgs.pylint}/bin/pylint" "--"];
             file_patterns = ["*.py"];
           };
-          rufo = {
-            title = "Rufo";
-            homepage = pkgs.rufo.meta.homepage;
-            command = ["${pkgs.rufo}/bin/rufo" "--"];
-            file_patterns = ["*.rb" "Vagrantfile"];
-          };
           shellcheck = {
             title = "ShellCheck";
             homepage = pkgs.shellcheck.meta.homepage;
             command = ["${pkgs.shellcheck}/bin/shellcheck" "--"];
-            file_patterns = ["*.sh"];
-          };
-          shfmt = {
-            title = "shfmt";
-            homepage = pkgs.shfmt.meta.homepage;
-            command = [
-              "${pkgs.shfmt}/bin/shfmt"
-              "--binary-next-line"
-              "--case-indent"
-              "--indent"
-              "2"
-              "--list"
-              "--write"
-              "--"
-            ];
             file_patterns = ["*.sh"];
           };
           stylelint = {
@@ -166,12 +100,6 @@
             homepage = pkgs.nodePackages.stylelint.meta.homepage;
             command = ["${pkgs.nodePackages.stylelint}/bin/stylelint" "--"];
             file_patterns = ["*.css"];
-          };
-          terraform = {
-            title = "Terraform fmt";
-            homepage = "https://developer.hashicorp.com/terraform/cli/commands/fmt";
-            command = ["${pkgs.terraform}/bin/terraform" "fmt" "--"];
-            file_patterns = ["*.tf"];
           };
           treefmt = {
             title = "treefmt";
@@ -201,8 +129,49 @@
           config.allowUnfree = true;
         };
         treefmtEval = treefmt-nix.lib.evalModule pkgs ({pkgs, ...}: {
-          programs.keep-sorted.enable = true;
+          programs.alejandra.enable = true;
+          programs.black.enable = true;
+          programs.isort.enable = true;
+          programs.jsonnetfmt.enable = true;
+          programs.prettier = {
+            enable = true;
+            settings.plugins = [
+              "${pkgs.nodePackages.prettier-plugin-toml}/lib/node_modules/prettier-plugin-toml/lib/index.cjs"
+            ];
+            # TODO: Include TOML files.
+          };
+          programs.rufo.enable = true;
+          programs.terraform.enable = true;
+
           projectRootFile = "flake.nix";
+
+          settings.formatter = {
+            isort = {
+              options = [
+                "--force-single-line-imports"
+                "--from-first"
+                "--profile"
+                "black"
+                "--"
+              ];
+            };
+            rufo = {
+              # TODO: Extend default includes instead of overriding them.
+              includes = ["*.rb" "Vagrantfile"];
+            };
+            shfmt = {
+              command = "${pkgs.shfmt}/bin/shfmt";
+              includes = ["*.sh"];
+              options = [
+                "--binary-next-line"
+                "--case-indent"
+                "--indent"
+                "2"
+                "--list"
+                "--write"
+              ];
+            };
+          };
         });
       in {
         apps.default = {
