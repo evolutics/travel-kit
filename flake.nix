@@ -99,18 +99,11 @@
               # `"--"` would break treefmt as it seems to append `--tree-root`.
             ];
             file_patterns = let
-              deduplicate = list:
-                builtins.attrNames (builtins.listToAttrs (builtins.map
-                  (item: {
-                    name = item;
-                    value = null;
-                  })
-                  list));
               formatters = builtins.attrValues treefmtEval.config.settings.formatter;
               includes =
                 builtins.concatMap (formatter: formatter.includes) formatters;
             in
-              deduplicate includes;
+              nixpkgs.lib.lists.unique (nixpkgs.lib.lists.naturalSort includes);
           };
         };
         package = pkgs.python3Packages.buildPythonApplication {
