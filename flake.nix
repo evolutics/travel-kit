@@ -29,7 +29,7 @@
           };
           gitlint = {
             title = "Gitlint";
-            homepage = pkgs.gitlint.meta.homepage;
+            inherit (pkgs.gitlint.meta) homepage;
             command = [
               "${pkgs.gitlint}/bin/gitlint"
               "--ignore"
@@ -39,13 +39,13 @@
           };
           hadolint = {
             title = "Haskell Dockerfile Linter";
-            homepage = pkgs.hadolint.meta.homepage;
+            inherit (pkgs.hadolint.meta) homepage;
             command = ["${pkgs.hadolint}/bin/hadolint" "--"];
             file_patterns = ["*.Dockerfile" "Dockerfile"];
           };
           html5validator = {
             title = "HTML5 Validator";
-            homepage = pkgs.html5validator.meta.homepage;
+            inherit (pkgs.html5validator.meta) homepage;
             command = [
               "${pkgs.html5validator}/bin/html5validator"
               "--also-check-css"
@@ -64,7 +64,7 @@
           };
           htmlhint = {
             title = "HTMLHint";
-            homepage = pkgs.nodePackages.htmlhint.meta.homepage;
+            inherit (pkgs.nodePackages.htmlhint.meta) homepage;
             command = ["${pkgs.nodePackages.htmlhint}/bin/htmlhint" "--"];
             file_patterns = ["*.htm" "*.html"];
           };
@@ -76,19 +76,19 @@
           };
           pylint = {
             title = "Pylint";
-            homepage = pkgs.pylint.meta.homepage;
+            inherit (pkgs.pylint.meta) homepage;
             command = ["${pkgs.pylint}/bin/pylint" "--"];
             file_patterns = ["*.py"];
           };
           shellcheck = {
             title = "ShellCheck";
-            homepage = pkgs.shellcheck.meta.homepage;
+            inherit (pkgs.shellcheck.meta) homepage;
             command = ["${pkgs.shellcheck}/bin/shellcheck" "--"];
             file_patterns = ["*.sh"];
           };
           stylelint = {
             title = "Stylelint";
-            homepage = pkgs.nodePackages.stylelint.meta.homepage;
+            inherit (pkgs.nodePackages.stylelint.meta) homepage;
             command = ["${pkgs.nodePackages.stylelint}/bin/stylelint" "--"];
             file_patterns = ["*.css"];
           };
