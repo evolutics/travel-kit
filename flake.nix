@@ -5,7 +5,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
-    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:numtide/treefmt-nix";
+    };
   };
 
   outputs = {
