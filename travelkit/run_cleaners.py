@@ -1,5 +1,4 @@
 import fnmatch
-import pathlib
 import shlex
 import subprocess
 import sys
@@ -29,8 +28,7 @@ def _resolve_command(cleaner, file_paths):
     else:
         file_paths = ()
 
-    executable = str(pathlib.Path(cleaner.command[0]) / cleaner.command[1])
-    return (executable,) + cleaner.command[2:] + file_paths
+    return cleaner.command + file_paths
 
 
 def _filter_file_paths(cleaner, file_paths):

@@ -16,11 +16,19 @@ def _menu_entry(cleaner):
 
 
 def _details(cleaner):
-    humanized_command = " ".join(
-        ("…" if pathlib.Path(argument).is_absolute() else shlex.quote(argument))
-        for argument in cleaner.command[1:]
-    )
+    humanized_command = _humanize_command(cleaner.command)
     pattern_indicator = "".join(f" {pattern}" for pattern in cleaner.file_patterns)
     return f"""```bash
 {humanized_command}{pattern_indicator}
 ```"""
+
+
+def _humanize_command(command):
+    def humanize(index, argument):
+        if index == 0:
+            return shlex.quote(pathlib.Path(argument).name)
+        if pathlib.Path(argument).is_absolute():
+            return "…"
+        return shlex.quote(argument)
+
+    return " ".join(humanize(index, argument) for index, argument in enumerate(command))
