@@ -136,6 +136,7 @@
             ];
           };
           programs.rufo.enable = true;
+          programs.statix.enable = true;
           programs.terraform.enable = true;
 
           projectRootFile = "flake.nix";
