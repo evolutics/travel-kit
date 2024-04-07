@@ -4,7 +4,6 @@ Would run: /…/hadolint -- hadolint.Dockerfile
 Would run: /…/html5validator --also-check-css --also-check-svg --Werror -- html5validator.htm htmlhint.htm stylelint.css
 Would run: /…/htmlhint -- html5validator.htm htmlhint.htm
 Would run: /…/jsonnet-lint -- jsonnet_lint.jsonnet jsonnetfmt.jsonnet
-Would run: /…/prettier --plugin /…/index.cjs --write -- prettier.toml
 Would run: /…/pylint -- black.py isort.py pylint.py
 Would run: /…/shellcheck -- shellcheck.sh shfmt.sh
 Would run: /…/stylelint -- stylelint.css

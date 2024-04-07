@@ -71,18 +71,6 @@
             command = ["${pkgs.go-jsonnet}/bin/jsonnet-lint" "--"];
             file_patterns = ["*.jsonnet" "*.libsonnet"];
           };
-          prettier = {
-            title = "Prettier";
-            homepage = pkgs.nodePackages.prettier.meta.homepage;
-            command = [
-              "${pkgs.nodePackages.prettier}/bin/prettier"
-              "--plugin"
-              "${pkgs.nodePackages.prettier-plugin-toml}/lib/node_modules/prettier-plugin-toml/lib/index.cjs"
-              "--write"
-              "--"
-            ];
-            file_patterns = ["*.toml"];
-          };
           pylint = {
             title = "Pylint";
             homepage = pkgs.pylint.meta.homepage;
@@ -138,7 +126,26 @@
             settings.plugins = [
               "${pkgs.nodePackages.prettier-plugin-toml}/lib/node_modules/prettier-plugin-toml/lib/index.cjs"
             ];
-            # TODO: Include TOML files.
+            # TODO: Extend default includes instead of overriding them.
+            includes = [
+              "*.cjs"
+              "*.css"
+              "*.html"
+              "*.js"
+              "*.json"
+              "*.json5"
+              "*.jsx"
+              "*.md"
+              "*.mdx"
+              "*.mjs"
+              "*.scss"
+              "*.toml"
+              "*.ts"
+              "*.tsx"
+              "*.vue"
+              "*.yaml"
+              "*.yml"
+            ];
           };
           programs.rufo.enable = true;
           programs.terraform.enable = true;

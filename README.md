@@ -78,12 +78,6 @@ The following tools are integrated:
   jsonnet-lint -- *.jsonnet *.libsonnet
   ```
 
-- [**Prettier**](https://prettier.io)
-
-  ```bash
-  prettier --plugin … --write -- *.toml
-  ```
-
 - [**Pylint**](https://pylint.readthedocs.io/en/stable/)
 
   ```bash
