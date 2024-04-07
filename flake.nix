@@ -36,7 +36,11 @@
           gitlint = {
             title = "Gitlint";
             homepage = pkgs.gitlint.meta.homepage;
-            command = ["${pkgs.gitlint}/bin/gitlint" "--ignore" "body-is-missing"];
+            command = [
+              "${pkgs.gitlint}/bin/gitlint"
+              "--ignore"
+              "body-is-missing"
+            ];
             file_patterns = [];
           };
           hadolint = {
