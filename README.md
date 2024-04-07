@@ -99,5 +99,5 @@ The following tools are integrated:
 - [**treefmt**](https://github.com/numtide/treefmt)
 
   ```bash
-  treefmt --fail-on-change --no-cache *
+  treefmt --fail-on-change --no-cache *.cjs *.css *.html *.js *.json *.json5 *.jsonnet *.jsx *.libsonnet *.md *.mdx *.mjs *.nix *.py *.pyi *.rb *.scss *.sh *.tf *.toml *.ts *.tsx *.vue *.yaml *.yml Vagrantfile
   ```
