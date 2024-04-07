@@ -21,13 +21,7 @@ travel-kit
 ```
 
 This affects all Git-tracked files in the current folder and its subfolders
-(recursively).
-
-Alternatively, you can pass specific paths to precisely affect those files as in
-
-```bash
-travel-kit foo.js bar.md
-```
+(recursively). Alternatively, you can pass specific paths to only affect those.
 
 To not apply certain tools, use the `--skip` option.
 
