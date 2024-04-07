@@ -86,16 +86,17 @@
           };
           isort = let
             isort = "${pkgs.isort}/bin/isort";
-            options = [
+          in {
+            title = "isort";
+            homepage = pkgs.isort.meta.homepage;
+            command = [
+              isort
               "--force-single-line-imports"
               "--from-first"
               "--profile"
               "black"
+              "--"
             ];
-          in {
-            title = "isort";
-            homepage = pkgs.isort.meta.homepage;
-            command = [isort] ++ options ++ ["--"];
             file_patterns = ["*.py" "*.pyi"];
           };
           jsonnet-lint = let
@@ -116,14 +117,16 @@
           };
           prettier = let
             prettier = "${pkgs.nodePackages.prettier}/bin/prettier";
-            options = [
-              "--plugin"
-              "${pkgs.nodePackages.prettier-plugin-toml}/lib/node_modules/prettier-plugin-toml/lib/index.cjs"
-            ];
           in {
             title = "Prettier";
             homepage = pkgs.nodePackages.prettier.meta.homepage;
-            command = [prettier] ++ options ++ ["--write" "--"];
+            command = [
+              prettier
+              "--plugin"
+              "${pkgs.nodePackages.prettier-plugin-toml}/lib/node_modules/prettier-plugin-toml/lib/index.cjs"
+              "--write"
+              "--"
+            ];
             file_patterns = [
               "*.css"
               "*.htm"
@@ -166,11 +169,19 @@
           };
           shfmt = let
             shfmt = "${pkgs.shfmt}/bin/shfmt";
-            options = ["--binary-next-line" "--case-indent" "--indent" "2"];
           in {
             title = "shfmt";
             homepage = pkgs.shfmt.meta.homepage;
-            command = [shfmt] ++ options ++ ["--list" "--write" "--"];
+            command = [
+              shfmt
+              "--binary-next-line"
+              "--case-indent"
+              "--indent"
+              "2"
+              "--list"
+              "--write"
+              "--"
+            ];
             file_patterns = ["*.sh"];
           };
           stylelint = let
