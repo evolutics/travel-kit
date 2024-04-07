@@ -23,6 +23,9 @@ travel-kit
 This affects all Git-tracked files in the current folder and its subfolders
 (recursively). Alternatively, you can pass specific paths to only affect those.
 
+A non-zero exit status is returned if the formatting has been changed or there
+are linting errors.
+
 To not apply certain tools, use the `--skip` option.
 
 The `--dry-run` option shows what would be done without changing anything.
