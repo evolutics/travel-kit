@@ -16,7 +16,7 @@
       system: let
         cleaners = builtins.toJSON {
           alejandra = let
-            alejandra = "${pkgs.lib.makeBinPath [pkgs.alejandra]}/alejandra";
+            alejandra = "${pkgs.alejandra}/bin/alejandra";
           in {
             title = "Alejandra";
             homepage = pkgs.alejandra.meta.homepage;
@@ -24,7 +24,7 @@
             file_patterns = ["*.nix"];
           };
           black = let
-            black = "${pkgs.lib.makeBinPath [pkgs.black]}/black";
+            black = "${pkgs.black}/bin/black";
           in {
             title = "Black";
             homepage = pkgs.black.meta.homepage;
@@ -32,7 +32,7 @@
             file_patterns = ["*.py" "*.pyi"];
           };
           git = let
-            git = "${pkgs.lib.makeBinPath [pkgs.git]}/git";
+            git = "${pkgs.git}/bin/git";
           in {
             title = "Git diff check";
             homepage = "https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---check";
@@ -40,7 +40,7 @@
             file_patterns = ["*"];
           };
           gitlint = let
-            gitlint = "${pkgs.lib.makeBinPath [pkgs.gitlint]}/gitlint";
+            gitlint = "${pkgs.gitlint}/bin/gitlint";
           in {
             title = "Gitlint";
             homepage = pkgs.gitlint.meta.homepage;
@@ -48,7 +48,7 @@
             file_patterns = [];
           };
           hadolint = let
-            hadolint = "${pkgs.lib.makeBinPath [pkgs.hadolint]}/hadolint";
+            hadolint = "${pkgs.hadolint}/bin/hadolint";
           in {
             title = "Haskell Dockerfile Linter";
             homepage = pkgs.hadolint.meta.homepage;
@@ -56,7 +56,7 @@
             file_patterns = ["*.Dockerfile" "Dockerfile"];
           };
           html5validator = let
-            html5validator = "${pkgs.lib.makeBinPath [pkgs.html5validator]}/html5validator";
+            html5validator = "${pkgs.html5validator}/bin/html5validator";
           in {
             title = "HTML5 Validator";
             homepage = pkgs.html5validator.meta.homepage;
@@ -77,7 +77,7 @@
             ];
           };
           htmlhint = let
-            htmlhint = "${pkgs.lib.makeBinPath [pkgs.nodePackages.htmlhint]}/htmlhint";
+            htmlhint = "${pkgs.nodePackages.htmlhint}/bin/htmlhint";
           in {
             title = "HTMLHint";
             homepage = pkgs.nodePackages.htmlhint.meta.homepage;
@@ -85,7 +85,7 @@
             file_patterns = ["*.htm" "*.html"];
           };
           isort = let
-            isort = "${pkgs.lib.makeBinPath [pkgs.isort]}/isort";
+            isort = "${pkgs.isort}/bin/isort";
             options = [
               "--force-single-line-imports"
               "--from-first"
@@ -99,7 +99,7 @@
             file_patterns = ["*.py" "*.pyi"];
           };
           jsonnet-lint = let
-            jsonnetLint = "${pkgs.lib.makeBinPath [pkgs.go-jsonnet]}/jsonnet-lint";
+            jsonnetLint = "${pkgs.go-jsonnet}/bin/jsonnet-lint";
           in {
             title = "Jsonnet linter";
             homepage = "https://jsonnet.org/learning/tools.html";
@@ -107,7 +107,7 @@
             file_patterns = ["*.jsonnet" "*.libsonnet"];
           };
           jsonnetfmt = let
-            jsonnetfmt = "${pkgs.lib.makeBinPath [pkgs.go-jsonnet]}/jsonnetfmt";
+            jsonnetfmt = "${pkgs.go-jsonnet}/bin/jsonnetfmt";
           in {
             title = "Jsonnet formatter";
             homepage = "https://jsonnet.org/learning/tools.html";
@@ -115,10 +115,10 @@
             file_patterns = ["*.jsonnet" "*.libsonnet"];
           };
           prettier = let
-            prettier = "${pkgs.lib.makeBinPath [pkgs.nodePackages.prettier]}/prettier";
+            prettier = "${pkgs.nodePackages.prettier}/bin/prettier";
             options = [
               "--plugin"
-              "${pkgs.lib.makeLibraryPath [pkgs.nodePackages.prettier-plugin-toml]}/node_modules/prettier-plugin-toml/lib/index.cjs"
+              "${pkgs.nodePackages.prettier-plugin-toml}/lib/node_modules/prettier-plugin-toml/lib/index.cjs"
             ];
           in {
             title = "Prettier";
@@ -141,7 +141,7 @@
             ];
           };
           pylint = let
-            pylint = "${pkgs.lib.makeBinPath [pkgs.pylint]}/pylint";
+            pylint = "${pkgs.pylint}/bin/pylint";
           in {
             title = "Pylint";
             homepage = pkgs.pylint.meta.homepage;
@@ -149,7 +149,7 @@
             file_patterns = ["*.py"];
           };
           rufo = let
-            rufo = "${pkgs.lib.makeBinPath [pkgs.rufo]}/rufo";
+            rufo = "${pkgs.rufo}/bin/rufo";
           in {
             title = "Rufo";
             homepage = pkgs.rufo.meta.homepage;
@@ -157,7 +157,7 @@
             file_patterns = ["*.rb" "Vagrantfile"];
           };
           shellcheck = let
-            shellcheck = "${pkgs.lib.makeBinPath [pkgs.shellcheck]}/shellcheck";
+            shellcheck = "${pkgs.shellcheck}/bin/shellcheck";
           in {
             title = "ShellCheck";
             homepage = pkgs.shellcheck.meta.homepage;
@@ -165,7 +165,7 @@
             file_patterns = ["*.sh"];
           };
           shfmt = let
-            shfmt = "${pkgs.lib.makeBinPath [pkgs.shfmt]}/shfmt";
+            shfmt = "${pkgs.shfmt}/bin/shfmt";
             options = ["--binary-next-line" "--case-indent" "--indent" "2"];
           in {
             title = "shfmt";
@@ -174,7 +174,7 @@
             file_patterns = ["*.sh"];
           };
           stylelint = let
-            stylelint = "${pkgs.lib.makeBinPath [pkgs.nodePackages.stylelint]}/stylelint";
+            stylelint = "${pkgs.nodePackages.stylelint}/bin/stylelint";
           in {
             title = "Stylelint";
             homepage = pkgs.nodePackages.stylelint.meta.homepage;
@@ -182,7 +182,7 @@
             file_patterns = ["*.css"];
           };
           terraform = let
-            terraform = "${pkgs.lib.makeBinPath [pkgs.terraform]}/terraform";
+            terraform = "${pkgs.terraform}/bin/terraform";
           in {
             title = "Terraform fmt";
             homepage = "https://developer.hashicorp.com/terraform/cli/commands/fmt";
