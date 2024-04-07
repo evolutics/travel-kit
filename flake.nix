@@ -15,53 +15,41 @@
     flake-utils.lib.eachDefaultSystem (
       system: let
         cleaners = builtins.toJSON {
-          alejandra = let
-            alejandra = "${pkgs.alejandra}/bin/alejandra";
-          in {
+          alejandra = {
             title = "Alejandra";
             homepage = pkgs.alejandra.meta.homepage;
-            command = [alejandra "--"];
+            command = ["${pkgs.alejandra}/bin/alejandra" "--"];
             file_patterns = ["*.nix"];
           };
-          black = let
-            black = "${pkgs.black}/bin/black";
-          in {
+          black = {
             title = "Black";
             homepage = pkgs.black.meta.homepage;
-            command = [black "--"];
+            command = ["${pkgs.black}/bin/black" "--"];
             file_patterns = ["*.py" "*.pyi"];
           };
-          git = let
-            git = "${pkgs.git}/bin/git";
-          in {
+          git = {
             title = "Git diff check";
             homepage = "https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---check";
-            command = [git "diff" "--check" "HEAD^" "--"];
+            command = ["${pkgs.git}/bin/git" "diff" "--check" "HEAD^" "--"];
             file_patterns = ["*"];
           };
-          gitlint = let
-            gitlint = "${pkgs.gitlint}/bin/gitlint";
-          in {
+          gitlint = {
             title = "Gitlint";
             homepage = pkgs.gitlint.meta.homepage;
-            command = [gitlint "--ignore" "body-is-missing"];
+            command = ["${pkgs.gitlint}/bin/gitlint" "--ignore" "body-is-missing"];
             file_patterns = [];
           };
-          hadolint = let
-            hadolint = "${pkgs.hadolint}/bin/hadolint";
-          in {
+          hadolint = {
             title = "Haskell Dockerfile Linter";
             homepage = pkgs.hadolint.meta.homepage;
-            command = [hadolint "--"];
+            command = ["${pkgs.hadolint}/bin/hadolint" "--"];
             file_patterns = ["*.Dockerfile" "Dockerfile"];
           };
-          html5validator = let
-            html5validator = "${pkgs.html5validator}/bin/html5validator";
-          in {
+          html5validator = {
             title = "HTML5 Validator";
             homepage = pkgs.html5validator.meta.homepage;
             command = [
-              html5validator
+              "${pkgs.html5validator}/bin/html5validator"
               "--also-check-css"
               "--also-check-svg"
               "--Werror"
@@ -76,21 +64,17 @@
               "*.xhtml"
             ];
           };
-          htmlhint = let
-            htmlhint = "${pkgs.nodePackages.htmlhint}/bin/htmlhint";
-          in {
+          htmlhint = {
             title = "HTMLHint";
             homepage = pkgs.nodePackages.htmlhint.meta.homepage;
-            command = [htmlhint "--"];
+            command = ["${pkgs.nodePackages.htmlhint}/bin/htmlhint" "--"];
             file_patterns = ["*.htm" "*.html"];
           };
-          isort = let
-            isort = "${pkgs.isort}/bin/isort";
-          in {
+          isort = {
             title = "isort";
             homepage = pkgs.isort.meta.homepage;
             command = [
-              isort
+              "${pkgs.isort}/bin/isort"
               "--force-single-line-imports"
               "--from-first"
               "--profile"
@@ -99,29 +83,23 @@
             ];
             file_patterns = ["*.py" "*.pyi"];
           };
-          jsonnet-lint = let
-            jsonnetLint = "${pkgs.go-jsonnet}/bin/jsonnet-lint";
-          in {
+          jsonnet-lint = {
             title = "Jsonnet linter";
             homepage = "https://jsonnet.org/learning/tools.html";
-            command = [jsonnetLint "--"];
+            command = ["${pkgs.go-jsonnet}/bin/jsonnet-lint" "--"];
             file_patterns = ["*.jsonnet" "*.libsonnet"];
           };
-          jsonnetfmt = let
-            jsonnetfmt = "${pkgs.go-jsonnet}/bin/jsonnetfmt";
-          in {
+          jsonnetfmt = {
             title = "Jsonnet formatter";
             homepage = "https://jsonnet.org/learning/tools.html";
-            command = [jsonnetfmt "--in-place" "--"];
+            command = ["${pkgs.go-jsonnet}/bin/jsonnetfmt" "--in-place" "--"];
             file_patterns = ["*.jsonnet" "*.libsonnet"];
           };
-          prettier = let
-            prettier = "${pkgs.nodePackages.prettier}/bin/prettier";
-          in {
+          prettier = {
             title = "Prettier";
             homepage = pkgs.nodePackages.prettier.meta.homepage;
             command = [
-              prettier
+              "${pkgs.nodePackages.prettier}/bin/prettier"
               "--plugin"
               "${pkgs.nodePackages.prettier-plugin-toml}/lib/node_modules/prettier-plugin-toml/lib/index.cjs"
               "--write"
@@ -143,37 +121,29 @@
               "*.yml"
             ];
           };
-          pylint = let
-            pylint = "${pkgs.pylint}/bin/pylint";
-          in {
+          pylint = {
             title = "Pylint";
             homepage = pkgs.pylint.meta.homepage;
-            command = [pylint "--"];
+            command = ["${pkgs.pylint}/bin/pylint" "--"];
             file_patterns = ["*.py"];
           };
-          rufo = let
-            rufo = "${pkgs.rufo}/bin/rufo";
-          in {
+          rufo = {
             title = "Rufo";
             homepage = pkgs.rufo.meta.homepage;
-            command = [rufo "--"];
+            command = ["${pkgs.rufo}/bin/rufo" "--"];
             file_patterns = ["*.rb" "Vagrantfile"];
           };
-          shellcheck = let
-            shellcheck = "${pkgs.shellcheck}/bin/shellcheck";
-          in {
+          shellcheck = {
             title = "ShellCheck";
             homepage = pkgs.shellcheck.meta.homepage;
-            command = [shellcheck "--"];
+            command = ["${pkgs.shellcheck}/bin/shellcheck" "--"];
             file_patterns = ["*.sh"];
           };
-          shfmt = let
-            shfmt = "${pkgs.shfmt}/bin/shfmt";
-          in {
+          shfmt = {
             title = "shfmt";
             homepage = pkgs.shfmt.meta.homepage;
             command = [
-              shfmt
+              "${pkgs.shfmt}/bin/shfmt"
               "--binary-next-line"
               "--case-indent"
               "--indent"
@@ -184,20 +154,16 @@
             ];
             file_patterns = ["*.sh"];
           };
-          stylelint = let
-            stylelint = "${pkgs.nodePackages.stylelint}/bin/stylelint";
-          in {
+          stylelint = {
             title = "Stylelint";
             homepage = pkgs.nodePackages.stylelint.meta.homepage;
-            command = [stylelint "--"];
+            command = ["${pkgs.nodePackages.stylelint}/bin/stylelint" "--"];
             file_patterns = ["*.css"];
           };
-          terraform = let
-            terraform = "${pkgs.terraform}/bin/terraform";
-          in {
+          terraform = {
             title = "Terraform fmt";
             homepage = "https://developer.hashicorp.com/terraform/cli/commands/fmt";
-            command = [terraform "fmt" "--"];
+            command = ["${pkgs.terraform}/bin/terraform" "fmt" "--"];
             file_patterns = ["*.tf"];
           };
         };
