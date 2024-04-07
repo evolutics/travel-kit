@@ -138,21 +138,15 @@
           projectRootFile = "flake.nix";
 
           settings.formatter = {
-            isort = {
-              options = [
-                "--force-single-line-imports"
-                "--from-first"
-                "--profile"
-                "black"
-                "--"
-              ];
-            };
-            prettier = {
-              includes = ["*.toml"];
-            };
-            rufo = {
-              includes = ["Vagrantfile"];
-            };
+            isort.options = [
+              "--force-single-line-imports"
+              "--from-first"
+              "--profile"
+              "black"
+              "--"
+            ];
+            prettier.includes = ["*.toml"];
+            rufo.includes = ["Vagrantfile"];
             shfmt = {
               command = "${pkgs.shfmt}/bin/shfmt";
               includes = ["*.sh"];
