@@ -116,6 +116,14 @@
           inherit system;
           config.allowUnfree = true;
         };
+        treefmtDefaults =
+          (treefmt-nix.lib.evalModule pkgs ({pkgs, ...}: {
+            programs.prettier.enable = true;
+            programs.rufo.enable = true;
+          }))
+          .config
+          .settings
+          .formatter;
         treefmtEval = treefmt-nix.lib.evalModule pkgs ({pkgs, ...}: {
           programs.alejandra.enable = true;
           programs.black.enable = true;
@@ -126,26 +134,7 @@
             settings.plugins = [
               "${pkgs.nodePackages.prettier-plugin-toml}/lib/node_modules/prettier-plugin-toml/lib/index.cjs"
             ];
-            # TODO: Extend default includes instead of overriding them.
-            includes = [
-              "*.cjs"
-              "*.css"
-              "*.html"
-              "*.js"
-              "*.json"
-              "*.json5"
-              "*.jsx"
-              "*.md"
-              "*.mdx"
-              "*.mjs"
-              "*.scss"
-              "*.toml"
-              "*.ts"
-              "*.tsx"
-              "*.vue"
-              "*.yaml"
-              "*.yml"
-            ];
+            includes = treefmtDefaults.prettier.includes ++ ["*.toml"];
           };
           programs.rufo.enable = true;
           programs.terraform.enable = true;
@@ -163,8 +152,7 @@
               ];
             };
             rufo = {
-              # TODO: Extend default includes instead of overriding them.
-              includes = ["*.rb" "Vagrantfile"];
+              includes = treefmtDefaults.rufo.includes ++ ["Vagrantfile"];
             };
             shfmt = {
               command = "${pkgs.shfmt}/bin/shfmt";
