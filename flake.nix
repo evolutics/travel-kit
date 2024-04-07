@@ -121,14 +121,6 @@
           inherit system;
           config.allowUnfree = true;
         };
-        treefmtDefaults =
-          (treefmt-nix.lib.evalModule pkgs ({pkgs, ...}: {
-            programs.prettier.enable = true;
-            programs.rufo.enable = true;
-          }))
-          .config
-          .settings
-          .formatter;
         treefmtEval = treefmt-nix.lib.evalModule pkgs ({pkgs, ...}: {
           programs.alejandra.enable = true;
           programs.black.enable = true;
@@ -139,7 +131,6 @@
             settings.plugins = [
               "${pkgs.nodePackages.prettier-plugin-toml}/lib/node_modules/prettier-plugin-toml/lib/index.cjs"
             ];
-            includes = treefmtDefaults.prettier.includes ++ ["*.toml"];
           };
           programs.rufo.enable = true;
           programs.terraform.enable = true;
@@ -156,8 +147,11 @@
                 "--"
               ];
             };
+            prettier = {
+              includes = ["*.toml"];
+            };
             rufo = {
-              includes = treefmtDefaults.rufo.includes ++ ["Vagrantfile"];
+              includes = ["Vagrantfile"];
             };
             shfmt = {
               command = "${pkgs.shfmt}/bin/shfmt";
