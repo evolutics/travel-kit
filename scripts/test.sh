@@ -65,9 +65,9 @@ Only in test/cases: stylelint.css" ]]; then
 sanity_check_example_integration() {
   (
     cd example
+    trap 'git rm --force flake.lock' EXIT
     nix flake check
     nix develop . --command travel-kit --help
-    git rm --force flake.lock
   )
 }
 
@@ -75,10 +75,12 @@ main() {
   local -r script_folder="$(dirname "$(readlink --canonicalize "$0")")"
   cd "$(dirname "${script_folder}")"
 
-  check_basics
-  test_cleaner_calls
-  test_cleaner_effects
-  git rm --force flake.lock
+  (
+    trap 'git rm --force flake.lock' EXIT
+    check_basics
+    test_cleaner_calls
+    test_cleaner_effects
+  )
 
   sanity_check_example_integration
 }
