@@ -1,4 +1,4 @@
-Would run: /…/git diff --check 'HEAD^' -- Vagrantfile alejandra.nix black.py git gitlint hadolint.Dockerfile html5validator.htm htmlhint.htm isort.py jsonnet_lint.jsonnet jsonnetfmt.jsonnet prettier.js prettier.toml pylint.py rufo.rb shellcheck.sh shfmt.sh statix.nix stylelint.css terraform.tf
+Would run: /…/git diff --check 'HEAD^' -- BUILD.bazel Vagrantfile alejandra.nix black.py git gitlint hadolint.Dockerfile html5validator.htm htmlhint.htm isort.py jsonnet_lint.jsonnet jsonnetfmt.jsonnet prettier.js prettier.toml pylint.py rufo.rb shellcheck.sh shfmt.sh statix.nix stylelint.css terraform.tf
 Would run: /…/gitlint --ignore body-is-missing
 Would run: /…/hadolint -- hadolint.Dockerfile
 Would run: /…/html5validator --also-check-css --also-check-svg --Werror -- html5validator.htm htmlhint.htm stylelint.css
@@ -7,4 +7,4 @@ Would run: /…/jsonnet-lint -- jsonnet_lint.jsonnet jsonnetfmt.jsonnet
 Would run: /…/pylint -- black.py isort.py pylint.py
 Would run: /…/shellcheck -- shellcheck.sh shfmt.sh
 Would run: /…/stylelint -- stylelint.css
-Would run: /…/treefmt --fail-on-change --no-cache Vagrantfile alejandra.nix black.py isort.py jsonnet_lint.jsonnet jsonnetfmt.jsonnet prettier.js prettier.toml pylint.py rufo.rb shellcheck.sh shfmt.sh statix.nix stylelint.css terraform.tf
+Would run: /…/treefmt --fail-on-change --no-cache BUILD.bazel Vagrantfile alejandra.nix black.py isort.py jsonnet_lint.jsonnet jsonnetfmt.jsonnet prettier.js prettier.toml pylint.py rufo.rb shellcheck.sh shfmt.sh statix.nix stylelint.css terraform.tf

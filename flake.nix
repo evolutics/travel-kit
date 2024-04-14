@@ -127,6 +127,7 @@
         treefmtEval = treefmt-nix.lib.evalModule pkgs ({pkgs, ...}: {
           programs.alejandra.enable = true;
           programs.black.enable = true;
+          programs.buildifier.enable = true;
           programs.isort.enable = true;
           programs.jsonnetfmt.enable = true;
           programs.prettier = {
