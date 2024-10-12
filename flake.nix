@@ -43,25 +43,6 @@
             command = ["${pkgs.hadolint}/bin/hadolint" "--"];
             file_patterns = ["*.Dockerfile" "Dockerfile"];
           };
-          html5validator = {
-            title = "HTML5 Validator";
-            inherit (pkgs.html5validator.meta) homepage;
-            command = [
-              "${pkgs.html5validator}/bin/html5validator"
-              "--also-check-css"
-              "--also-check-svg"
-              "--Werror"
-              "--"
-            ];
-            file_patterns = [
-              "*.css"
-              "*.htm"
-              "*.html"
-              "*.svg"
-              "*.xht"
-              "*.xhtml"
-            ];
-          };
           htmlhint = {
             title = "HTMLHint";
             inherit (pkgs.nodePackages.htmlhint.meta) homepage;

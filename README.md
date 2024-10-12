@@ -57,12 +57,6 @@ The following tools are integrated:
   hadolint -- *.Dockerfile Dockerfile
   ```
 
-- [**HTML5 Validator**](https://github.com/svenkreiss/html5validator)
-
-  ```bash
-  html5validator --also-check-css --also-check-svg --Werror -- *.css *.htm *.html *.svg *.xht *.xhtml
-  ```
-
 - [**HTMLHint**](https://github.com/htmlhint/HTMLHint)
 
   ```bash

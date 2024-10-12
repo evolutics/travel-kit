@@ -36,7 +36,6 @@ test_cleaner_effects() {
   if [[ "${delta}" != "Only in test/cases: git
 Only in test/cases: gitlint
 Only in test/cases: hadolint.Dockerfile
-Only in test/cases: html5validator.htm
 Only in test/cases: htmlhint.htm
 Only in test/cases: jsonnet_lint.jsonnet
 Only in test/cases: pylint.py
