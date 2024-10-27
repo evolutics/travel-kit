@@ -135,7 +135,7 @@
               "--"
             ];
             prettier.includes = ["*.toml"];
-            rufo.includes = ["Vagrantfile"];
+            rufo.includes = ["*Vagrantfile"];
             shfmt = {
               command = "${pkgs.shfmt}/bin/shfmt";
               includes = ["*.sh"];
