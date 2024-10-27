@@ -80,6 +80,8 @@
               "${treefmtEval.config.build.wrapper}/bin/treefmt"
               "--fail-on-change"
               "--no-cache"
+              "--walk"
+              "filesystem"
               # `"--"` would break treefmt as it seems to append `--tree-root`.
             ];
             file_patterns = let
