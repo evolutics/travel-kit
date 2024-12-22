@@ -148,6 +148,11 @@
                 "--write"
               ];
             };
+            sqruff = {
+              command = "${pkgs.sqruff}/bin/sqruff";
+              includes = ["*.sql"];
+              options = ["fix" "--force"];
+            };
           };
         });
       in {
