@@ -69,8 +69,7 @@ sanity_check_example_integration() {
 }
 
 main() {
-  local -r script_folder="$(dirname "$(readlink --canonicalize "$0")")"
-  cd "$(dirname "${script_folder}")"
+  cd -- "$(dirname -- "$0")/.."
 
   (
     trap 'git rm --force flake.lock' EXIT
