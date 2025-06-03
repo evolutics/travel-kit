@@ -114,12 +114,7 @@
           programs.cljfmt.enable = true;
           programs.isort.enable = true;
           programs.jsonnetfmt.enable = true;
-          programs.prettier = {
-            enable = true;
-            settings.plugins = [
-              "${pkgs.nodePackages.prettier-plugin-toml}/lib/node_modules/prettier-plugin-toml/lib/index.cjs"
-            ];
-          };
+          programs.prettier.enable = true;
           programs.rufo.enable = true;
           programs.statix.enable = true;
           programs.terraform.enable = true;
@@ -134,7 +129,6 @@
               "black"
               "--"
             ];
-            prettier.includes = ["*.toml"];
             rufo.includes = ["*Vagrantfile"];
             shfmt = {
               command = "${pkgs.shfmt}/bin/shfmt";
