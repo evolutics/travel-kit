@@ -116,6 +116,7 @@
           programs.jsonnetfmt.enable = true;
           programs.prettier.enable = true;
           programs.rufo.enable = true;
+          programs.sqruff.enable = true;
           programs.statix.enable = true;
           programs.taplo.enable = true;
           programs.terraform.enable = true;
@@ -142,11 +143,6 @@
                 "--list"
                 "--write"
               ];
-            };
-            sqruff = {
-              command = "${pkgs.sqruff}/bin/sqruff";
-              includes = ["*.sql"];
-              options = ["fix" "--force"];
             };
           };
         });
