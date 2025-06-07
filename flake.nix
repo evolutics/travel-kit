@@ -117,6 +117,7 @@
           programs.prettier.enable = true;
           programs.rufo.enable = true;
           programs.statix.enable = true;
+          programs.taplo.enable = true;
           programs.terraform.enable = true;
 
           projectRootFile = "flake.nix";
