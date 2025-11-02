@@ -100,7 +100,10 @@
             ${cleaners}
             EOF
           '';
-          propagatedBuildInputs = [pkgs.python3Packages.setuptools];
+          propagatedBuildInputs = [
+            pkgs.go
+            pkgs.python3Packages.setuptools
+          ];
           src = ./.;
         };
         pkgs = import nixpkgs {
@@ -114,6 +117,7 @@
           programs.cljfmt.enable = true;
           programs.gofumpt.enable = true;
           programs.goimports.enable = true;
+          programs.golangci-lint.enable = true;
           programs.isort.enable = true;
           programs.jsonnetfmt.enable = true;
           programs.prettier.enable = true;

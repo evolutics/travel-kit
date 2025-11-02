@@ -1,4 +1,4 @@
-Would run: /…/git diff --check 'HEAD^' -- Vagrantfile alejandra.nix black.py buildifier.bzl cljfmt.clj git gitlint gofumpt.go goimports.go hadolint.Dockerfile htmlhint.htm isort.py jsonnet_lint.jsonnet jsonnetfmt.jsonnet prettier.js pylint.py rufo.rb shellcheck.sh shfmt.sh statix.nix stylelint.css taplo.toml terraform.tf
+Would run: /…/git diff --check 'HEAD^' -- Vagrantfile alejandra.nix black.py buildifier.bzl cljfmt.clj git gitlint gofumpt.go goimports.go golangci-lint.go hadolint.Dockerfile htmlhint.htm isort.py jsonnet_lint.jsonnet jsonnetfmt.jsonnet prettier.js pylint.py rufo.rb shellcheck.sh shfmt.sh statix.nix stylelint.css taplo.toml terraform.tf
 Would run: /…/gitlint --ignore body-is-missing
 Would run: /…/hadolint -- hadolint.Dockerfile
 Would run: /…/htmlhint -- htmlhint.htm
@@ -6,4 +6,4 @@ Would run: /…/jsonnet-lint -- jsonnet_lint.jsonnet jsonnetfmt.jsonnet
 Would run: /…/pylint -- black.py isort.py pylint.py
 Would run: /…/shellcheck -- shellcheck.sh shfmt.sh
 Would run: /…/stylelint -- stylelint.css
-Would run: /…/treefmt --fail-on-change --no-cache --walk filesystem Vagrantfile alejandra.nix black.py buildifier.bzl cljfmt.clj gofumpt.go goimports.go isort.py jsonnet_lint.jsonnet jsonnetfmt.jsonnet prettier.js pylint.py rufo.rb shellcheck.sh shfmt.sh statix.nix stylelint.css taplo.toml terraform.tf
+Would run: /…/treefmt --fail-on-change --no-cache --walk filesystem Vagrantfile alejandra.nix black.py buildifier.bzl cljfmt.clj gofumpt.go goimports.go golangci-lint.go isort.py jsonnet_lint.jsonnet jsonnetfmt.jsonnet prettier.js pylint.py rufo.rb shellcheck.sh shfmt.sh statix.nix stylelint.css taplo.toml terraform.tf
