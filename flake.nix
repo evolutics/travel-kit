@@ -112,6 +112,7 @@
           programs.black.enable = true;
           programs.buildifier.enable = true;
           programs.cljfmt.enable = true;
+          programs.gofumpt.enable = true;
           programs.isort.enable = true;
           programs.jsonnetfmt.enable = true;
           programs.prettier.enable = true;
