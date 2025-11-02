@@ -52,7 +52,8 @@ Only in test/cases: stylelint.css" ]]; then
     for expected_line in "${expected_lines[@]}"; do
       if ! echo "${actual_output}" \
         | grep --fixed-strings --quiet "${expected_line}"; then
-        >&2 echo "${lint}: ${expected_line}"
+        >&2 printf '%s\nExpected string in actual output above: %s\nFile:%s\n' \
+          "${actual_output}" "${expected_line}" "${lint}"
         exit 1
       fi
     done
