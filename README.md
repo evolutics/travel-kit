@@ -33,7 +33,7 @@ The `--dry-run` option shows what would be done without changing anything.
 ## Related projects
 
 - [Super-linter](https://github.com/super-linter/super-linter)
-- [`treefmt`](https://github.com/numtide/treefmt)
+- [`treefmt`](https://github.com/numtide/treefmt)([`-nix`](https://github.com/numtide/treefmt-nix))
 
 ## Tools
 
