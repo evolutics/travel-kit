@@ -1,1 +1,0 @@
-/golangci-lint.go:3:9: SA4028: x % 1 is always zero (staticcheck)

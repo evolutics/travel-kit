@@ -35,7 +35,6 @@ test_cleaner_effects() {
   local -r delta="$(diff --recursive test/cases test/fixed)"
   if [[ "${delta}" != "Only in test/cases: git
 Only in test/cases: gitlint
-Only in test/cases: golangci-lint.go
 Only in test/cases: hadolint.Dockerfile
 Only in test/cases: htmlhint.htm
 Only in test/cases: jsonnet_lint.jsonnet
