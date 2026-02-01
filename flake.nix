@@ -116,6 +116,7 @@
           programs.goimports.enable = true;
           programs.isort.enable = true;
           programs.jsonnetfmt.enable = true;
+          programs.packer.enable = true;
           programs.prettier.enable = true;
           programs.rufo.enable = true;
           programs.sqruff.enable = true;

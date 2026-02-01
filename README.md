@@ -90,5 +90,5 @@ The following tools are integrated:
 - [**treefmt**](https://github.com/numtide/treefmt)
 
   ```bash
-  treefmt --fail-on-change --no-cache --walk filesystem *.bazel *.bzl *.cjs *.clj *.cljc *.cljs *.cljx *.css *.go *.html *.js *.json *.json5 *.jsonnet *.jsx *.libsonnet *.md *.mdx *.mjs *.nix *.py *.pyi *.rb *.scss *.sh *.sql *.tf *.tftest.hcl *.tfvars *.toml *.ts *.tsx *.vue *.yaml *.yml *Vagrantfile
+  treefmt --fail-on-change --no-cache --walk filesystem *.bazel *.bzl *.cjs *.clj *.cljc *.cljs *.cljx *.css *.go *.html *.js *.json *.json5 *.jsonnet *.jsx *.libsonnet *.md *.mdx *.mjs *.nix *.pkr.hcl *.pkrvars.hcl *.py *.pyi *.rb *.scss *.sh *.sql *.tf *.tftest.hcl *.tfvars *.toml *.ts *.tsx *.vue *.yaml *.yml *Vagrantfile
   ```
