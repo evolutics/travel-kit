@@ -45,8 +45,8 @@
           };
           htmlhint = {
             title = "HTMLHint";
-            inherit (pkgs.nodePackages.htmlhint.meta) homepage;
-            command = ["${pkgs.nodePackages.htmlhint}/bin/htmlhint" "--"];
+            inherit (pkgs.htmlhint.meta) homepage;
+            command = ["${pkgs.htmlhint}/bin/htmlhint" "--"];
             file_patterns = ["*.htm" "*.html"];
           };
           jsonnet-lint = {
@@ -69,8 +69,8 @@
           };
           stylelint = {
             title = "Stylelint";
-            inherit (pkgs.nodePackages.stylelint.meta) homepage;
-            command = ["${pkgs.nodePackages.stylelint}/bin/stylelint" "--"];
+            inherit (pkgs.stylelint.meta) homepage;
+            command = ["${pkgs.stylelint}/bin/stylelint" "--"];
             file_patterns = ["*.css"];
           };
           treefmt = {
