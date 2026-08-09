@@ -114,9 +114,9 @@
           programs.cljfmt.enable = true;
           programs.gofumpt.enable = true;
           programs.goimports.enable = true;
+          programs.hclfmt.enable = true;
           programs.isort.enable = true;
           programs.jsonnetfmt.enable = true;
-          programs.packer.enable = true;
           programs.prettier.enable = true;
           programs.rufo.enable = true;
           programs.sqruff.enable = true;
