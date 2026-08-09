@@ -38,7 +38,7 @@ Only in test/cases: gitlint
 Only in test/cases: hadolint.Dockerfile
 Only in test/cases: htmlhint.htm
 Only in test/cases: jsonnet_lint.jsonnet
-Only in test/cases: pylint.py
+Only in test/cases: ruff_check.py
 Only in test/cases: shellcheck.sh
 Only in test/cases: stylelint.css" ]]; then
     >&2 echo "${delta}"

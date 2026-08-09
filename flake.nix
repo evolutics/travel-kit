@@ -55,12 +55,6 @@
             command = ["${pkgs.go-jsonnet}/bin/jsonnet-lint" "--"];
             file_patterns = ["*.jsonnet" "*.libsonnet"];
           };
-          pylint = {
-            title = "Pylint";
-            inherit (pkgs.pylint.meta) homepage;
-            command = ["${pkgs.pylint}/bin/pylint" "--"];
-            file_patterns = ["*.py"];
-          };
           shellcheck = {
             title = "ShellCheck";
             inherit (pkgs.shellcheck.meta) homepage;
@@ -109,15 +103,15 @@
         };
         treefmtEval = treefmt-nix.lib.evalModule pkgs ({pkgs, ...}: {
           programs.alejandra.enable = true;
-          programs.black.enable = true;
           programs.buildifier.enable = true;
           programs.cljfmt.enable = true;
           programs.gofumpt.enable = true;
           programs.goimports.enable = true;
           programs.hclfmt.enable = true;
-          programs.isort.enable = true;
           programs.jsonnetfmt.enable = true;
           programs.prettier.enable = true;
+          programs.ruff-check.enable = true;
+          programs.ruff-format.enable = true;
           programs.rufo.enable = true;
           programs.sqruff.enable = true;
           programs.statix.enable = true;
@@ -127,13 +121,6 @@
           projectRootFile = "flake.nix";
 
           settings.formatter = {
-            isort.options = [
-              "--force-single-line-imports"
-              "--from-first"
-              "--profile"
-              "black"
-              "--"
-            ];
             rufo.includes = ["*Vagrantfile"];
             shfmt = {
               command = "${pkgs.shfmt}/bin/shfmt";

@@ -1,1 +1,0 @@
-pylint.py:1:0: C0103: Constant name "a" doesn't conform to UPPER_CASE naming style (invalid-name)

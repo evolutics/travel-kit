@@ -1,0 +1,5 @@
+TRY002 Create your own exception
+ --> test/cases/ruff_check.py:1:7
+  |
+1 | raise Exception()
+  |       ^^^^^^^^^^^

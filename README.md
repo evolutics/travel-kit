@@ -69,12 +69,6 @@ The following tools are integrated:
   jsonnet-lint -- *.jsonnet *.libsonnet
   ```
 
-- [**Pylint**](https://pylint.readthedocs.io/en/stable/)
-
-  ```bash
-  pylint -- *.py
-  ```
-
 - [**ShellCheck**](https://hackage.haskell.org/package/ShellCheck)
 
   ```bash
