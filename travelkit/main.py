@@ -1,13 +1,9 @@
-#!/usr/bin/env python3
-
-from importlib import resources
 import argparse
 import json
 import subprocess
+from importlib import resources
 
-from . import model
-from . import readme
-from . import run_cleaners
+from . import model, readme, run_cleaners
 
 
 def main():
