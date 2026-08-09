@@ -1,2 +1,2 @@
 stylelint.css
- 1:3  ✖  Unexpected empty block  block-no-empty
+  1:3  ✖  Empty block  block-no-empty
