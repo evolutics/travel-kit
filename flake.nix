@@ -88,7 +88,6 @@
         };
         package = pkgs.python3Packages.buildPythonApplication {
           build-system = [pkgs.python3Packages.setuptools];
-          format = "pyproject";
           name = "travel-kit";
           postFixup = ''
             # Keep this CLI's Python out of downstream shells once wrapped
@@ -100,6 +99,7 @@
             ${cleaners}
             EOF
           '';
+          pyproject = true;
           src = ./.;
         };
         pkgs = import nixpkgs {
