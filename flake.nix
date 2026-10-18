@@ -87,6 +87,7 @@
           };
         };
         package = pkgs.python3Packages.buildPythonApplication {
+          build-system = [pkgs.python3Packages.setuptools];
           format = "pyproject";
           name = "travel-kit";
           preBuild = ''
@@ -94,7 +95,6 @@
             ${cleaners}
             EOF
           '';
-          propagatedBuildInputs = [pkgs.python3Packages.setuptools];
           src = ./.;
         };
         pkgs = import nixpkgs {
