@@ -85,6 +85,7 @@
         };
         package = pkgs.python3Packages.buildPythonApplication {
           build-system = [pkgs.python3Packages.setuptools];
+          meta.mainProgram = "travel-kit";
           name = "travel-kit";
           postFixup = ''
             # Keep this CLI's Python out of downstream shells once wrapped
