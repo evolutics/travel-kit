@@ -90,6 +90,11 @@
           build-system = [pkgs.python3Packages.setuptools];
           format = "pyproject";
           name = "travel-kit";
+          postFixup = ''
+            # Keep this CLI's Python out of downstream shells once wrapped
+            # (https://nixos.org/guides/nix-pills/20-basic-dependencies-and-hooks.html).
+            rm "$out/nix-support/propagated-build-inputs"
+          '';
           preBuild = ''
             cat >travelkit/cleaners.json <<'EOF'
             ${cleaners}
